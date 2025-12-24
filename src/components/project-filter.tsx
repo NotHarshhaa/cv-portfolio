@@ -5,13 +5,15 @@ import { Input } from '@/components/ui/input'
 import { SearchIcon, XIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
+type Project = {
+	title: string
+	description: string
+	techStack: readonly string[]
+}
+
 interface ProjectFilterProps {
-	projects: Array<{
-		title: string
-		description: string
-		techStack: readonly string[]
-	}>
-	onFilterChange: (filteredProjects: typeof projects) => void
+	projects: Project[]
+	onFilterChange: (filteredProjects: Project[]) => void
 }
 
 export function ProjectFilter({ projects, onFilterChange }: ProjectFilterProps) {
