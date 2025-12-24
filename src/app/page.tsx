@@ -12,7 +12,6 @@ import { ThemeToggle } from '@/components/theme-toggle'
 import { RESUME_DATA } from '@/data/resume-data'
 import { NavigationMenu } from '@/components/navigation-menu'
 import { ScrollToTop } from '@/components/scroll-to-top'
-import { SkipToContent } from '@/components/skip-to-content'
 import { CopyButton } from '@/components/copy-button'
 
 // Memoized components for better performance
@@ -43,7 +42,6 @@ export default function Page() {
 				type='application/ld+json'
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
 			/>
-			<SkipToContent />
 			<NavigationMenu />
 			<main id='main-content' className='container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16 pt-20 md:pt-24'>
 				<section className='mx-auto w-full max-w-4xl space-y-8 bg-background text-foreground print:space-y-6'>
@@ -219,7 +217,7 @@ export default function Page() {
 					}
 				]}
 			/>
-			<div className="fixed top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 z-50 print:hidden">
+			<div className="fixed top-4 left-4 md:top-8 md:left-auto md:right-8 z-50 print:hidden">
                 <ThemeToggle />
             </div>
 			<ScrollToTop />

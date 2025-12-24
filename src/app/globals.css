@@ -179,6 +179,22 @@
 		animation: fadeIn 0.6s ease-out forwards;
 	}
 	
+	/* Slide in from right animation for mobile menu */
+	@keyframes slideInRight {
+		from {
+			transform: translateX(100%);
+			opacity: 0;
+		}
+		to {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+	
+	.animate-slide-in-right {
+		animation: slideInRight 0.3s ease-out forwards;
+	}
+	
 	/* Stagger animation for children */
 	.animate-fade-in:nth-child(1) { animation-delay: 0.1s; }
 	.animate-fade-in:nth-child(2) { animation-delay: 0.2s; }

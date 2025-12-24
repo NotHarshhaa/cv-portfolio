@@ -19,7 +19,7 @@ export function ThemeToggle() {
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       aria-label="Toggle theme"
-      className="fixed top-6 right-6 z-50 rounded-lg border bg-white text-black dark:bg-zinc-900 dark:text-white shadow-md p-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
+      className="rounded-lg border bg-white text-black dark:bg-zinc-900 dark:text-white shadow-md p-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.div

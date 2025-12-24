@@ -17,6 +17,18 @@ export function NavigationMenu() {
 	const [activeSection, setActiveSection] = useState('')
 	const [isOpen, setIsOpen] = useState(false)
 
+	// Prevent body scroll when menu is open
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = 'hidden'
+		} else {
+			document.body.style.overflow = ''
+		}
+		return () => {
+			document.body.style.overflow = ''
+		}
+	}, [isOpen])
+
 	useEffect(() => {
 		// Use Intersection Observer for accurate section detection
 		const observerOptions = {
@@ -151,12 +163,12 @@ export function NavigationMenu() {
 			</nav>
 
 			{/* Mobile Navigation */}
-			<div className='md:hidden fixed top-4 left-4 z-40 print:hidden'>
+			<div className='md:hidden fixed top-4 right-4 z-50 print:hidden'>
 				<Button
 					variant='outline'
 					size='icon'
 					onClick={() => setIsOpen(!isOpen)}
-					className='rounded-full shadow-lg bg-background/80 backdrop-blur-sm border-border'
+					className='size-11 rounded-full shadow-xl bg-background/90 backdrop-blur-md border-2 border-border hover:scale-110 transition-all duration-200'
 					aria-label='Toggle navigation menu'
 					aria-expanded={isOpen}
 				>
@@ -165,27 +177,52 @@ export function NavigationMenu() {
 
 				{isOpen && (
 					<>
+						{/* Backdrop */}
 						<div
-							className='fixed inset-0 bg-black/20 backdrop-blur-sm z-30'
+							className='fixed inset-0 bg-black/50 backdrop-blur-sm z-40 animate-fade-in'
 							onClick={() => setIsOpen(false)}
 							aria-hidden='true'
 						/>
-						<div className='absolute top-14 left-0 mt-2 w-48 rounded-lg border border-border bg-background/95 backdrop-blur-md shadow-xl p-2 z-40 animate-fade-in'>
-							{sections.map((section) => (
+						{/* Mobile Menu */}
+						<div className='fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-background/98 backdrop-blur-xl border-l border-border shadow-2xl z-50 flex flex-col animate-slide-in-right'>
+							{/* Header */}
+							<div className='flex items-center justify-between p-6 border-b border-border'>
+								<h2 className='text-lg font-semibold'>Navigation</h2>
 								<Button
-									key={section.id}
 									variant='ghost'
-									className={cn(
-										'w-full justify-start transition-all duration-200 rounded-md',
-										activeSection === section.id
-											? 'bg-foreground text-background hover:bg-foreground/90 font-medium dark:bg-foreground dark:text-background'
-											: 'hover:bg-accent hover:text-accent-foreground text-foreground'
-									)}
-									onClick={() => scrollToSection(section.id)}
+									size='icon'
+									onClick={() => setIsOpen(false)}
+									className='size-9 rounded-full'
+									aria-label='Close menu'
 								>
-									{section.label}
+									<XIcon className='size-5' />
 								</Button>
-							))}
+							</div>
+							
+							{/* Menu Items */}
+							<nav className='flex-1 overflow-y-auto p-4 space-y-2'>
+								{sections.map((section, index) => (
+									<Button
+										key={section.id}
+										variant='ghost'
+										className={cn(
+											'w-full justify-start h-14 px-4 text-base transition-all duration-200 rounded-xl',
+											activeSection === section.id
+												? 'bg-foreground text-background hover:bg-foreground/90 font-semibold shadow-md dark:bg-foreground dark:text-background'
+												: 'hover:bg-accent hover:text-accent-foreground text-foreground active:scale-95'
+										)}
+										onClick={() => scrollToSection(section.id)}
+										style={{
+											animationDelay: `${index * 50}ms`
+										}}
+									>
+										<span className='flex-1 text-left'>{section.label}</span>
+										{activeSection === section.id && (
+											<span className='ml-2 size-2 rounded-full bg-background dark:bg-background' />
+										)}
+									</Button>
+								))}
+							</nav>
 						</div>
 					</>
 				)}
