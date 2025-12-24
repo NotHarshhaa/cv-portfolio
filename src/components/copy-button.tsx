@@ -24,13 +24,17 @@ export function CopyButton({ text, label, className }: CopyButtonProps) {
 		}
 	}
 
+	const handleClick = () => {
+		void copyToClipboard()
+	}
+
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>
 				<Button
 					variant='ghost'
 					size='icon'
-					onClick={copyToClipboard}
+					onClick={handleClick}
 					className={className}
 					aria-label={`Copy ${label}`}
 				>
