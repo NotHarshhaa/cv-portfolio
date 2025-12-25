@@ -21,7 +21,7 @@ export function ProjectFilter({ projects, onFilterChange }: ProjectFilterProps) 
 	const [selectedTag, setSelectedTag] = useState<string | null>(null)
 
 	// Ensure projects is always an array
-	const safeProjects = projects || []
+	const safeProjects = useMemo(() => projects || [], [projects])
 
 	const allTags = useMemo(() => {
 		const tags = new Set<string>()

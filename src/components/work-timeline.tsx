@@ -9,12 +9,12 @@ interface Work {
 	company: string
 	link?: string
 	badges: string[]
-	jobs: Array<{
+	jobs: {
 		title: string
 		start: string
 		end: string
 		description: string[]
-	}>
+	}[]
 }
 
 interface WorkTimelineProps {
