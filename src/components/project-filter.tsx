@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Input } from '@/components/ui/input'
 import { SearchIcon, XIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -20,30 +20,37 @@ export function ProjectFilter({ projects, onFilterChange }: ProjectFilterProps) 
 	const [searchQuery, setSearchQuery] = useState('')
 	const [selectedTag, setSelectedTag] = useState<string | null>(null)
 
+	// Ensure projects is always an array
+	const safeProjects = projects || []
+
 	const allTags = useMemo(() => {
 		const tags = new Set<string>()
-		projects.forEach((project) => {
-			project.techStack.forEach((tag) => tags.add(tag))
+		safeProjects.forEach((project) => {
+			if (project?.techStack) {
+				project.techStack.forEach((tag) => tags.add(tag))
+			}
 		})
 		return Array.from(tags).sort()
-	}, [projects])
+	}, [safeProjects])
 
 	const filteredProjects = useMemo(() => {
-		return projects.filter((project) => {
+		return safeProjects.filter((project) => {
 			const matchesSearch =
 				searchQuery === '' ||
-				project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				project.techStack.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+				project.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+				project.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+				project.techStack?.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
 
-			const matchesTag = selectedTag === null || project.techStack.includes(selectedTag)
+			const matchesTag = selectedTag === null || project.techStack?.includes(selectedTag)
 
 			return matchesSearch && matchesTag
 		})
-	}, [projects, searchQuery, selectedTag])
+	}, [safeProjects, searchQuery, selectedTag])
 
-	useMemo(() => {
-		onFilterChange(filteredProjects)
+	React.useEffect(() => {
+		if (filteredProjects && Array.isArray(filteredProjects)) {
+			onFilterChange(filteredProjects)
+		}
 	}, [filteredProjects, onFilterChange])
 
 	return (
@@ -90,9 +97,9 @@ export function ProjectFilter({ projects, onFilterChange }: ProjectFilterProps) 
 					</Button>
 				))}
 			</div>
-			{filteredProjects.length !== projects.length && (
+			{filteredProjects.length !== safeProjects.length && (
 				<p className='text-sm text-muted-foreground'>
-					Showing {filteredProjects.length} of {projects.length} projects
+					Showing {filteredProjects.length} of {safeProjects.length} projects
 				</p>
 			)}
 		</div>

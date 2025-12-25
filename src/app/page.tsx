@@ -13,9 +13,13 @@ import { RESUME_DATA } from '@/data/resume-data'
 import { NavigationMenu } from '@/components/navigation-menu'
 import { ScrollToTop } from '@/components/scroll-to-top'
 import { CopyButton } from '@/components/copy-button'
+import { SkillsCategorized } from '@/components/skills-categorized'
+import { DownloadResumeButton } from '@/components/download-resume-button'
+import { StatsSection } from '@/components/stats-section'
+import { ProjectsSection } from '@/components/projects-section'
+import { WorkTimeline } from '@/components/work-timeline'
 
 // Memoized components for better performance
-const MemoizedProjectCard = React.memo(ProjectCard)
 const MemoizedButtonLink = React.memo(ButtonLink)
 
 // Structured data for SEO
@@ -64,8 +68,9 @@ export default function Page() {
 							</a>
 						</div>
 
-						<div className='flex justify-center gap-2 pt-1 sm:justify-start'>
+						<div className='flex flex-wrap justify-center gap-2 pt-1 sm:justify-start'>
 							<MemoizedButtonLink data={data} />
+							<DownloadResumeButton />
 						</div>
 					</div>
 
@@ -84,62 +89,17 @@ export default function Page() {
 				</div>
 
 				<Section id='about' className='scroll-mt-20 animate-fade-in'>
-					<div className='flex items-center justify-between'>
+					<div className='flex items-center justify-between mb-4'>
 						<h2 className='text-xl font-bold'>About</h2>
 						<CopyButton text={data.contact.email.at} label='email' className='print:hidden' />
 					</div>
-					<p className='text-pretty font-mono text-sm text-muted-foreground'>{data.summary}</p>
+					<p className='text-pretty font-mono text-sm text-muted-foreground mb-6'>{data.summary}</p>
+					<StatsSection />
 				</Section>
 
 				<Section id='work' className='scroll-mt-20 animate-fade-in'>
-					<h2 className='text-xl font-bold'>Work Experience</h2>
-					{data.work.map((work) => (
-						<Card key={work.company} className='transition-all duration-300 hover:shadow-lg hover:border-primary/20 animate-fade-in'>
-							<CardHeader>
-								<h3 className='text-base inline-flex items-center gap-x-1 font-semibold leading-none'>
-									{work.link ? (
-										<a
-											className='hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded'
-											href={work.link}
-											target='_blank'
-											rel='noreferrer'
-											aria-label={`Visit ${work.company} website`}
-										>
-											{work.company}
-										</a>
-									) : (
-										<span>{work.company}</span>
-									)}
-
-									<span className='inline-flex gap-x-1'>
-										{work.badges.map((badge) => (
-											<Badge variant='secondary' className='align-middle text-xs' key={badge}>
-												{badge}
-											</Badge>
-										))}
-									</span>
-								</h3>
-							</CardHeader>
-
-							{work.jobs.map((job, index) => (
-								<CardContent key={index} className='mt-2 mb-4 text-xs'>
-									<div className='flex flex-col md:flex-row md:items-center justify-between gap-x-2 text-sm'>
-										<h4 className='font-mono text-primary'>{job.title}</h4>
-										<time className='tabular-nums text-muted-foreground' dateTime={`${job.start}/${job.end}`}>
-											{job.start} - {job.end}
-										</time>
-									</div>
-									<ul className='mt-2 space-y-1'>
-										{job.description.map((item, index) => (
-											<li key={index} className='mb-1'>
-												• {item}
-											</li>
-										))}
-									</ul>
-								</CardContent>
-							))}
-						</Card>
-					))}
+					<h2 className='text-xl font-bold mb-6'>Work Experience</h2>
+					<WorkTimeline work={data.work} />
 				</Section>
 
 				<Section id='education' className='scroll-mt-20 animate-fade-in'>
@@ -169,27 +129,13 @@ export default function Page() {
 				</Section>
 
 				<Section id='skills' className='scroll-mt-20 animate-fade-in'>
-					<h2 className='text-xl font-bold'>Skills</h2>
-					<div className='flex flex-wrap gap-1'>
-						{data.skills.map((skill) => (
-							<Badge key={skill} className='transition-all duration-200 hover:scale-105 hover:shadow-md'>{skill}</Badge>
-						))}
-					</div>
+					<h2 className='text-xl font-bold mb-4'>Skills</h2>
+					<SkillsCategorized skills={data.skills} />
 				</Section>
 
 				<Section id='projects' className='print-force-new-page scroll-mb-16 scroll-mt-20 animate-fade-in'>
-					<h2 className='text-xl font-bold'>Projects</h2>
-					<div className='-mx-3 grid grid-cols-1 gap-3 print:grid-cols-3 print:gap-2 md:grid-cols-2 lg:grid-cols-3'>
-						{data.projects.map((project) => (
-							<MemoizedProjectCard
-								key={project.title}
-								title={project.title}
-								description={project.description}
-								tags={project.techStack}
-								link={'link' in project ? project.link.href : undefined}
-							/>
-						))}
-					</div>
+					<h2 className='text-xl font-bold mb-4'>Projects</h2>
+					<ProjectsSection projects={data.projects} />
 				</Section>
 			</section>
 
