@@ -143,14 +143,18 @@ export function NavigationMenu() {
 		<>
 			{/* Desktop Navigation */}
 			<nav className='hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-40 print:hidden'>
-				<div className='flex items-center gap-3 rounded-full border border-border bg-background/80 backdrop-blur-sm px-5 py-2.5 shadow-lg'>
-					<Badge variant='secondary' className='px-3 py-1 text-xs font-medium flex items-center gap-1.5 shrink-0'>
-						<FileTextIcon className='size-3' />
-						<span className='hidden lg:inline'>CV Portfolio</span>
-						<span className='lg:hidden'>CV</span>
-					</Badge>
-					<div className='h-4 w-px bg-border' />
-					<div className='flex gap-2'>
+				<div className='flex items-center gap-4 rounded-full border border-border bg-background/95 backdrop-blur-xl px-5 py-2.5 shadow-2xl'>
+					<div className='flex items-center gap-2.5 px-3 py-1.5'>
+						<div className='flex items-center justify-center size-7 rounded-lg bg-primary text-primary-foreground shadow-sm'>
+							<FileTextIcon className='size-4' />
+						</div>
+						<div className='flex items-baseline gap-1.5'>
+							<span className='text-sm font-bold tracking-tight'>CV</span>
+							<span className='hidden lg:inline text-xs font-medium text-muted-foreground tracking-wide'>Portfolio</span>
+						</div>
+					</div>
+					<div className='h-6 w-px bg-border' />
+					<div className='flex gap-1'>
 						{sections.map((section) => (
 							<Button
 								key={section.id}
@@ -158,7 +162,7 @@ export function NavigationMenu() {
 								size='sm'
 								onClick={() => scrollToSection(section.id)}
 								className={cn(
-									'transition-all duration-200 rounded-full',
+									'transition-all duration-200 rounded-full px-3.5',
 									activeSection === section.id
 										? 'bg-foreground text-background hover:bg-foreground/90 font-medium dark:bg-foreground dark:text-background'
 										: 'hover:bg-accent hover:text-accent-foreground text-foreground'
@@ -195,22 +199,24 @@ export function NavigationMenu() {
 						{/* Mobile Menu */}
 						<div className='fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-background/98 backdrop-blur-xl border-l border-border shadow-2xl z-50 flex flex-col animate-slide-in-right'>
 							{/* Header */}
-							<div className='flex items-center justify-between p-6 border-b border-border bg-muted/30'>
-								<div className='flex items-center gap-2'>
-									<FileTextIcon className='size-5 text-primary' />
+							<div className='flex items-center justify-between p-5 border-b border-border bg-background'>
+								<div className='flex items-center gap-3'>
+									<div className='flex items-center justify-center size-10 rounded-lg bg-primary text-primary-foreground shadow-md'>
+										<FileTextIcon className='size-5' />
+									</div>
 									<div>
-										<h2 className='text-lg font-semibold'>CV Portfolio</h2>
-										<p className='text-xs text-muted-foreground'>Navigation Menu</p>
+										<h2 className='text-lg font-bold tracking-tight'>CV Portfolio</h2>
+										<p className='text-[10px] text-muted-foreground font-medium uppercase tracking-wider mt-0.5'>Resume Navigation</p>
 									</div>
 								</div>
 								<Button
 									variant='ghost'
 									size='icon'
 									onClick={() => setIsOpen(false)}
-									className='size-9 rounded-full'
+									className='size-8 rounded-lg hover:bg-muted transition-colors'
 									aria-label='Close menu'
 								>
-									<XIcon className='size-5' />
+									<XIcon className='size-4' />
 								</Button>
 							</div>
 							
