@@ -4,14 +4,14 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { MenuIcon, XIcon, FileTextIcon } from 'lucide-react'
+import { MenuIcon, XIcon, FileTextIcon, UserIcon, BriefcaseIcon, GraduationCapIcon, CodeIcon, FolderKanbanIcon } from 'lucide-react'
 
 const sections = [
-	{ id: 'about', label: 'About' },
-	{ id: 'work', label: 'Experience' },
-	{ id: 'education', label: 'Education' },
-	{ id: 'skills', label: 'Skills' },
-	{ id: 'projects', label: 'Projects' }
+	{ id: 'about', label: 'About', icon: UserIcon },
+	{ id: 'work', label: 'Experience', icon: BriefcaseIcon },
+	{ id: 'education', label: 'Education', icon: GraduationCapIcon },
+	{ id: 'skills', label: 'Skills', icon: CodeIcon },
+	{ id: 'projects', label: 'Projects', icon: FolderKanbanIcon }
 ]
 
 export function NavigationMenu() {
@@ -181,69 +181,96 @@ export function NavigationMenu() {
 					variant='outline'
 					size='icon'
 					onClick={() => setIsOpen(!isOpen)}
-					className='size-11 rounded-full shadow-xl bg-background/90 backdrop-blur-md border-2 border-border hover:scale-110 transition-all duration-200'
+					className='size-12 rounded-full shadow-2xl bg-background border-2 border-border hover:scale-110 hover:shadow-3xl transition-all duration-300'
 					aria-label='Toggle navigation menu'
 					aria-expanded={isOpen}
 				>
-					{isOpen ? <XIcon className='size-5' /> : <MenuIcon className='size-5' />}
+					{isOpen ? (
+						<XIcon className='size-5 transition-transform duration-300 rotate-90' />
+					) : (
+						<MenuIcon className='size-5' />
+					)}
 				</Button>
 
 				{isOpen && (
 					<>
 						{/* Backdrop */}
 						<div
-							className='fixed inset-0 bg-black/50 backdrop-blur-sm z-40 animate-fade-in'
+							className='fixed inset-0 bg-black/60 backdrop-blur-md z-40 animate-fade-in'
 							onClick={() => setIsOpen(false)}
 							aria-hidden='true'
 						/>
 						{/* Mobile Menu */}
-						<div className='fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-background/98 backdrop-blur-xl border-l border-border shadow-2xl z-50 flex flex-col animate-slide-in-right'>
+						<div className='fixed top-0 right-0 h-full w-80 max-w-[90vw] bg-background border-l-2 border-border shadow-2xl z-50 flex flex-col animate-slide-in-right'>
 							{/* Header */}
-							<div className='flex items-center justify-between p-5 border-b border-border bg-background'>
+							<div className='flex items-center justify-between p-6 border-b-2 border-border bg-gradient-to-br from-background to-muted/30'>
 								<div className='flex items-center gap-3'>
-									<div className='flex items-center justify-center size-10 rounded-lg bg-primary text-primary-foreground shadow-md'>
-										<FileTextIcon className='size-5' />
+									<div className='flex items-center justify-center size-12 rounded-xl bg-primary text-primary-foreground shadow-lg ring-2 ring-primary/20'>
+										<FileTextIcon className='size-6' />
 									</div>
 									<div>
-										<h2 className='text-lg font-bold tracking-tight'>CV Portfolio</h2>
-										<p className='text-[10px] text-muted-foreground font-medium uppercase tracking-wider mt-0.5'>Resume Navigation</p>
+										<h2 className='text-xl font-bold tracking-tight'>CV Portfolio</h2>
+										<p className='text-xs text-muted-foreground font-medium mt-1'>Navigation Menu</p>
 									</div>
 								</div>
 								<Button
 									variant='ghost'
 									size='icon'
 									onClick={() => setIsOpen(false)}
-									className='size-8 rounded-lg hover:bg-muted transition-colors'
+									className='size-9 rounded-lg hover:bg-destructive/10 hover:text-destructive transition-colors'
 									aria-label='Close menu'
 								>
-									<XIcon className='size-4' />
+									<XIcon className='size-5' />
 								</Button>
 							</div>
 							
 							{/* Menu Items */}
-							<nav className='flex-1 overflow-y-auto p-4 space-y-2'>
-								{sections.map((section, index) => (
-									<Button
-										key={section.id}
-										variant='ghost'
-										className={cn(
-											'w-full justify-start h-14 px-4 text-base transition-all duration-200 rounded-xl',
-											activeSection === section.id
-												? 'bg-foreground text-background hover:bg-foreground/90 font-semibold shadow-md dark:bg-foreground dark:text-background'
-												: 'hover:bg-accent hover:text-accent-foreground text-foreground active:scale-95'
-										)}
-										onClick={() => scrollToSection(section.id)}
-										style={{
-											animationDelay: `${index * 50}ms`
-										}}
-									>
-										<span className='flex-1 text-left'>{section.label}</span>
-										{activeSection === section.id && (
-											<span className='ml-2 size-2 rounded-full bg-background dark:bg-background' />
-										)}
-									</Button>
-								))}
+							<nav className='flex-1 overflow-y-auto p-5 space-y-3'>
+								{sections.map((section, index) => {
+									const Icon = section.icon
+									return (
+										<Button
+											key={section.id}
+											variant='ghost'
+											className={cn(
+												'w-full justify-start h-16 px-5 text-base transition-all duration-300 rounded-2xl group relative overflow-hidden',
+												activeSection === section.id
+													? 'bg-foreground text-background hover:bg-foreground/90 font-semibold shadow-lg dark:bg-foreground dark:text-background'
+													: 'hover:bg-accent/50 hover:text-accent-foreground text-foreground active:scale-[0.98] border border-transparent hover:border-border'
+											)}
+											onClick={() => scrollToSection(section.id)}
+											style={{
+												animationDelay: `${index * 60}ms`
+											}}
+										>
+											<div className={cn(
+												'flex items-center gap-4 w-full',
+												activeSection === section.id && 'text-background'
+											)}>
+												<div className={cn(
+													'flex items-center justify-center size-10 rounded-xl transition-all duration-300',
+													activeSection === section.id
+														? 'bg-background/20 text-background'
+														: 'bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary'
+												)}>
+													<Icon className='size-5' />
+												</div>
+												<span className='flex-1 text-left font-medium'>{section.label}</span>
+												{activeSection === section.id && (
+													<div className='size-2 rounded-full bg-background animate-pulse' />
+												)}
+											</div>
+										</Button>
+									)
+								})}
 							</nav>
+							
+							{/* Footer */}
+							<div className='p-5 border-t border-border bg-muted/30'>
+								<p className='text-xs text-center text-muted-foreground'>
+									Tap outside to close
+								</p>
+							</div>
 						</div>
 					</>
 				)}
