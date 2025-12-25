@@ -102,7 +102,7 @@ export function CommandMenu({ links }: Props) {
 	const handleCopyLink = (e: React.MouseEvent, url: string) => {
 		e.stopPropagation()
 		const textToCopy = url.replace('mailto:', '').replace('tel:', '')
-		navigator.clipboard.writeText(textToCopy)
+		void navigator.clipboard.writeText(textToCopy)
 		setOpen(false)
 	}
 
