@@ -28,7 +28,7 @@ export function WorkTimeline({ work }: WorkTimelineProps) {
 			<div className='absolute left-4 top-0 bottom-0 w-0.5 bg-border md:left-8' />
 			
 			<div className='space-y-8'>
-				{work.map((workItem, workIndex) => (
+				{work.map((workItem) => (
 					<div key={workItem.company} className='relative pl-12 md:pl-16'>
 						{/* Timeline dot */}
 						<div className='absolute left-0 top-2 md:left-4'>
