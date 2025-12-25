@@ -185,6 +185,76 @@ export const RESUME_DATA = {
 	],	  
 	projects: [
 		{
+		  title: 'From Docker to Kubernetes',
+		  techStack: ['Docker', 'Kubernetes', 'Learning'],
+		  description: 'A hands-on learning repository to help you master containerization and orchestration — starting with Docker fundamentals and progressing to real-world Kubernetes deployments. Ideal for developers, DevOps engineers, and learners building modern cloud-native workflows.',
+		  link: {
+			label: 'github.com/NotHarshhaa/From-Docker-to-Kubernetes',
+			href: 'https://github.com/NotHarshhaa/From-Docker-to-Kubernetes'
+		  },
+		  isNew: true
+		},
+		{
+		  title: 'Home of Best DevOps Resources',
+		  techStack: ['DevOps', 'Resources', 'UI'],
+		  description: 'A curated collection of the "Home of Best DevOps resources" — with live UI demos and GitHub source links.',
+		  link: {
+			label: 'github.com/NotHarshhaa/home-of-best-devops-resources',
+			href: 'https://github.com/NotHarshhaa/home-of-best-devops-resources'
+		  },
+		  isNew: true
+		},
+		{
+		  title: 'DevOps Monitoring in a Box',
+		  techStack: ['Prometheus', 'Grafana', 'Loki', 'Monitoring'],
+		  description: 'This project provides a ready-to-use advanced monitoring platform for DevOps engineers and beginners. With just one command, you get Prometheus, Grafana, Loki, Alertmanager, Node Exporter.',
+		  link: {
+			label: 'github.com/NotHarshhaa/devops-monitoring-in-a-box',
+			href: 'https://github.com/NotHarshhaa/devops-monitoring-in-a-box'
+		  },
+		  isNew: true
+		},
+		{
+		  title: 'AWS | GCP | Azure — Cloud Projects Workshop',
+		  techStack: ['AWS', 'GCP', 'Azure', 'Cloud'],
+		  description: 'A complete, hands-on collection of AWS, Google Cloud (GCP), and Microsoft Azure projects designed to help you gain real-world experience, build your portfolio, and prepare for certifications.',
+		  link: {
+			label: 'github.com/NotHarshhaa/AWS-GCP-Azure-Cloud-Projects-Workshop',
+			href: 'https://github.com/NotHarshhaa/AWS-GCP-Azure-Cloud-Projects-Workshop'
+		  },
+		  isNew: true
+		},
+		{
+		  title: 'DevOps Environment Toolkit for Beginners',
+		  techStack: ['DevOps', 'Tools', 'Setup'],
+		  description: 'This repo provides a ready-to-use local setup with all the essential tools you need before starting your DevOps learning journey.',
+		  link: {
+			label: 'github.com/NotHarshhaa/devops-environment-toolkit-beginners',
+			href: 'https://github.com/NotHarshhaa/devops-environment-toolkit-beginners'
+		  },
+		  isNew: true
+		},
+		{
+		  title: 'Awesome DevOps Cloud UI',
+		  techStack: ['DevOps', 'Cloud', 'UI', 'Tools'],
+		  description: 'A curated collection of beautiful, powerful, and helpful UI-based tools and resources for DevOps and Cloud professionals.',
+		  link: {
+			label: 'github.com/NotHarshhaa/awesome-devops-cloud-ui',
+			href: 'https://github.com/NotHarshhaa/awesome-devops-cloud-ui'
+		  },
+		  isNew: true
+		},
+		{
+		  title: 'Real-World AWS Projects For Learning',
+		  techStack: ['AWS', 'DevOps', 'Projects'],
+		  description: 'An ultimate resource for learning AWS DevOps through hands-on projects! This repository is designed to cater to aspiring AWS DevOps engineers of all skill levels, from beginners taking their first steps in cloud computing to advanced users looking to master enterprise-level AWS architectures and automation.',
+		  link: {
+			label: 'github.com/NotHarshhaa/AWS-Projects',
+			href: 'https://github.com/NotHarshhaa/AWS-Projects'
+		  },
+		  isNew: true
+		},
+		{
 		  title: 'AWS Terraform Workshop',
 		  techStack: ['Terraform', 'AWS'],
 		  description: 'Beginner-friendly guide to setting up AWS infrastructure using Terraform.',

@@ -12,6 +12,7 @@ interface Project {
 		href: string
 		label: string
 	}
+	isNew?: boolean
 }
 
 interface ProjectsSectionProps {
@@ -37,6 +38,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
 						description={project.description}
 						tags={project.techStack}
 						link={project.link?.href}
+						isNew={project.isNew}
 					/>
 				))}
 			</div>

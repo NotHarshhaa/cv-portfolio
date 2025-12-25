@@ -9,6 +9,7 @@ interface Project {
 	title: string
 	description: string
 	techStack: readonly string[]
+	isNew?: boolean
 }
 
 interface ProjectFilterProps {
