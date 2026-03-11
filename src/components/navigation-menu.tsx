@@ -200,32 +200,10 @@ export function NavigationMenu() {
 							onClick={() => setIsOpen(false)}
 							aria-hidden='true'
 						/>
-						{/* Mobile Menu */}
-						<div className='fixed top-0 right-0 h-full w-80 max-w-[90vw] bg-background border-l-2 border-border shadow-2xl z-50 flex flex-col animate-slide-in-right'>
-							{/* Header */}
-							<div className='flex items-center justify-between p-6 border-b-2 border-border bg-gradient-to-br from-background to-muted/30'>
-								<div className='flex items-center gap-3'>
-									<div className='flex items-center justify-center size-12 rounded-xl bg-primary text-primary-foreground shadow-lg ring-2 ring-primary/20'>
-										<FileTextIcon className='size-6' />
-									</div>
-									<div>
-										<h2 className='text-xl font-bold tracking-tight'>CV Portfolio</h2>
-										<p className='text-xs text-muted-foreground font-medium mt-1'>Navigation Menu</p>
-									</div>
-								</div>
-								<Button
-									variant='ghost'
-									size='icon'
-									onClick={() => setIsOpen(false)}
-									className='size-9 rounded-lg hover:bg-destructive/10 hover:text-destructive transition-colors'
-									aria-label='Close menu'
-								>
-									<XIcon className='size-5' />
-								</Button>
-							</div>
-							
+						{/* Mobile Menu - Compact Dropdown */}
+						<div className='fixed top-20 right-4 bg-background border-2 border-border shadow-2xl z-50 rounded-2xl p-3 min-w-[200px] animate-slide-in-right'>
 							{/* Menu Items */}
-							<nav className='flex-1 overflow-y-auto p-5 space-y-3'>
+							<nav className='space-y-1'>
 								{sections.map((section, index) => {
 									const Icon = section.icon
 									return (
@@ -233,27 +211,27 @@ export function NavigationMenu() {
 											key={section.id}
 											variant='ghost'
 											className={cn(
-												'w-full justify-start h-16 px-5 text-base transition-all duration-300 rounded-2xl group relative overflow-hidden',
+												'w-full justify-start h-12 px-4 text-sm transition-all duration-200 rounded-xl group relative overflow-hidden',
 												activeSection === section.id
-													? 'bg-foreground text-background hover:bg-foreground/90 font-semibold shadow-lg dark:bg-foreground dark:text-background'
+													? 'bg-foreground text-background hover:bg-foreground/90 font-semibold shadow-md dark:bg-foreground dark:text-background'
 													: 'hover:bg-accent/50 hover:text-accent-foreground text-foreground active:scale-[0.98] border border-transparent hover:border-border'
 											)}
 											onClick={() => scrollToSection(section.id)}
 											style={{
-												animationDelay: `${index * 60}ms`
+												animationDelay: `${index * 50}ms`
 											}}
 										>
 											<div className={cn(
-												'flex items-center gap-4 w-full',
+												'flex items-center gap-3 w-full',
 												activeSection === section.id && 'text-background'
 											)}>
 												<div className={cn(
-													'flex items-center justify-center size-10 rounded-xl transition-all duration-300',
+													'flex items-center justify-center size-8 rounded-lg transition-all duration-200',
 													activeSection === section.id
 														? 'bg-background/20 text-background'
 														: 'bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary'
 												)}>
-													<Icon className='size-5' />
+													<Icon className='size-4' />
 												</div>
 												<span className='flex-1 text-left font-medium'>{section.label}</span>
 												{activeSection === section.id && (
@@ -264,13 +242,6 @@ export function NavigationMenu() {
 									)
 								})}
 							</nav>
-							
-							{/* Footer */}
-							<div className='p-5 border-t border-border bg-muted/30'>
-								<p className='text-xs text-center text-muted-foreground'>
-									Tap outside to close
-								</p>
-							</div>
 						</div>
 					</>
 				)}
