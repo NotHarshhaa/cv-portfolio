@@ -27,8 +27,6 @@ import {
 } from 'lucide-react'
 import { GitHubIcon, LinkedInIcon, TelegramIcon } from '@/components/icons'
 import { useTheme } from 'next-themes'
-import { Badge } from './ui/badge'
-
 interface Link {
 	url: string
 	title: string
@@ -120,9 +118,9 @@ export function CommandMenu({ links }: Props) {
 
 	return (
 		<>
-			<p className='fixed bottom-0 left-0 right-0 hidden border-t bg-background/95 backdrop-blur-sm border-t-border text-muted-foreground p-2 text-center text-xs print:hidden xl:block z-40'>
+			<p className='fixed bottom-0 left-0 right-0 z-40 hidden border-t border-border bg-background/95 p-2 text-center text-xs text-muted-foreground print:hidden xl:block'>
 				Press{' '}
-				<kbd className='pointer-events-none inline-flex h-6 select-none items-center gap-1 rounded-md border border-border bg-muted px-2 font-mono text-xs font-medium shadow-sm'>
+				<kbd className='pointer-events-none inline-flex h-6 select-none items-center gap-1 border border-border bg-muted px-2 font-mono text-xs font-medium'>
 					<span className='text-xs'>⌘</span>K
 				</kbd>{' '}
 				to open command menu
@@ -131,10 +129,10 @@ export function CommandMenu({ links }: Props) {
 				onClick={() => setOpen((open) => !open)}
 				variant='outline'
 				size='icon'
-				className='fixed bottom-4 right-4 size-12 rounded-full shadow-xl bg-background/90 backdrop-blur-sm border-2 border-border print:hidden xl:hidden z-50 transition-all duration-200 hover:scale-110'
+				className='fixed right-4 bottom-20 z-50 print:hidden xl:hidden'
 				aria-label='Open command menu'
 			>
-				<CommandIcon className='h-5 w-5' />
+				<CommandIcon className='size-4' />
 			</Button>
 			<CommandDialog open={open} onOpenChange={setOpen}>
 				<CommandInput placeholder='Search links, actions, or type a command...' className='h-14' />

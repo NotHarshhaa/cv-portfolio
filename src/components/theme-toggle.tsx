@@ -2,36 +2,66 @@
 
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
-import { Sun, Moon } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Monitor, Moon, Sun } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
-export function ThemeToggle() {
+const options = [
+  { value: 'light', label: 'Light', icon: Sun },
+  { value: 'system', label: 'System', icon: Monitor },
+  { value: 'dark', label: 'Dark', icon: Moon }
+] as const
+
+export function ThemeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
-  useEffect(() => setMounted(true), [])
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
-  if (!mounted) return null
-
-  const isDark = theme === 'dark'
+  if (!mounted) {
+    return (
+      <div
+        className={cn(
+          'inline-flex h-9 w-[6.75rem] border border-transparent',
+          className
+        )}
+        aria-hidden
+      />
+    )
+  }
 
   return (
-    <button
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      aria-label="Toggle theme"
-      className="rounded-lg border bg-white text-black dark:bg-zinc-900 dark:text-white shadow-md p-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
+    <div
+      role="group"
+      aria-label="Theme"
+      className={cn(
+        'inline-flex h-9 items-stretch border border-border bg-background',
+        className
+      )}
     >
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={isDark ? 'sun' : 'moon'}
-          initial={{ rotate: -90, opacity: 0 }}
-          animate={{ rotate: 0, opacity: 1 }}
-          exit={{ rotate: 90, opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-        </motion.div>
-      </AnimatePresence>
-    </button>
+      {options.map(({ value, label, icon: Icon }) => {
+        const active = theme === value
+        return (
+          <button
+            key={value}
+            type="button"
+            onClick={() => setTheme(value)}
+            aria-label={`${label} theme`}
+            aria-pressed={active}
+            title={label}
+            className={cn(
+              'flex size-9 items-center justify-center transition-colors',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-inset',
+              active
+                ? 'bg-foreground text-background'
+                : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+            )}
+          >
+            <Icon className="size-3.5" strokeWidth={2} />
+          </button>
+        )
+      })}
+    </div>
   )
 }

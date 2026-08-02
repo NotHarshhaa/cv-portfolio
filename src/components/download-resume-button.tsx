@@ -46,12 +46,8 @@ ${RESUME_DATA.projects.map((p) => `- ${p.title}: ${p.description}`).join('\n')}
 	}
 
 	return (
-		<Button
-			onClick={handleDownload}
-			variant='outline'
-			className='gap-2 transition-all duration-200 hover:scale-105'
-		>
-			<DownloadIcon className='size-4' />
+		<Button onClick={handleDownload} variant="outline">
+			<DownloadIcon className="size-4" />
 			Download Resume
 		</Button>
 	)

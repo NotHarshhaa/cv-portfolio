@@ -2,251 +2,200 @@
 
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { MenuIcon, XIcon, FileTextIcon, UserIcon, BriefcaseIcon, GraduationCapIcon, CodeIcon, FolderKanbanIcon } from 'lucide-react'
+import { ChevronRightIcon, MenuIcon, XIcon } from 'lucide-react'
+import { ThemeToggle } from '@/components/theme-toggle'
 
 const sections = [
-	{ id: 'about', label: 'About', icon: UserIcon },
-	{ id: 'work', label: 'Experience', icon: BriefcaseIcon },
-	{ id: 'education', label: 'Education', icon: GraduationCapIcon },
-	{ id: 'skills', label: 'Skills', icon: CodeIcon },
-	{ id: 'projects', label: 'Projects', icon: FolderKanbanIcon }
+  { id: 'about', label: 'About' },
+  { id: 'work', label: 'Experience' },
+  { id: 'education', label: 'Education' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'projects', label: 'Projects' }
 ]
 
-export function NavigationMenu() {
-	const [activeSection, setActiveSection] = useState('')
-	const [isOpen, setIsOpen] = useState(false)
-
-	// Prevent body scroll when menu is open
-	useEffect(() => {
-		if (isOpen) {
-			document.body.style.overflow = 'hidden'
-		} else {
-			document.body.style.overflow = ''
-		}
-		return () => {
-			document.body.style.overflow = ''
-		}
-	}, [isOpen])
-
-	useEffect(() => {
-		// Use Intersection Observer for accurate section detection
-		const observerOptions = {
-			root: null,
-			rootMargin: '-30% 0px -50% 0px',
-			threshold: [0, 0.25, 0.5, 0.75, 1]
-		}
-
-		const sectionVisibility = new Map<string, number>()
-
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				const id = entry.target.id
-				if (entry.isIntersecting) {
-					// Calculate how much of the section is visible
-					const ratio = entry.intersectionRatio
-					sectionVisibility.set(id, ratio)
-				} else {
-					sectionVisibility.delete(id)
-				}
-
-				// Find the section with the highest visibility ratio
-				if (sectionVisibility.size > 0) {
-					let maxRatio = 0
-					let mostVisibleSection = ''
-
-					sectionVisibility.forEach((ratio, id) => {
-						if (ratio > maxRatio) {
-							maxRatio = ratio
-							mostVisibleSection = id
-						}
-					})
-
-					if (mostVisibleSection) {
-						setActiveSection(mostVisibleSection)
-					}
-				}
-			})
-		}, observerOptions)
-
-		// Observe all sections
-		const elements: HTMLElement[] = []
-		sections.forEach((section) => {
-			const element = document.getElementById(section.id)
-			if (element) {
-				observer.observe(element)
-				elements.push(element)
-			}
-		})
-
-		// Fallback scroll handler for immediate feedback
-		const handleScroll = () => {
-			const scrollPosition = window.scrollY + 120
-			
-			// Only update if Intersection Observer hasn't set it recently
-			// This prevents conflicts
-			for (let i = sections.length - 1; i >= 0; i--) {
-				const section = sections[i]
-				const element = document.getElementById(section.id)
-				if (element) {
-					const { offsetTop, offsetHeight } = element
-					if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-						setActiveSection(section.id)
-						break
-					}
-				}
-			}
-
-			// If at the top, default to first section
-			if (scrollPosition < 150) {
-				setActiveSection(sections[0].id)
-			}
-		}
-
-		// Check initial scroll position
-		const checkInitialSection = () => {
-			handleScroll()
-		}
-
-		// Small delay to ensure DOM is ready
-		setTimeout(checkInitialSection, 100)
-
-		// Add scroll listener as backup
-		window.addEventListener('scroll', handleScroll, { passive: true })
-
-		return () => {
-			observer.disconnect()
-			window.removeEventListener('scroll', handleScroll)
-		}
-	}, [])
-
-	const scrollToSection = (id: string) => {
-		// Immediately set active section when clicked
-		setActiveSection(id)
-		
-		const element = document.getElementById(id)
-		if (element) {
-			const offset = 100
-			const elementPosition = element.getBoundingClientRect().top
-			const offsetPosition = elementPosition + window.pageYOffset - offset
-
-			window.scrollTo({
-				top: offsetPosition,
-				behavior: 'smooth'
-			})
-			setIsOpen(false)
-		}
-	}
-
-	return (
-		<>
-			{/* Desktop Navigation */}
-			<nav className='hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-40 print:hidden'>
-				<div className='flex items-center gap-4 rounded-full border border-border bg-background/95 backdrop-blur-xl px-5 py-2.5 shadow-2xl'>
-					<div className='flex items-center gap-2.5 px-3 py-1.5'>
-						<div className='flex items-center justify-center size-7 rounded-lg bg-primary text-primary-foreground shadow-sm'>
-							<FileTextIcon className='size-4' />
-						</div>
-						<div className='flex items-baseline gap-1.5'>
-							<span className='text-sm font-bold tracking-tight'>CV</span>
-							<span className='hidden lg:inline text-xs font-medium text-muted-foreground tracking-wide'>Portfolio</span>
-						</div>
-					</div>
-					<div className='h-6 w-px bg-border' />
-					<div className='flex gap-1'>
-						{sections.map((section) => (
-							<Button
-								key={section.id}
-								variant='ghost'
-								size='sm'
-								onClick={() => scrollToSection(section.id)}
-								className={cn(
-									'transition-all duration-200 rounded-full px-3.5',
-									activeSection === section.id
-										? 'bg-foreground text-background hover:bg-foreground/90 font-medium dark:bg-foreground dark:text-background'
-										: 'hover:bg-accent hover:text-accent-foreground text-foreground'
-								)}
-							>
-								{section.label}
-							</Button>
-						))}
-					</div>
-				</div>
-			</nav>
-
-			{/* Mobile Navigation */}
-			<div className='md:hidden fixed top-4 right-4 z-50 print:hidden'>
-				<Button
-					variant='outline'
-					size='icon'
-					onClick={() => setIsOpen(!isOpen)}
-					className='size-12 rounded-full shadow-2xl bg-background border-2 border-border hover:scale-110 hover:shadow-3xl transition-all duration-300'
-					aria-label='Toggle navigation menu'
-					aria-expanded={isOpen}
-				>
-					{isOpen ? (
-						<XIcon className='size-5 transition-transform duration-300 rotate-90' />
-					) : (
-						<MenuIcon className='size-5' />
-					)}
-				</Button>
-
-				{isOpen && (
-					<>
-						{/* Backdrop */}
-						<div
-							className='fixed inset-0 bg-black/60 backdrop-blur-md z-40 animate-fade-in'
-							onClick={() => setIsOpen(false)}
-							aria-hidden='true'
-						/>
-						{/* Mobile Menu - Compact Dropdown */}
-						<div className='fixed top-20 right-4 bg-background border-2 border-border shadow-2xl z-50 rounded-2xl p-3 min-w-[200px] animate-slide-in-right'>
-							{/* Menu Items */}
-							<nav className='space-y-1'>
-								{sections.map((section, index) => {
-									const Icon = section.icon
-									return (
-										<Button
-											key={section.id}
-											variant='ghost'
-											className={cn(
-												'w-full justify-start h-12 px-4 text-sm transition-all duration-200 rounded-xl group relative overflow-hidden',
-												activeSection === section.id
-													? 'bg-foreground text-background hover:bg-foreground/90 font-semibold shadow-md dark:bg-foreground dark:text-background'
-													: 'hover:bg-accent/50 hover:text-accent-foreground text-foreground active:scale-[0.98] border border-transparent hover:border-border'
-											)}
-											onClick={() => scrollToSection(section.id)}
-											style={{
-												animationDelay: `${index * 50}ms`
-											}}
-										>
-											<div className={cn(
-												'flex items-center gap-3 w-full',
-												activeSection === section.id && 'text-background'
-											)}>
-												<div className={cn(
-													'flex items-center justify-center size-8 rounded-lg transition-all duration-200',
-													activeSection === section.id
-														? 'bg-background/20 text-background'
-														: 'bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary'
-												)}>
-													<Icon className='size-4' />
-												</div>
-												<span className='flex-1 text-left font-medium'>{section.label}</span>
-												{activeSection === section.id && (
-													<div className='size-2 rounded-full bg-background animate-pulse' />
-												)}
-											</div>
-										</Button>
-									)
-								})}
-							</nav>
-						</div>
-					</>
-				)}
-			</div>
-		</>
-	)
+function Corners({ className }: { className?: string }) {
+  return (
+    <>
+      <span
+        aria-hidden
+        className={cn(
+          'pointer-events-none absolute -top-px -left-px z-10 size-2.5 border-t-2 border-l-2 border-foreground/45 sm:size-3',
+          className
+        )}
+      />
+      <span
+        aria-hidden
+        className={cn(
+          'pointer-events-none absolute -top-px -right-px z-10 size-2.5 border-t-2 border-r-2 border-foreground/45 sm:size-3',
+          className
+        )}
+      />
+      <span
+        aria-hidden
+        className={cn(
+          'pointer-events-none absolute -bottom-px -left-px z-10 size-2.5 border-b-2 border-l-2 border-foreground/45 sm:size-3',
+          className
+        )}
+      />
+      <span
+        aria-hidden
+        className={cn(
+          'pointer-events-none absolute -right-px -bottom-px z-10 size-2.5 border-b-2 border-r-2 border-foreground/45 sm:size-3',
+          className
+        )}
+      />
+    </>
+  )
 }
 
+export function NavigationMenu() {
+  const [activeSection, setActiveSection] = useState('')
+  const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    if (isOpen) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (visible?.target.id) setActiveSection(visible.target.id)
+      },
+      { rootMargin: '-30% 0px -50% 0px', threshold: [0, 0.25, 0.5, 1] }
+    )
+
+    sections.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    setIsOpen(false)
+  }
+
+  return (
+    <header className="fixed top-0 right-0 left-0 z-50 bg-background/80 backdrop-blur-md print:hidden">
+      <div className="site-shell pt-3 sm:pt-4">
+        <div className="relative flex h-12 items-center justify-between border border-border bg-background/90 px-4 sm:h-14 sm:px-5">
+          <Corners />
+
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="text-sm font-semibold tracking-[0.18em] uppercase"
+          >
+            Harshhaa
+          </button>
+
+          <nav className="hidden items-center gap-6 md:flex">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                type="button"
+                onClick={() => scrollTo(section.id)}
+                className={cn(
+                  'text-xs font-medium tracking-wide transition-colors',
+                  activeSection === section.id
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                )}
+              >
+                {section.label}
+              </button>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsOpen((v) => !v)}
+              aria-label="Toggle menu"
+              aria-expanded={isOpen}
+            >
+              {isOpen ? (
+                <XIcon className="size-4" />
+              ) : (
+                <MenuIcon className="size-4" />
+              )}
+            </Button>
+          </div>
+        </div>
+
+        {isOpen && (
+          <nav
+            className="relative -mt-px border border-t-0 border-border bg-background/95 md:hidden"
+            aria-label="Mobile"
+          >
+            <Corners />
+            <div className="border-b border-border px-4 py-3">
+              <span className="text-[11px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
+                Navigate
+              </span>
+            </div>
+            <ul className="flex flex-col">
+              {sections.map((section, index) => {
+                const active = activeSection === section.id
+                return (
+                  <li
+                    key={section.id}
+                    className={
+                      index < sections.length - 1
+                        ? 'border-b border-border'
+                        : undefined
+                    }
+                  >
+                    <button
+                      type="button"
+                      onClick={() => scrollTo(section.id)}
+                      className={cn(
+                        'group flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-sm transition-colors',
+                        active
+                          ? 'bg-muted/50 text-foreground'
+                          : 'text-muted-foreground hover:bg-muted/30 hover:text-foreground'
+                      )}
+                    >
+                      <span className="flex items-center gap-3">
+                        <span
+                          className={cn(
+                            'font-mono text-[10px] tabular-nums tracking-wider',
+                            active
+                              ? 'text-foreground'
+                              : 'text-muted-foreground/60'
+                          )}
+                        >
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        {section.label}
+                      </span>
+                      <ChevronRightIcon
+                        className={cn(
+                          'size-3.5 shrink-0 transition-transform group-hover:translate-x-0.5',
+                          active ? 'opacity-70' : 'opacity-40'
+                        )}
+                      />
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
+          </nav>
+        )}
+      </div>
+    </header>
+  )
+}

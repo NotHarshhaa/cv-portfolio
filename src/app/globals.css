@@ -1,234 +1,185 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-@layer base {
-	:root {
-		--background: 0 0% 100%;
-		--foreground: 0 0% 3.9%;
+@custom-variant dark (&:is(.dark *));
 
-		--card: 0 0% 100%;
-		--card-foreground: 0 0% 3.9%;
+:root {
+  --background: oklch(0.99 0.002 106);
+  --foreground: oklch(0.153 0.006 107.1);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.153 0.006 107.1);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.153 0.006 107.1);
+  --primary: oklch(0.228 0.013 107.4);
+  --primary-foreground: oklch(0.988 0.003 106.5);
+  --secondary: oklch(0.966 0.005 106.5);
+  --secondary-foreground: oklch(0.228 0.013 107.4);
+  --muted: oklch(0.966 0.005 106.5);
+  --muted-foreground: oklch(0.52 0.02 107);
+  --accent: oklch(0.966 0.005 106.5);
+  --accent-foreground: oklch(0.228 0.013 107.4);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.91 0.006 106.5);
+  --input: oklch(0.91 0.006 106.5);
+  --ring: oklch(0.737 0.021 106.9);
+  --radius: 0;
+  --chart-1: oklch(0.88 0.011 106.6);
+  --chart-2: oklch(0.58 0.031 107.3);
+  --chart-3: oklch(0.466 0.025 107.3);
+  --chart-4: oklch(0.394 0.023 107.4);
+  --chart-5: oklch(0.286 0.016 107.4);
+  --sidebar: oklch(0.988 0.003 106.5);
+  --sidebar-foreground: oklch(0.153 0.006 107.1);
+  --sidebar-primary: oklch(0.228 0.013 107.4);
+  --sidebar-primary-foreground: oklch(0.988 0.003 106.5);
+  --sidebar-accent: oklch(0.966 0.005 106.5);
+  --sidebar-accent-foreground: oklch(0.228 0.013 107.4);
+  --sidebar-border: oklch(0.93 0.007 106.5);
+  --sidebar-ring: oklch(0.737 0.021 106.9);
+}
 
-		--popover: 0 0% 100%;
-		--popover-foreground: 0 0% 3.9%;
+.dark {
+  --background: oklch(0.12 0.005 107);
+  --foreground: oklch(0.97 0.003 106.5);
+  --card: oklch(0.15 0.006 107);
+  --card-foreground: oklch(0.97 0.003 106.5);
+  --popover: oklch(0.15 0.006 107);
+  --popover-foreground: oklch(0.97 0.003 106.5);
+  --primary: oklch(0.95 0.005 106.5);
+  --primary-foreground: oklch(0.15 0.006 107);
+  --secondary: oklch(0.2 0.008 107);
+  --secondary-foreground: oklch(0.97 0.003 106.5);
+  --muted: oklch(0.2 0.008 107);
+  --muted-foreground: oklch(0.65 0.015 107);
+  --accent: oklch(0.2 0.008 107);
+  --accent-foreground: oklch(0.97 0.003 106.5);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.58 0.031 107.3);
+  --chart-1: oklch(0.88 0.011 106.6);
+  --chart-2: oklch(0.58 0.031 107.3);
+  --chart-3: oklch(0.466 0.025 107.3);
+  --chart-4: oklch(0.394 0.023 107.4);
+  --chart-5: oklch(0.286 0.016 107.4);
+  --sidebar: oklch(0.15 0.006 107);
+  --sidebar-foreground: oklch(0.97 0.003 106.5);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.988 0.003 106.5);
+  --sidebar-accent: oklch(0.2 0.008 107);
+  --sidebar-accent-foreground: oklch(0.97 0.003 106.5);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: oklch(0.58 0.031 107.3);
+}
 
-		--primary: 0 0% 9%;
-		--primary-foreground: 0 0% 98%;
-
-		--secondary: 0 0% 96.1%;
-		--secondary-foreground: 0 0% 9%;
-
-		--muted: 0 0% 96.1%;
-		--muted-foreground: 0 0% 45.1%;
-
-		--accent: 0 0% 96.1%;
-		--accent-foreground: 0 0% 9%;
-
-		--destructive: 0 84.2% 60.2%;
-		--destructive-foreground: 0 0% 98%;
-
-		--border: 0 0% 89.8%;
-		--input: 0 0% 89.8%;
-		--ring: 0 0% 3.9%;
-
-		--radius: 0.5rem;
-	}
-
-	.dark {
-		--background: 0 0% 3.9%;
-		--foreground: 0 0% 98%;
-
-		--card: 0 0% 3.9%;
-		--card-foreground: 0 0% 98%;
-
-		--popover: 0 0% 3.9%;
-		--popover-foreground: 0 0% 98%;
-
-		--primary: 0 0% 98%;
-		--primary-foreground: 0 0% 9%;
-
-		--secondary: 0 0% 14.9%;
-		--secondary-foreground: 0 0% 98%;
-
-		--muted: 0 0% 14.9%;
-		--muted-foreground: 0 0% 63.9%;
-
-		--accent: 0 0% 14.9%;
-		--accent-foreground: 0 0% 98%;
-
-		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 0 0% 98%;
-
-		--border: 0 0% 14.9%;
-		--input: 0 0% 14.9%;
-		--ring: 0 0% 83.1%;
-	}
+@theme inline {
+  --breakpoint-xs: 475px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
-	* {
-		@apply border-border;
-	}
-	body {
-		@apply bg-background text-foreground;
-	}
-	
-	/* Performance optimizations */
-	* {
-		box-sizing: border-box;
-	}
-	
-	html {
-		scroll-behavior: smooth;
-	}
-	
-	/* Focus styles for accessibility */
-	.focus-visible:focus {
-		outline: 2px solid hsl(var(--ring));
-		outline-offset: 2px;
-	}
-	
-	/* Reduce motion for users who prefer it */
-	@media (prefers-reduced-motion: reduce) {
-		*,
-		*::before,
-		*::after {
-			animation-duration: 0.01ms !important;
-			animation-iteration-count: 1 !important;
-			transition-duration: 0.01ms !important;
-			scroll-behavior: auto !important;
-		}
-	}
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+  }
+
+  body {
+    @apply text-foreground antialiased;
+    background-color: var(--background);
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in oklch, var(--foreground) 12%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in oklch, var(--foreground) 12%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 48px 48px;
+    background-attachment: fixed;
+    background-position: center top;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    @apply bg-foreground text-background;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+.site-shell {
+  @apply relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10;
 }
 
 @layer utilities {
-	.print-force-new-page {
-		page-break-before: always;
-	}
-	
-	/* Optimize for print */
-	@media print {
-		body {
-			background: white !important;
-			color: black !important;
-			font-size: 12pt;
-			line-height: 1.4;
-		}
-		
-		img {
-			filter: none !important;
-			max-width: 100% !important;
-			height: auto !important;
-		}
-		
-		a {
-			color: black !important;
-			text-decoration: underline;
-		}
-		
-		.dark,
-		.dark * {
-			background: white !important;
-			color: black !important;
-		}
-		
-		/* Hide non-essential elements */
-		.print\\:hidden,
-		[class*="print:hidden"] {
-			display: none !important;
-		}
-		
-		/* Ensure proper page breaks */
-		.page-break-before {
-			page-break-before: always;
-		}
-		
-		.page-break-after {
-			page-break-after: always;
-		}
-		
-		/* Optimize text for print */
-		.text-pretty {
-			text-align: justify;
-		}
-	}
-	
-	/* Performance optimizations */
-	.will-change-transform {
-		will-change: transform;
-	}
-	
-	.will-change-opacity {
-		will-change: opacity;
-	}
-	
-	/* Optimize animations */
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-			transform: translateY(20px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-	
-	.animate-fade-in {
-		animation: fadeIn 0.6s ease-out forwards;
-	}
-	
-	/* Slide in from right animation for mobile menu */
-	@keyframes slideInRight {
-		from {
-			transform: translateX(100%);
-			opacity: 0;
-		}
-		to {
-			transform: translateX(0);
-			opacity: 1;
-		}
-	}
-	
-	.animate-slide-in-right {
-		animation: slideInRight 0.3s ease-out forwards;
-	}
-	
-	/* Stagger animation for children */
-	.animate-fade-in:nth-child(1) { animation-delay: 0.1s; }
-	.animate-fade-in:nth-child(2) { animation-delay: 0.2s; }
-	.animate-fade-in:nth-child(3) { animation-delay: 0.3s; }
-	.animate-fade-in:nth-child(4) { animation-delay: 0.4s; }
-	.animate-fade-in:nth-child(5) { animation-delay: 0.5s; }
-	
-	/* Smooth scroll behavior */
-	html {
-		scroll-behavior: smooth;
-		scroll-padding-top: 100px;
-	}
-	
-	/* Screen reader only class */
-	.sr-only {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
-		border-width: 0;
-	}
-	
-	.focus\:not-sr-only:focus {
-		position: static;
-		width: auto;
-		height: auto;
-		padding: inherit;
-		margin: inherit;
-		overflow: visible;
-		clip: auto;
-		white-space: normal;
-	}
+  .print-force-new-page {
+    page-break-before: always;
+  }
+
+  @media print {
+    body {
+      background: white !important;
+      background-image: none !important;
+      color: black !important;
+    }
+
+    .print\:hidden,
+    [class*='print:hidden'] {
+      display: none !important;
+    }
+  }
 }

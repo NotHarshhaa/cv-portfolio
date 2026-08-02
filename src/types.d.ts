@@ -63,11 +63,13 @@ export interface Project {
 	techStack: string[]
 	description: string
 	link: ProjectLink
+	isNew?: boolean
 }
 
 export interface ResumeData {
 	name: string
 	initials: string
+	role?: string
 	location: string
 	locationLink: string
 	about: string
