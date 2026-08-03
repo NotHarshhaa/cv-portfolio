@@ -134,12 +134,12 @@ export default function Page() {
             </FrameBody>
           </Frame>
 
-          <Frame id="work" className="scroll-mt-28 overflow-hidden">
+          <Frame id="work" className="scroll-mt-28 overflow-visible">
             <FrameHeader label="Work Experience" />
             <WorkTimeline work={data.work} />
           </Frame>
 
-          <Frame id="education" className="scroll-mt-28 overflow-hidden">
+          <Frame id="education" className="scroll-mt-28 overflow-visible">
             <FrameHeader label="Education" />
             <ul>
               {data.education.map((education, index) => (
@@ -188,7 +188,7 @@ export default function Page() {
 
           <Frame
             id="projects"
-            className="print-force-new-page scroll-mt-28 overflow-hidden"
+            className="print-force-new-page scroll-mt-28 overflow-visible"
           >
             <FrameHeader label="Projects" />
             <FrameBody>

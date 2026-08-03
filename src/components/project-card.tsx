@@ -1,6 +1,7 @@
 import React from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { Badge } from './ui/badge'
+import { HoverMark } from '@/components/hover-mark'
 
 interface Props {
   title: string
@@ -20,7 +21,12 @@ export const ProjectCard = React.memo(function ProjectCard({
   isLast
 }: Props) {
   return (
-    <li className={isLast ? undefined : 'border-b border-border'}>
+    <HoverMark
+      as="li"
+      label={link ? 'Open link' : undefined}
+      disabled={!link}
+      className={isLast ? undefined : 'border-b border-border'}
+    >
       <div className="flex flex-col gap-4 px-4 py-7 sm:flex-row sm:items-start sm:justify-between sm:gap-10 sm:px-6 sm:py-8">
         <div className="min-w-0 flex-1 space-y-3">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -29,7 +35,7 @@ export const ProjectCard = React.memo(function ProjectCard({
                 href={link}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-base font-medium transition-opacity hover:opacity-60"
+                className="inline-flex items-center gap-1.5 text-base font-medium"
               >
                 {title}
                 <ArrowUpRight className="size-3.5 opacity-40" />
@@ -61,6 +67,6 @@ export const ProjectCard = React.memo(function ProjectCard({
           </ul>
         </div>
       </div>
-    </li>
+    </HoverMark>
   )
 })

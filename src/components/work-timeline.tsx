@@ -1,6 +1,7 @@
 'use client'
 
 import { ArrowUpRight } from 'lucide-react'
+import { HoverMark } from '@/components/hover-mark'
 
 interface Work {
   company: string
@@ -22,8 +23,11 @@ export function WorkTimeline({ work }: WorkTimelineProps) {
   return (
     <ul>
       {work.map((workItem, index) => (
-        <li
+        <HoverMark
+          as="li"
           key={workItem.company}
+          label={workItem.link ? 'Open link' : undefined}
+          disabled={!workItem.link}
           className={
             index < work.length - 1 ? 'border-b border-border' : undefined
           }
@@ -35,7 +39,7 @@ export function WorkTimeline({ work }: WorkTimelineProps) {
                   href={workItem.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-base font-medium transition-opacity hover:opacity-60"
+                  className="inline-flex items-center gap-1 text-base font-medium"
                 >
                   {workItem.company}
                   <ArrowUpRight className="size-3.5 opacity-40" />
@@ -76,7 +80,7 @@ export function WorkTimeline({ work }: WorkTimelineProps) {
               ))}
             </div>
           </div>
-        </li>
+        </HoverMark>
       ))}
     </ul>
   )

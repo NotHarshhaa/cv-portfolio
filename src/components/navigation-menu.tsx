@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { ChevronRightIcon, MenuIcon, XIcon } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { HoverMark } from '@/components/hover-mark'
 
 const sections = [
   { id: 'about', label: 'About' },
@@ -88,36 +89,37 @@ export function NavigationMenu() {
   return (
     <header className="fixed top-0 right-0 left-0 z-50 bg-background/80 backdrop-blur-md print:hidden">
       <div className="site-shell pt-3 sm:pt-4">
-        <div className="relative flex h-12 items-center justify-between border border-border bg-background/90 px-4 sm:h-14 sm:px-5">
+        <div className="relative flex h-12 items-center justify-between overflow-visible border border-border bg-background/90 px-4 sm:h-14 sm:px-5">
           <Corners />
 
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-sm font-semibold tracking-[0.18em] uppercase"
+            className="relative z-10 text-sm font-semibold tracking-[0.18em] uppercase"
           >
             Harshhaa
           </button>
 
-          <nav className="hidden items-center gap-6 md:flex">
+          <nav className="hidden items-center gap-1 md:flex">
             {sections.map((section) => (
-              <button
-                key={section.id}
-                type="button"
-                onClick={() => scrollTo(section.id)}
-                className={cn(
-                  'text-xs font-medium tracking-wide transition-colors',
-                  activeSection === section.id
-                    ? 'text-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
-                )}
-              >
-                {section.label}
-              </button>
+              <HoverMark key={section.id} className="px-2.5 py-1.5">
+                <button
+                  type="button"
+                  onClick={() => scrollTo(section.id)}
+                  className={cn(
+                    'text-xs font-medium tracking-wide transition-colors',
+                    activeSection === section.id
+                      ? 'text-foreground'
+                      : 'text-muted-foreground group-hover/mark:text-foreground'
+                  )}
+                >
+                  {section.label}
+                </button>
+              </HoverMark>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="relative z-10 flex items-center gap-2">
             <ThemeToggle />
             <Button
               variant="ghost"
@@ -138,7 +140,7 @@ export function NavigationMenu() {
 
         {isOpen && (
           <nav
-            className="relative -mt-px border border-t-0 border-border bg-background/95 md:hidden"
+            className="relative -mt-px overflow-visible border border-t-0 border-border bg-background/95 md:hidden"
             aria-label="Mobile"
           >
             <Corners />
@@ -151,8 +153,10 @@ export function NavigationMenu() {
               {sections.map((section, index) => {
                 const active = activeSection === section.id
                 return (
-                  <li
+                  <HoverMark
+                    as="li"
                     key={section.id}
+                    label="Go"
                     className={
                       index < sections.length - 1
                         ? 'border-b border-border'
@@ -163,16 +167,16 @@ export function NavigationMenu() {
                       type="button"
                       onClick={() => scrollTo(section.id)}
                       className={cn(
-                        'group flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-sm transition-colors',
+                        'flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-sm transition-colors',
                         active
-                          ? 'bg-muted/50 text-foreground'
-                          : 'text-muted-foreground hover:bg-muted/30 hover:text-foreground'
+                          ? 'text-foreground'
+                          : 'text-muted-foreground group-hover/mark:text-foreground'
                       )}
                     >
                       <span className="flex items-center gap-3">
                         <span
                           className={cn(
-                            'font-mono text-[10px] tabular-nums tracking-wider',
+                            'font-mono text-[10px] tracking-wider tabular-nums',
                             active
                               ? 'text-foreground'
                               : 'text-muted-foreground/60'
@@ -184,12 +188,12 @@ export function NavigationMenu() {
                       </span>
                       <ChevronRightIcon
                         className={cn(
-                          'size-3.5 shrink-0 transition-transform group-hover:translate-x-0.5',
+                          'size-3.5 shrink-0 transition-transform group-hover/mark:translate-x-0.5',
                           active ? 'opacity-70' : 'opacity-40'
                         )}
                       />
                     </button>
-                  </li>
+                  </HoverMark>
                 )
               })}
             </ul>
