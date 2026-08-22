@@ -128,6 +128,15 @@
   body {
     @apply text-foreground antialiased;
     background-color: var(--background);
+    min-height: 100vh;
+  }
+
+  body::before {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    content: '';
     background-image:
       linear-gradient(
         to right,
@@ -140,9 +149,7 @@
         transparent 1px
       );
     background-size: 48px 48px;
-    background-attachment: fixed;
     background-position: center top;
-    min-height: 100vh;
   }
 
   ::selection {
@@ -175,6 +182,10 @@
       background: white !important;
       background-image: none !important;
       color: black !important;
+    }
+
+    body::before {
+      display: none !important;
     }
 
     .print\:hidden,

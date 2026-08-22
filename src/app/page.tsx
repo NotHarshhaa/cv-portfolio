@@ -6,6 +6,7 @@ import { GlobeIcon } from 'lucide-react'
 import { data } from '@/constants'
 import { RESUME_DATA } from '@/data/resume-data'
 import { NavigationMenu } from '@/components/navigation-menu'
+import { Corners } from '@/components/frame'
 import { ScrollToTop } from '@/components/scroll-to-top'
 import { CopyButton } from '@/components/copy-button'
 import { SkillsCategorized } from '@/components/skills-categorized'
@@ -13,7 +14,12 @@ import { DownloadResumeButton } from '@/components/download-resume-button'
 import { StatsSection } from '@/components/stats-section'
 import { ProjectsSection } from '@/components/projects-section'
 import { WorkTimeline } from '@/components/work-timeline'
-import { Frame, FrameBody, FrameHeader } from '@/components/frame'
+import {
+  BracketTitle,
+  Frame,
+  FrameBody,
+  FrameHeader
+} from '@/components/frame'
 
 const MemoizedButtonLink = React.memo(ButtonLink)
 
@@ -57,7 +63,7 @@ export default function Page() {
                 <div className="flex-1 space-y-4">
                   <div>
                     <h1 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-                      {data.name}
+                      <BracketTitle>{data.name}</BracketTitle>
                     </h1>
                     {data.role && (
                       <p className="mt-2 text-sm font-medium tracking-wide text-foreground/80 sm:text-base">
@@ -93,16 +99,19 @@ export default function Page() {
                   className="shrink-0 focus:outline-none"
                   aria-label="Visit GitHub profile"
                 >
-                  <Avatar className="size-28 rounded-none border border-border after:rounded-none sm:size-32">
-                    <AvatarImage
-                      src={RESUME_DATA.avatar}
-                      alt={RESUME_DATA.name}
-                      className="rounded-none object-cover"
-                    />
-                    <AvatarFallback className="rounded-none">
-                      {RESUME_DATA.initials}
-                    </AvatarFallback>
-                  </Avatar>
+                  <span className="relative block">
+                    <Corners />
+                    <Avatar className="size-28 rounded-none border border-border after:rounded-none sm:size-32">
+                      <AvatarImage
+                        src={RESUME_DATA.avatar}
+                        alt={RESUME_DATA.name}
+                        className="rounded-none object-cover"
+                      />
+                      <AvatarFallback className="rounded-none">
+                        {RESUME_DATA.initials}
+                      </AvatarFallback>
+                    </Avatar>
+                  </span>
                 </a>
               </div>
             </FrameBody>

@@ -131,6 +131,7 @@ export function CommandMenu({ links }: Props) {
 				size='icon'
 				className='fixed right-4 bottom-20 z-50 print:hidden xl:hidden'
 				aria-label='Open command menu'
+				suppressHydrationWarning
 			>
 				<CommandIcon className='size-4' />
 			</Button>

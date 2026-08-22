@@ -1,11 +1,13 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { ChevronRightIcon, MenuIcon, XIcon } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { HoverMark } from '@/components/hover-mark'
+import { BracketTitle, Corners } from '@/components/frame'
 
 const sections = [
   { id: 'about', label: 'About' },
@@ -14,41 +16,6 @@ const sections = [
   { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' }
 ]
-
-function Corners({ className }: { className?: string }) {
-  return (
-    <>
-      <span
-        aria-hidden
-        className={cn(
-          'pointer-events-none absolute -top-px -left-px z-10 size-2.5 border-t-2 border-l-2 border-foreground/45 sm:size-3',
-          className
-        )}
-      />
-      <span
-        aria-hidden
-        className={cn(
-          'pointer-events-none absolute -top-px -right-px z-10 size-2.5 border-t-2 border-r-2 border-foreground/45 sm:size-3',
-          className
-        )}
-      />
-      <span
-        aria-hidden
-        className={cn(
-          'pointer-events-none absolute -bottom-px -left-px z-10 size-2.5 border-b-2 border-l-2 border-foreground/45 sm:size-3',
-          className
-        )}
-      />
-      <span
-        aria-hidden
-        className={cn(
-          'pointer-events-none absolute -right-px -bottom-px z-10 size-2.5 border-b-2 border-r-2 border-foreground/45 sm:size-3',
-          className
-        )}
-      />
-    </>
-  )
-}
 
 export function NavigationMenu() {
   const [activeSection, setActiveSection] = useState('')
@@ -87,9 +54,9 @@ export function NavigationMenu() {
   }
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 bg-background/80 backdrop-blur-md print:hidden">
+    <header className="fixed top-0 right-0 left-0 z-50 backdrop-blur-md print:hidden">
       <div className="site-shell pt-3 sm:pt-4">
-        <div className="relative flex h-12 items-center justify-between overflow-visible border border-border bg-background/90 px-4 sm:h-14 sm:px-5">
+        <div className="relative flex h-12 items-center justify-between overflow-visible border border-border bg-transparent px-4 sm:h-14 sm:px-5">
           <Corners />
 
           <button
@@ -97,7 +64,16 @@ export function NavigationMenu() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="relative z-10 text-sm font-semibold tracking-[0.18em] uppercase"
           >
-            Harshhaa
+            <span className="relative z-10 flex items-center gap-2">
+              <Image
+                src="/android-chrome-192x192.png"
+                alt="Harshhaa logo"
+                width={32}
+                height={32}
+                className="block size-8 shrink-0 object-contain"
+              />
+              <BracketTitle>Harshhaa</BracketTitle>
+            </span>
           </button>
 
           <nav className="hidden items-center gap-1 md:flex">
