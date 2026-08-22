@@ -110,8 +110,8 @@
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {

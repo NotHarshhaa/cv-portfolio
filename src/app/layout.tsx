@@ -1,6 +1,6 @@
 import React from 'react'
 import { type Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Instrument_Sans } from 'next/font/google'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { RESUME_DATA } from '@/data/resume-data'
 import { cn } from '@/lib/utils'
@@ -9,9 +9,9 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
-const inter = Inter({
+const instrumentSans = Instrument_Sans({
   subsets: ['latin'],
-  variable: '--font-inter'
+  variable: '--font-instrument-sans'
 })
 
 export const metadata: Metadata = {
@@ -63,7 +63,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn(
         'min-h-screen font-sans antialiased',
-        inter.variable
+        instrumentSans.variable
       )}
     >
       <body className="min-h-screen font-sans antialiased">
