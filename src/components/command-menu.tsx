@@ -24,7 +24,9 @@ import {
 	CopyIcon,
 	ExternalLinkIcon,
 	PrinterIcon,
-	TerminalIcon
+	TerminalIcon,
+	BotIcon,
+	LayersIcon
 } from 'lucide-react'
 import { GitHubIcon, LinkedInIcon, TelegramIcon } from '@/components/icons'
 import { useTheme } from 'next-themes'
@@ -206,6 +208,29 @@ export function CommandMenu({ links }: Props) {
 							<TerminalIcon className='mr-2 h-4 w-4' />
 							<span>Open Blueprint Terminal</span>
 							<CommandShortcut>`</CommandShortcut>
+						</CommandItem>
+
+						<CommandItem
+							onSelect={() => {
+								setOpen(false)
+								window.dispatchEvent(new CustomEvent('open-ai-agent'))
+							}}
+							className='cursor-pointer'
+						>
+							<BotIcon className='mr-2 h-4 w-4' />
+							<span>Ask Harshhaa’s Agent (AI Assistant)</span>
+							<CommandShortcut>⌘J</CommandShortcut>
+						</CommandItem>
+
+						<CommandItem
+							onSelect={() => {
+								setOpen(false)
+								document.getElementById('architecture')?.scrollIntoView({ behavior: 'smooth' })
+							}}
+							className='cursor-pointer'
+						>
+							<LayersIcon className='mr-2 h-4 w-4' />
+							<span>View Cloud & AI Architecture</span>
 						</CommandItem>
 					</CommandGroup>
 

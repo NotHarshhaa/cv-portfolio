@@ -4,16 +4,18 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { ChevronRightIcon, MenuIcon, XIcon, TerminalIcon } from 'lucide-react'
+import { ChevronRightIcon, MenuIcon, XIcon, TerminalIcon, BotIcon } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { HoverMark } from '@/components/hover-mark'
 import { BracketTitle, Corners } from '@/components/frame'
 import { TerminalDrawer } from '@/components/terminal-drawer'
+import { PortfolioAIAgent } from '@/components/portfolio-ai-agent'
 
 const sections = [
   { id: 'about', label: 'About' },
   { id: 'work', label: 'Experience' },
   { id: 'education', label: 'Education' },
+  { id: 'architecture', label: 'Architecture' },
   { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' }
 ]
@@ -22,6 +24,7 @@ export function NavigationMenu() {
   const [activeSection, setActiveSection] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const [isTerminalOpen, setIsTerminalOpen] = useState(false)
+  const [isAgentOpen, setIsAgentOpen] = useState(false)
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -35,14 +38,21 @@ export function NavigationMenu() {
         e.preventDefault()
         setIsTerminalOpen((prev) => !prev)
       }
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'j') {
+        e.preventDefault()
+        setIsAgentOpen((prev) => !prev)
+      }
     }
     const handleOpenTerminal = () => setIsTerminalOpen(true)
+    const handleOpenAgent = () => setIsAgentOpen(true)
 
     window.addEventListener('keydown', handleKey)
     window.addEventListener('open-terminal', handleOpenTerminal)
+    window.addEventListener('open-ai-agent', handleOpenAgent)
     return () => {
       window.removeEventListener('keydown', handleKey)
       window.removeEventListener('open-terminal', handleOpenTerminal)
+      window.removeEventListener('open-ai-agent', handleOpenAgent)
     }
   }, [])
 
@@ -127,6 +137,17 @@ export function NavigationMenu() {
           </nav>
 
           <div className="relative z-10 flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsAgentOpen(true)}
+              className="h-9 gap-1.5 px-2.5 font-mono text-xs tracking-wider"
+              aria-label="Ask Harshhaa's AI Agent"
+              title="Ask Harshhaa's AI Agent (⌘J)"
+            >
+              <BotIcon className="size-3.5 text-primary" />
+              <span className="hidden sm:inline">Agent</span>
+            </Button>
             <Button
               variant="outline"
               size="sm"
@@ -216,6 +237,26 @@ export function NavigationMenu() {
               })}
               <HoverMark
                 as="li"
+                label="Chat"
+                className="border-t border-border"
+              >
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsOpen(false)
+                    setIsAgentOpen(true)
+                  }}
+                  className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-sm text-foreground transition-colors"
+                >
+                  <span className="flex items-center gap-2.5 font-mono text-xs">
+                    <BotIcon className="size-3.5 text-primary" />
+                    <span>Ask Harshhaa’s Agent (⌘J)</span>
+                  </span>
+                  <ChevronRightIcon className="size-3.5 opacity-60" />
+                </button>
+              </HoverMark>
+              <HoverMark
+                as="li"
                 label="Run"
                 className="border-t border-border"
               >
@@ -242,6 +283,10 @@ export function NavigationMenu() {
       <TerminalDrawer
         open={isTerminalOpen}
         onOpenChange={setIsTerminalOpen}
+      />
+      <PortfolioAIAgent
+        open={isAgentOpen}
+        onOpenChange={setIsAgentOpen}
       />
     </header>
   )

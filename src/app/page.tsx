@@ -14,6 +14,7 @@ import { DownloadResumeButton } from '@/components/download-resume-button'
 import { StatsSection } from '@/components/stats-section'
 import { ProjectsSection } from '@/components/projects-section'
 import { WorkTimeline } from '@/components/work-timeline'
+import { ArchitectureVisualizer } from '@/components/architecture-visualizer'
 import {
   BracketTitle,
   Frame,
@@ -186,6 +187,17 @@ export default function Page() {
                 </li>
               ))}
             </ul>
+          </Frame>
+
+          <Frame id="architecture" className="scroll-mt-28 overflow-visible">
+            <FrameHeader label="Architecture & Topology">
+              <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
+                Interactive Cloud Canvas
+              </span>
+            </FrameHeader>
+            <FrameBody className="py-6 sm:py-8">
+              <ArchitectureVisualizer />
+            </FrameBody>
           </Frame>
 
           <Frame id="skills" className="scroll-mt-28">
