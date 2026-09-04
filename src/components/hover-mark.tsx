@@ -36,7 +36,7 @@ export function HoverMark({
             aria-hidden
             className={cn(
               'pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-150',
-              'group-hover/mark:opacity-100 group-focus-within/mark:opacity-100'
+              'group-hover/mark:opacity-100 group-has-[:focus-visible]/mark:opacity-100'
             )}
             style={{
               backgroundColor:
@@ -53,19 +53,19 @@ export function HoverMark({
 
           <span
             aria-hidden
-            className="pointer-events-none absolute top-0 left-0 z-20 size-2.5 border-t-2 border-l-2 border-foreground opacity-0 transition-opacity duration-150 group-hover/mark:opacity-100 group-focus-within/mark:opacity-100 sm:size-3"
+            className="pointer-events-none absolute top-0 left-0 z-20 size-2.5 border-t-2 border-l-2 border-foreground opacity-0 transition-opacity duration-150 group-hover/mark:opacity-100 group-has-[:focus-visible]/mark:opacity-100 sm:size-3"
           />
           <span
             aria-hidden
-            className="pointer-events-none absolute top-0 right-0 z-20 size-2.5 border-t-2 border-r-2 border-foreground opacity-0 transition-opacity duration-150 group-hover/mark:opacity-100 group-focus-within/mark:opacity-100 sm:size-3"
+            className="pointer-events-none absolute top-0 right-0 z-20 size-2.5 border-t-2 border-r-2 border-foreground opacity-0 transition-opacity duration-150 group-hover/mark:opacity-100 group-has-[:focus-visible]/mark:opacity-100 sm:size-3"
           />
           <span
             aria-hidden
-            className="pointer-events-none absolute bottom-0 left-0 z-20 size-2.5 border-b-2 border-l-2 border-foreground opacity-0 transition-opacity duration-150 group-hover/mark:opacity-100 group-focus-within/mark:opacity-100 sm:size-3"
+            className="pointer-events-none absolute bottom-0 left-0 z-20 size-2.5 border-b-2 border-l-2 border-foreground opacity-0 transition-opacity duration-150 group-hover/mark:opacity-100 group-has-[:focus-visible]/mark:opacity-100 sm:size-3"
           />
           <span
             aria-hidden
-            className="pointer-events-none absolute right-0 bottom-0 z-20 size-2.5 border-r-2 border-b-2 border-foreground opacity-0 transition-opacity duration-150 group-hover/mark:opacity-100 group-focus-within/mark:opacity-100 sm:size-3"
+            className="pointer-events-none absolute right-0 bottom-0 z-20 size-2.5 border-r-2 border-b-2 border-foreground opacity-0 transition-opacity duration-150 group-hover/mark:opacity-100 group-has-[:focus-visible]/mark:opacity-100 sm:size-3"
           />
 
           {label && (
@@ -75,7 +75,7 @@ export function HoverMark({
                 'pointer-events-none absolute right-0 bottom-0 z-30 translate-y-1/2',
                 'bg-foreground px-1.5 py-0.5 font-mono text-[10px] leading-none tracking-wide text-background whitespace-nowrap',
                 'opacity-0 transition-opacity duration-150',
-                'group-hover/mark:opacity-100 group-focus-within/mark:opacity-100'
+                'group-hover/mark:opacity-100 group-has-[:focus-visible]/mark:opacity-100'
               )}
             >
               {label}

@@ -74,12 +74,18 @@ export function NavigationMenu() {
   }, [])
 
   const scrollTo = (id: string) => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     setIsOpen(false)
   }
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 print:hidden pointer-events-none">
+    <header
+      className="fixed top-0 right-0 left-0 z-50 print:hidden pointer-events-none right-scroll-bar-position"
+      style={{ right: 'var(--removed-body-scroll-bar-size, 0px)' }}
+    >
       <div className="site-shell pt-3 sm:pt-4">
         <div className="relative flex h-12 items-center justify-between overflow-visible border border-border bg-background/80 backdrop-blur-md px-4 pointer-events-auto sm:h-14 sm:px-5">
           <Corners />

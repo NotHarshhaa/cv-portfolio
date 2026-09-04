@@ -172,6 +172,12 @@
   @apply relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-10;
 }
 
+/* Prevent layout shift on fixed elements when Radix / react-remove-scroll locks body scroll */
+body[data-scroll-locked] header,
+body[data-scroll-locked] .right-scroll-bar-position {
+  right: var(--removed-body-scroll-bar-size, 0px) !important;
+}
+
 @layer utilities {
   .print-force-new-page {
     page-break-before: always;

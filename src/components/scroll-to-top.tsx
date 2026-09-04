@@ -22,6 +22,7 @@ export function ScrollToTop() {
     <Button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       className="fixed right-4 bottom-4 z-50 print:hidden md:right-6 md:bottom-6"
+      style={{ right: 'calc(1rem + var(--removed-body-scroll-bar-size, 0px))' }}
       variant="outline"
       size="icon"
       aria-label="Scroll to top"

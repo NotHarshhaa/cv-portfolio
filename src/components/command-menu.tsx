@@ -123,7 +123,10 @@ export function CommandMenu({ links }: Props) {
 
 	return (
 		<>
-			<p className='fixed bottom-0 left-0 right-0 z-40 hidden border-t border-border bg-background/95 p-2 text-center text-xs text-muted-foreground print:hidden xl:block'>
+			<p
+				className='fixed bottom-0 left-0 right-0 z-40 hidden border-t border-border bg-background/95 p-2 text-center text-xs text-muted-foreground print:hidden right-scroll-bar-position xl:block'
+				style={{ right: 'var(--removed-body-scroll-bar-size, 0px)' }}
+			>
 				Press{' '}
 				<kbd className='pointer-events-none inline-flex h-6 select-none items-center gap-1 border border-border bg-muted px-2 font-mono text-xs font-medium'>
 					<span className='text-xs'>⌘</span>K
@@ -135,6 +138,7 @@ export function CommandMenu({ links }: Props) {
 				variant='outline'
 				size='icon'
 				className='fixed right-4 bottom-20 z-50 print:hidden xl:hidden'
+				style={{ right: 'calc(1rem + var(--removed-body-scroll-bar-size, 0px))' }}
 				aria-label='Open command menu'
 				suppressHydrationWarning
 			>
