@@ -23,7 +23,8 @@ import {
 	ArrowUpIcon,
 	CopyIcon,
 	ExternalLinkIcon,
-	PrinterIcon
+	PrinterIcon,
+	TerminalIcon
 } from 'lucide-react'
 import { GitHubIcon, LinkedInIcon, TelegramIcon } from '@/components/icons'
 import { useTheme } from 'next-themes'
@@ -189,6 +190,18 @@ export function CommandMenu({ links }: Props) {
 							<PrinterIcon className='mr-2 h-4 w-4' />
 							<span>Print Page</span>
 							<CommandShortcut>⌘P</CommandShortcut>
+						</CommandItem>
+
+						<CommandItem
+							onSelect={() => {
+								setOpen(false)
+								window.dispatchEvent(new CustomEvent('open-terminal'))
+							}}
+							className='cursor-pointer'
+						>
+							<TerminalIcon className='mr-2 h-4 w-4' />
+							<span>Open Blueprint Terminal</span>
+							<CommandShortcut>`</CommandShortcut>
 						</CommandItem>
 					</CommandGroup>
 

@@ -197,7 +197,21 @@ I enjoy building open-source tools, automation frameworks, production-ready AI p
         label: 'projects.prodevopsguytech.com',
         href: 'https://projects.prodevopsguytech.com'
       },
-      isNew: true
+      isNew: true,
+      category: 'Cloud Platform & IDP',
+      architecture:
+        'Next.js application deployed with automated GitHub Actions CI/CD workflows, backed by modular Terraform configurations for AWS & Azure multi-cloud sandbox environments.',
+      highlights: [
+        'Curated 40+ production-grade DevOps & Cloud project blueprints',
+        'Complete end-to-end IaC pipelines using Terraform and Ansible',
+        'Container orchestration guides with Kubernetes and Helm chart configurations',
+        'Full observability integrations with Prometheus, Grafana, and Loki'
+      ],
+      metrics: [
+        { label: 'Projects', value: '40+' },
+        { label: 'Cloud Providers', value: 'AWS / Azure' },
+        { label: 'Automation', value: '100% CI/CD' }
+      ]
     },
     {
       title: 'Ultimate DevOps & Cloud Docs Portal',
@@ -208,7 +222,20 @@ I enjoy building open-source tools, automation frameworks, production-ready AI p
         label: 'docs.prodevopsguytech.com',
         href: 'https://docs.prodevopsguytech.com'
       },
-      isNew: true
+      isNew: true,
+      category: 'Knowledge Platform',
+      architecture:
+        'Automated documentation portal indexed by topic with CI/CD content validation, automated link integrity checking, and markdown parsing.',
+      highlights: [
+        'Comprehensive documentation hub with 900+ handpicked engineering resources',
+        'Structured learning paths for Cloud Engineers, Platform Engineers, and SREs',
+        'Interactive architecture diagrams and cheatsheets for rapid reference'
+      ],
+      metrics: [
+        { label: 'Resources', value: '900+' },
+        { label: 'Topics', value: '25+' },
+        { label: 'Audience', value: 'Global Engineers' }
+      ]
     },
     {
       title: 'DevOps Repositories Central Hub',
@@ -219,7 +246,19 @@ I enjoy building open-source tools, automation frameworks, production-ready AI p
         label: 'repos.prodevopsguytech.com',
         href: 'https://repos.prodevopsguytech.com'
       },
-      isNew: true
+      isNew: true,
+      category: 'Open Source Hub',
+      architecture:
+        'Static catalog powered by GitHub API webhooks and automated metadata synchronization to showcase open-source repositories and scripts.',
+      highlights: [
+        'Catalog of open-source automation scripts and Terraform modules',
+        'Categorized by Infrastructure as Code, CI/CD, Containerization, and Security',
+        'Direct links to cloneable starter repos and deployment templates'
+      ],
+      metrics: [
+        { label: 'Repositories', value: '30+' },
+        { label: 'License', value: 'MIT' }
+      ]
     },
     {
       title: 'DevOps Real-Time Projects',
@@ -230,7 +269,19 @@ I enjoy building open-source tools, automation frameworks, production-ready AI p
         label: 'github.com/NotHarshhaa/DevOps-Projects',
         href: 'https://github.com/NotHarshhaa/DevOps-Projects'
       },
-      isNew: true
+      isNew: true,
+      category: 'Hands-on Repository',
+      architecture:
+        'Monorepo containing end-to-end DevOps project implementations with Dockerfiles, Helm charts, Jenkinsfiles, and GitHub Actions workflows.',
+      highlights: [
+        'Complete three-tier microservice architectures deployed on Kubernetes',
+        'Automated security scanning with SonarQube, Trivy, and OWASP Dependency-Check',
+        'GitOps deployment pipelines using ArgoCD and automated canary releases'
+      ],
+      metrics: [
+        { label: 'Projects', value: '20+' },
+        { label: 'Pipelines', value: 'GitHub Actions / Jenkins' }
+      ]
     },
     {
       title: 'AWS Real-Time Projects',
@@ -241,7 +292,19 @@ I enjoy building open-source tools, automation frameworks, production-ready AI p
         label: 'github.com/NotHarshhaa/AWS-Projects',
         href: 'https://github.com/NotHarshhaa/AWS-Projects'
       },
-      isNew: true
+      isNew: true,
+      category: 'Cloud Engineering',
+      architecture:
+        'AWS infrastructure blueprints provisioned via Terraform modules spanning VPCs, EKS clusters, ECS Fargate, ALB, RDS, and CloudWatch alarms.',
+      highlights: [
+        'High-availability multi-AZ VPC architecture with private subnets and NAT Gateways',
+        'Production EKS cluster deployment with managed node groups and IAM Roles for Service Accounts (IRSA)',
+        'Serverless microservices with AWS Lambda, API Gateway, and DynamoDB'
+      ],
+      metrics: [
+        { label: 'AWS Services', value: '15+' },
+        { label: 'IaC Tool', value: 'Terraform' }
+      ]
     },
     {
       title: 'Into the DevOps',
@@ -252,7 +315,19 @@ I enjoy building open-source tools, automation frameworks, production-ready AI p
         label: 'github.com/NotHarshhaa/into-the-devops',
         href: 'https://github.com/NotHarshhaa/into-the-devops'
       },
-      isNew: true
+      isNew: true,
+      category: 'Technical Guide',
+      architecture:
+        'Curated technical knowledge base covering real-world scenario questions, architecture trade-offs, and system design for Platform Engineers.',
+      highlights: [
+        'Deep dives into Linux kernel internals, networking, and system calls',
+        'Troubleshooting scenarios for Kubernetes crash looping and OOMKilled pods',
+        'Cloud security, IAM least-privilege, and compliance best practices'
+      ],
+      metrics: [
+        { label: 'Questions', value: '550+' },
+        { label: 'Domains', value: '8 Core Areas' }
+      ]
     },
     {
       title: 'Kubernetes Learning Path',
@@ -263,7 +338,19 @@ I enjoy building open-source tools, automation frameworks, production-ready AI p
         label: 'github.com/NotHarshhaa/kubernetes-learning-path',
         href: 'https://github.com/NotHarshhaa/kubernetes-learning-path'
       },
-      isNew: true
+      isNew: true,
+      category: 'Container Orchestration',
+      architecture:
+        'Curriculum repository with step-by-step declarative manifests, Kustomize overlays, and Helm charts for learning Kubernetes cluster administration.',
+      highlights: [
+        'Comprehensive coverage of Pod lifecycle, Deployments, StatefulSets, and DaemonSets',
+        'Cluster networking with CoreDNS, CNI plugins (Calico/Flannel), and Ingress Controllers',
+        'CKA and CKAD preparation exercises with simulated exam challenges'
+      ],
+      metrics: [
+        { label: 'Modules', value: '12' },
+        { label: 'Labs', value: '50+' }
+      ]
     },
     {
       title: 'From Docker to Kubernetes',
@@ -274,7 +361,15 @@ I enjoy building open-source tools, automation frameworks, production-ready AI p
         label: 'github.com/NotHarshhaa/From-Docker-to-Kubernetes',
         href: 'https://github.com/NotHarshhaa/From-Docker-to-Kubernetes'
       },
-      isNew: true
+      isNew: true,
+      category: 'Containers & Cloud Native',
+      architecture:
+        'Hands-on tutorial series guiding engineers from multi-stage Dockerfiles and container optimization to Kubernetes cluster manifests.',
+      highlights: [
+        'Multi-stage Docker builds reducing image sizes by over 70%',
+        'Local cluster development with Minikube, KinD, and Docker Desktop',
+        'Translating Docker Compose stacks into scalable Kubernetes manifests'
+      ]
     },
     {
       title: 'DevOps Monitoring in a Box',
@@ -285,7 +380,19 @@ I enjoy building open-source tools, automation frameworks, production-ready AI p
         label: 'github.com/NotHarshhaa/devops-monitoring-in-a-box',
         href: 'https://github.com/NotHarshhaa/devops-monitoring-in-a-box'
       },
-      isNew: true
+      isNew: true,
+      category: 'Observability & SRE',
+      architecture:
+        'Full LGTM observability stack packaged with Docker Compose and Kubernetes Helm chart, pre-configured with scrape configs and dashboard JSON templates.',
+      highlights: [
+        'One-command setup for Prometheus, Grafana, Loki, and Alertmanager',
+        '15+ pre-configured dashboards for system metrics, container performance, and logs',
+        'Alerting rules for CPU saturation, memory exhaustion, and service unavailability'
+      ],
+      metrics: [
+        { label: 'Setup Time', value: '< 2 mins' },
+        { label: 'Dashboards', value: '15+ Ready' }
+      ]
     },
     {
       title: 'AWS | GCP | Azure — Cloud Projects Workshop',

@@ -58,12 +58,21 @@ export interface PersonalWebsiteUrl {
 	url: string
 }
 
+export interface ProjectMetric {
+	label: string
+	value: string
+}
+
 export interface Project {
 	title: string
 	techStack: string[]
 	description: string
 	link: ProjectLink
 	isNew?: boolean
+	category?: string
+	architecture?: string
+	highlights?: string[]
+	metrics?: ProjectMetric[]
 }
 
 export interface ResumeData {

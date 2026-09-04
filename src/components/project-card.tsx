@@ -10,6 +10,7 @@ interface Props {
   link?: string
   isNew?: boolean
   isLast?: boolean
+  onDeepDive?: () => void
 }
 
 export const ProjectCard = React.memo(function ProjectCard({
@@ -18,7 +19,8 @@ export const ProjectCard = React.memo(function ProjectCard({
   tags,
   link,
   isNew,
-  isLast
+  isLast,
+  onDeepDive
 }: Props) {
   return (
     <HoverMark
@@ -74,6 +76,22 @@ export const ProjectCard = React.memo(function ProjectCard({
             ))}
           </ul>
         </div>
+
+        {onDeepDive && (
+          <div className="shrink-0 pt-1 sm:pt-0">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation()
+                onDeepDive()
+              }}
+              className="inline-flex items-center gap-1.5 border border-border bg-background px-2.5 py-1.5 font-mono text-[11px] font-medium tracking-wide text-muted-foreground transition-all hover:border-foreground hover:bg-muted hover:text-foreground active:scale-95"
+              aria-label={`View architecture details for ${title}`}
+            >
+              <span>[ Architecture ]</span>
+            </button>
+          </div>
+        )}
       </div>
     </HoverMark>
   )

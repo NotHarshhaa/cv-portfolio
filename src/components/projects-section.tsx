@@ -3,17 +3,8 @@
 import React, { useState, useMemo } from 'react'
 import { ProjectCard } from '@/components/project-card'
 import { ProjectFilter } from '@/components/project-filter'
-
-interface Project {
-  title: string
-  description: string
-  techStack: readonly string[]
-  link?: {
-    href: string
-    label: string
-  }
-  isNew?: boolean
-}
+import { ProjectDeepDive } from '@/components/project-deep-dive'
+import type { Project } from '@/types'
 
 interface ProjectsSectionProps {
   projects: Project[]
@@ -24,6 +15,8 @@ const MemoizedProjectCard = React.memo(ProjectCard)
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedTag, setSelectedTag] = useState<string | null>(null)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [isDeepDiveOpen, setIsDeepDiveOpen] = useState(false)
 
   const safeProjects = useMemo(() => projects || [], [projects])
 
@@ -51,6 +44,11 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
     })
   }, [safeProjects, searchQuery, selectedTag])
 
+  const handleDeepDive = (project: Project) => {
+    setSelectedProject(project)
+    setIsDeepDiveOpen(true)
+  }
+
   return (
     <div className="space-y-6">
       <ProjectFilter
@@ -72,6 +70,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
             link={project.link?.href}
             isNew={project.isNew}
             isLast={index === filteredProjects.length - 1}
+            onDeepDive={() => handleDeepDive(project)}
           />
         ))}
       </ul>
@@ -80,6 +79,12 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
           No projects found matching your search criteria.
         </p>
       )}
+
+      <ProjectDeepDive
+        project={selectedProject}
+        open={isDeepDiveOpen}
+        onOpenChange={setIsDeepDiveOpen}
+      />
     </div>
   )
 }

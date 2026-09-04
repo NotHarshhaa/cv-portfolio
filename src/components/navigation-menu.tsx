@@ -4,10 +4,11 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { ChevronRightIcon, MenuIcon, XIcon } from 'lucide-react'
+import { ChevronRightIcon, MenuIcon, XIcon, TerminalIcon } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { HoverMark } from '@/components/hover-mark'
 import { BracketTitle, Corners } from '@/components/frame'
+import { TerminalDrawer } from '@/components/terminal-drawer'
 
 const sections = [
   { id: 'about', label: 'About' },
@@ -20,6 +21,30 @@ const sections = [
 export function NavigationMenu() {
   const [activeSection, setActiveSection] = useState('')
   const [isOpen, setIsOpen] = useState(false)
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false)
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (
+        ['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName) ||
+        (e.target as HTMLElement)?.isContentEditable
+      ) {
+        return
+      }
+      if (e.key === '`') {
+        e.preventDefault()
+        setIsTerminalOpen((prev) => !prev)
+      }
+    }
+    const handleOpenTerminal = () => setIsTerminalOpen(true)
+
+    window.addEventListener('keydown', handleKey)
+    window.addEventListener('open-terminal', handleOpenTerminal)
+    return () => {
+      window.removeEventListener('keydown', handleKey)
+      window.removeEventListener('open-terminal', handleOpenTerminal)
+    }
+  }, [])
 
   useEffect(() => {
     if (isOpen) document.body.style.overflow = 'hidden'
@@ -96,6 +121,17 @@ export function NavigationMenu() {
           </nav>
 
           <div className="relative z-10 flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsTerminalOpen(true)}
+              className="h-9 gap-1.5 px-2.5 font-mono text-xs tracking-wider"
+              aria-label="Open CLI Terminal"
+              title="Open CLI Terminal (`)"
+            >
+              <TerminalIcon className="size-3.5 text-primary" />
+              <span className="hidden sm:inline">CLI</span>
+            </Button>
             <ThemeToggle />
             <Button
               variant="ghost"
@@ -172,10 +208,35 @@ export function NavigationMenu() {
                   </HoverMark>
                 )
               })}
+              <HoverMark
+                as="li"
+                label="Run"
+                className="border-t border-border"
+              >
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsOpen(false)
+                    setIsTerminalOpen(true)
+                  }}
+                  className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-sm text-foreground transition-colors"
+                >
+                  <span className="flex items-center gap-2.5 font-mono text-xs">
+                    <TerminalIcon className="size-3.5 text-primary" />
+                    <span>Open Blueprint CLI (` )</span>
+                  </span>
+                  <ChevronRightIcon className="size-3.5 opacity-60" />
+                </button>
+              </HoverMark>
             </ul>
           </nav>
         )}
       </div>
+
+      <TerminalDrawer
+        open={isTerminalOpen}
+        onOpenChange={setIsTerminalOpen}
+      />
     </header>
   )
 }
