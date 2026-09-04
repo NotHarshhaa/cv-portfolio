@@ -54,9 +54,9 @@ export function NavigationMenu() {
   }
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 backdrop-blur-md print:hidden">
+    <header className="fixed top-0 right-0 left-0 z-50 print:hidden pointer-events-none">
       <div className="site-shell pt-3 sm:pt-4">
-        <div className="relative flex h-12 items-center justify-between overflow-visible border border-border bg-transparent px-4 sm:h-14 sm:px-5">
+        <div className="relative flex h-12 items-center justify-between overflow-visible border border-border bg-background/80 backdrop-blur-md px-4 pointer-events-auto sm:h-14 sm:px-5">
           <Corners />
 
           <button
@@ -116,7 +116,7 @@ export function NavigationMenu() {
 
         {isOpen && (
           <nav
-            className="relative -mt-px overflow-visible border border-t-0 border-border bg-background/95 md:hidden"
+            className="relative -mt-px overflow-visible border border-t-0 border-border bg-background/95 pointer-events-auto md:hidden"
             aria-label="Mobile"
           >
             <Corners />

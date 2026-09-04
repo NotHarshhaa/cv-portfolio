@@ -49,7 +49,7 @@ export default function Page() {
       <NavigationMenu />
       <main
         id="main-content"
-        className="site-shell relative scroll-my-12 overflow-auto pt-24 pb-8 print:p-12 sm:pt-28"
+        className="site-shell relative scroll-my-12 pt-24 pb-8 print:p-12 sm:pt-28"
       >
         <div className="flex w-full flex-col gap-4 print:gap-6">
           <Frame>
