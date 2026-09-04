@@ -159,7 +159,7 @@ export function NavigationMenu() {
               <TerminalIcon className="size-3.5 text-primary" />
               <span className="hidden sm:inline">CLI</span>
             </Button>
-            <ThemeToggle />
+            <ThemeToggle className="hidden md:inline-flex" />
             <Button
               variant="ghost"
               size="icon"
@@ -275,6 +275,12 @@ export function NavigationMenu() {
                   <ChevronRightIcon className="size-3.5 opacity-60" />
                 </button>
               </HoverMark>
+              <li className="flex items-center justify-between border-t border-border bg-muted/20 px-4 py-2.5">
+                <span className="font-mono text-xs text-muted-foreground uppercase tracking-wider">
+                  Theme
+                </span>
+                <ThemeToggle />
+              </li>
             </ul>
           </nav>
         )}
