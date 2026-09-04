@@ -9,7 +9,7 @@ A modern, performant, and accessible CV/portfolio website built with Next.js 14,
 
 ## 📸 Preview
 
-Visit the live site: [cv.notharshhaa.site](https://cv.notharshhaa.site)
+Visit the live site: [cv.harshhaareddy.com](https://cv.harshhaareddy.com)
 
 ---
 
@@ -385,7 +385,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 | **Email** | harshhaa03@gmail.com |
 | **LinkedIn** | [harshhaa-vardhan-reddy](https://www.linkedin.com/in/harshhaa-vardhan-reddy) |
 | **GitHub** | [NotHarshhaa](https://github.com/NotHarshhaa) |
-| **Portfolio** | [notharshhaa.site](https://notharshhaa.site) |
+| **Portfolio** | [harshhaareddy.com](https://harshhaareddy.com) |
 
 ---
 

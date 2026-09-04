@@ -17,12 +17,12 @@ I enjoy building open-source tools, automation frameworks, production-ready AI p
   avatar: '/assets/avatar.png',
   personalWebsiteUrl: {
     name: 'Portfolio',
-    url: 'https://harshhaareddy.site'
+    url: 'https://harshhaareddy.com'
   },
   contact: {
     link: {
       name: 'Other Links',
-      url: 'https://link.notharshhaa.site'
+      url: 'https://link.harshhaareddy.com'
     },
     email: {
       name: 'Email',
@@ -50,7 +50,7 @@ I enjoy building open-source tools, automation frameworks, production-ready AI p
       },
       {
         name: 'Blog',
-        url: 'https://blog.harshhaareddy.site',
+        url: 'https://blog.harshhaareddy.com',
         icon: LinkIcon
       }
     ]
