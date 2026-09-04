@@ -4,6 +4,9 @@ import reactPlugin from 'eslint-plugin-react'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
 const config = [
+  {
+    ignores: ['.next/**', 'out/**', 'node_modules/**', '.turbo/**', 'dist/**', 'public/**']
+  },
   ...nextVitals,
   ...tseslint.configs.recommended,
   {

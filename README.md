@@ -1,10 +1,10 @@
 # Harshhaa Vardhan Reddy - DevOps Engineer CV Portfolio
 
-A modern, performant, and accessible CV/portfolio website built with Next.js 14, TypeScript, and Tailwind CSS.
+A modern, performant, and accessible CV/portfolio website built with Next.js 16, TypeScript, and Tailwind CSS v4.
 
-![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwind-css)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.3-38B2AC?logo=tailwind-css)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ## 📸 Preview
@@ -173,12 +173,12 @@ Visit the live site: [cv.harshhaareddy.com](https://cv.harshhaareddy.com)
 
 | Category | Technology |
 |----------|------------|
-| **Framework** | Next.js 14 (App Router) |
+| **Framework** | Next.js 16 (App Router) |
 | **Language** | TypeScript |
-| **Styling** | Tailwind CSS |
+| **Styling** | Tailwind CSS v4 |
 | **UI Components** | Radix UI + shadcn/ui |
 | **Icons** | Lucide React |
-| **Fonts** | Geist Sans & Geist Mono |
+| **Fonts** | Instrument Sans |
 | **Animations** | Framer Motion |
 | **Deployment** | Vercel |
 | **Analytics** | Vercel Analytics & Speed Insights |

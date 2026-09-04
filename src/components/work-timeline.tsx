@@ -31,6 +31,14 @@ export function WorkTimeline({ work }: WorkTimelineProps) {
           className={
             index < work.length - 1 ? 'border-b border-border' : undefined
           }
+          onClick={
+            workItem.link
+              ? (e) => {
+                  if ((e.target as HTMLElement).closest('a')) return
+                  window.open(workItem.link, '_blank', 'noopener,noreferrer')
+                }
+              : undefined
+          }
         >
           <div className="grid gap-6 px-4 py-8 sm:grid-cols-[11rem_1fr] sm:gap-10 sm:px-6 sm:py-10">
             <div>
@@ -56,13 +64,10 @@ export function WorkTimeline({ work }: WorkTimelineProps) {
 
             <div className="space-y-8">
               {workItem.jobs.map((job, jobIndex) => (
-                <div key={jobIndex}>
+                <div key={`${job.title}-${jobIndex}`}>
                   <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                     <h4 className="text-base font-medium">{job.title}</h4>
-                    <time
-                      className="shrink-0 font-mono text-xs text-muted-foreground tabular-nums"
-                      dateTime={`${job.start}/${job.end}`}
-                    >
+                    <time className="shrink-0 font-mono text-xs text-muted-foreground tabular-nums">
                       {job.start} — {job.end}
                     </time>
                   </div>

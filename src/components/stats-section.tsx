@@ -1,5 +1,3 @@
-'use client'
-
 import { RESUME_DATA } from '@/data/resume-data'
 
 export function StatsSection() {

@@ -33,7 +33,12 @@ export function ButtonLink({ data }: { data: ResumeData }) {
         <Tooltip key={index}>
           <TooltipTrigger asChild>
             <Button variant="outline" size="icon" asChild>
-              <a href={link.url} target="_blank" rel="noreferrer" aria-label={link.name}>
+              <a
+                href={link.url}
+                target={link.url.startsWith('http') ? '_blank' : undefined}
+                rel={link.url.startsWith('http') ? 'noreferrer' : undefined}
+                aria-label={link.name}
+              >
                 <link.icon className="size-4" />
               </a>
             </Button>

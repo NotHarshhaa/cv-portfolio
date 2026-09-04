@@ -26,6 +26,14 @@ export const ProjectCard = React.memo(function ProjectCard({
       label={link ? 'Open link' : undefined}
       disabled={!link}
       className={isLast ? undefined : 'border-b border-border'}
+      onClick={
+        link
+          ? (e) => {
+              if ((e.target as HTMLElement).closest('a')) return
+              window.open(link, '_blank', 'noopener,noreferrer')
+            }
+          : undefined
+      }
     >
       <div className="flex flex-col gap-4 px-4 py-7 sm:flex-row sm:items-start sm:justify-between sm:gap-10 sm:px-6 sm:py-8">
         <div className="min-w-0 flex-1 space-y-3">

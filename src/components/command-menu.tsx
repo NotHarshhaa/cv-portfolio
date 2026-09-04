@@ -90,7 +90,11 @@ export function CommandMenu({ links }: Props) {
 
 	const handleLinkSelect = (link: Link) => {
 		setOpen(false)
-		window.open(link.url, '_blank')
+		if (link.url.startsWith('mailto:') || link.url.startsWith('tel:')) {
+			window.location.assign(link.url)
+		} else {
+			window.open(link.url, '_blank', 'noopener,noreferrer')
+		}
 
 		const updated = [link, ...recentPages.filter((l) => l.url !== link.url)].slice(0, 5)
 		setRecentPages(updated)
@@ -164,7 +168,6 @@ export function CommandMenu({ links }: Props) {
 									<span>Switch to Dark Mode</span>
 								</>
 							)}
-							<CommandShortcut>⌘T</CommandShortcut>
 						</CommandItem>
 
 						<CommandItem
@@ -201,15 +204,21 @@ export function CommandMenu({ links }: Props) {
 									>
 										{getLinkIcon(link.url, link.title)}
 										<span className='flex-1'>{link.title}</span>
-										<Button
-											variant='ghost'
-											size='icon'
-											className='h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity'
+										<span
+											role='button'
+											tabIndex={0}
+											className='inline-flex h-6 w-6 items-center justify-center rounded text-muted-foreground hover:text-foreground opacity-0 group-hover:opacity-100 transition-opacity'
 											onClick={(e) => handleCopyLink(e, link.url)}
-											aria-label='Copy link'
+											onKeyDown={(e) => {
+												if (e.key === 'Enter' || e.key === ' ') {
+													e.preventDefault()
+													handleCopyLink(e as unknown as React.MouseEvent, link.url)
+												}
+											}}
+											aria-label={`Copy ${link.title}`}
 										>
 											<CopyIcon className='h-3 w-3' />
-										</Button>
+										</span>
 										<ExternalLinkIcon className='ml-2 h-3 w-3 opacity-50' />
 									</CommandItem>
 								))}
@@ -236,15 +245,21 @@ export function CommandMenu({ links }: Props) {
 										>
 											{getLinkIcon(link.url, link.title)}
 											<span className='flex-1'>{link.title}</span>
-											<Button
-												variant='ghost'
-												size='icon'
-												className='h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity'
+											<span
+												role='button'
+												tabIndex={0}
+												className='inline-flex h-6 w-6 items-center justify-center rounded text-muted-foreground hover:text-foreground opacity-0 group-hover:opacity-100 transition-opacity'
 												onClick={(e) => handleCopyLink(e, link.url)}
-												aria-label='Copy link'
+												onKeyDown={(e) => {
+													if (e.key === 'Enter' || e.key === ' ') {
+														e.preventDefault()
+														handleCopyLink(e as unknown as React.MouseEvent, link.url)
+													}
+												}}
+												aria-label={`Copy ${link.title}`}
 											>
 												<CopyIcon className='h-3 w-3' />
-											</Button>
+											</span>
 											<ExternalLinkIcon className='ml-2 h-3 w-3 opacity-50' />
 										</CommandItem>
 									))}

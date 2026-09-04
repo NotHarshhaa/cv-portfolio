@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import Image from 'next/image'
 import { ButtonLink } from '@/components/button-link'
 import { CommandMenu } from '@/components/command-menu'
 import { GlobeIcon } from 'lucide-react'
@@ -101,16 +101,16 @@ export default function Page() {
                 >
                   <span className="relative block">
                     <Corners />
-                    <Avatar className="size-28 rounded-none border border-border after:rounded-none sm:size-32">
-                      <AvatarImage
+                    <div className="relative size-28 overflow-hidden border border-border bg-muted sm:size-32">
+                      <Image
                         src={RESUME_DATA.avatar}
                         alt={RESUME_DATA.name}
-                        className="rounded-none object-cover"
+                        width={128}
+                        height={128}
+                        priority
+                        className="size-full object-cover"
                       />
-                      <AvatarFallback className="rounded-none">
-                        {RESUME_DATA.initials}
-                      </AvatarFallback>
-                    </Avatar>
+                    </div>
                   </span>
                 </a>
               </div>
@@ -121,7 +121,7 @@ export default function Page() {
             <FrameHeader label="About">
               <CopyButton
                 text={data.contact.email.at}
-                label="email"
+                label={`email (${data.contact.email.at})`}
                 className="print:hidden"
               />
             </FrameHeader>

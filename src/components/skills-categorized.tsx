@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -24,10 +24,10 @@ const skillCategories: Record<string, string[]> = {
     'Infrastructure as Code'
   ],
   'CI/CD Tools': [
+    'Azure DevOps',
     'Jenkins',
     'GitHub Actions',
     'GitLab CI',
-    'Azure DevOps',
     'CI/CD'
   ],
   Observability: ['Prometheus', 'Grafana', 'Observability'],
@@ -68,74 +68,102 @@ export function SkillsCategorized({ skills }: SkillsCategorizedProps) {
     ])
   )
 
-  const categorizedSkills: Record<string, string[]> = {}
-  const uncategorized: string[] = []
+  const entries = useMemo(() => {
+    const categorizedSkills: Record<string, string[]> = {}
+    const uncategorized: string[] = []
 
-  skills.forEach((skill) => {
-    let found = false
-    for (const [category, categorySkills] of Object.entries(skillCategories)) {
-      if (
-        categorySkills.some(
-          (catSkill) =>
-            skill.toLowerCase().includes(catSkill.toLowerCase()) ||
-            catSkill.toLowerCase().includes(skill.toLowerCase())
-        )
-      ) {
-        if (!categorizedSkills[category]) {
-          categorizedSkills[category] = []
+    skills.forEach((skill) => {
+      const normalized = skill.trim().toLowerCase()
+      let matchedCategory: string | null = null
+
+      // Pass 1: exact match
+      for (const [category, categorySkills] of Object.entries(skillCategories)) {
+        if (categorySkills.some((catSkill) => catSkill.toLowerCase() === normalized)) {
+          matchedCategory = category
+          break
         }
-        categorizedSkills[category].push(skill)
-        found = true
-        break
       }
-    }
-    if (!found) {
-      uncategorized.push(skill)
-    }
-  })
 
-  const entries = Object.entries(categorizedSkills)
-  if (uncategorized.length > 0) {
-    entries.push(['Other Skills', uncategorized])
-  }
+      // Pass 2: fallback substring match if not exactly matched
+      if (!matchedCategory) {
+        for (const [category, categorySkills] of Object.entries(skillCategories)) {
+          if (
+            categorySkills.some(
+              (catSkill) =>
+                normalized.includes(catSkill.toLowerCase()) ||
+                catSkill.toLowerCase().includes(normalized)
+            )
+          ) {
+            matchedCategory = category
+            break
+          }
+        }
+      }
+
+      if (matchedCategory) {
+        if (!categorizedSkills[matchedCategory]) {
+          categorizedSkills[matchedCategory] = []
+        }
+        categorizedSkills[matchedCategory].push(skill)
+      } else {
+        uncategorized.push(skill)
+      }
+    })
+
+    const result = Object.entries(categorizedSkills)
+    if (uncategorized.length > 0) {
+      result.push(['Other Skills', uncategorized])
+    }
+    return result
+  }, [skills])
 
   const toggleCategory = (category: string) => {
-    const next = new Set(expandedCategories)
-    if (next.has(category)) next.delete(category)
-    else next.add(category)
-    setExpandedCategories(next)
+    setExpandedCategories((prev) => {
+      const next = new Set(prev)
+      if (next.has(category)) next.delete(category)
+      else next.add(category)
+      return next
+    })
   }
 
   return (
     <ul className="-mx-4 border-t border-border sm:-mx-6">
       {entries.map(([category, categorySkills], index) => {
-        const isOpen =
-          category === 'Other Skills' || expandedCategories.has(category)
+        const isOther = category === 'Other Skills'
+        const isOpen = isOther || expandedCategories.has(category)
         const isLast = index === entries.length - 1
+        const sectionId = `skills-cat-${category.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
 
         return (
           <li
             key={category}
             className={cn(!isLast && 'border-b border-border')}
           >
-            <button
-              type="button"
-              className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-muted/40 sm:px-6"
-              onClick={() =>
-                category !== 'Other Skills' && toggleCategory(category)
-              }
-              disabled={category === 'Other Skills'}
-            >
-              <span className="text-sm font-medium">{category}</span>
-              {category !== 'Other Skills' &&
-                (isOpen ? (
+            {isOther ? (
+              <div className="flex w-full items-center justify-between gap-4 px-4 py-4 sm:px-6">
+                <span className="text-sm font-medium">{category}</span>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-muted/40 sm:px-6"
+                onClick={() => toggleCategory(category)}
+                aria-expanded={isOpen}
+                aria-controls={sectionId}
+              >
+                <span className="text-sm font-medium">{category}</span>
+                {isOpen ? (
                   <ChevronUpIcon className="size-4 shrink-0 text-muted-foreground" />
                 ) : (
                   <ChevronDownIcon className="size-4 shrink-0 text-muted-foreground" />
-                ))}
-            </button>
+                )}
+              </button>
+            )}
             {isOpen && (
-              <ul className="flex flex-wrap gap-x-3 gap-y-1.5 px-4 pb-5 sm:px-6">
+              <ul
+                id={sectionId}
+                className="flex flex-wrap gap-x-3 gap-y-1.5 px-4 pb-5 sm:px-6"
+              >
                 {categorySkills.map((skill) => (
                   <li
                     key={skill}

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { ProjectCard } from '@/components/project-card'
 import { ProjectFilter } from '@/components/project-filter'
 
@@ -22,17 +22,48 @@ interface ProjectsSectionProps {
 const MemoizedProjectCard = React.memo(ProjectCard)
 
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>(
-    projects || []
-  )
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedTag, setSelectedTag] = useState<string | null>(null)
 
-  const safeFilteredProjects = filteredProjects || projects || []
+  const safeProjects = useMemo(() => projects || [], [projects])
+
+  const allTags = useMemo(() => {
+    const tags = new Set<string>()
+    safeProjects.forEach((project) => {
+      project?.techStack?.forEach((tag) => tags.add(tag))
+    })
+    return Array.from(tags).sort()
+  }, [safeProjects])
+
+  const filteredProjects = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase()
+    return safeProjects.filter((project) => {
+      const matchesSearch =
+        query === '' ||
+        project.title?.toLowerCase().includes(query) ||
+        project.description?.toLowerCase().includes(query) ||
+        project.techStack?.some((tag) => tag.toLowerCase().includes(query))
+
+      const matchesTag =
+        selectedTag === null || project.techStack?.includes(selectedTag)
+
+      return matchesSearch && matchesTag
+    })
+  }, [safeProjects, searchQuery, selectedTag])
 
   return (
     <div className="space-y-6">
-      <ProjectFilter projects={projects} onFilterChange={setFilteredProjects} />
+      <ProjectFilter
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        selectedTag={selectedTag}
+        onTagChange={setSelectedTag}
+        allTags={allTags}
+        totalCount={safeProjects.length}
+        filteredCount={filteredProjects.length}
+      />
       <ul className="-mx-4 border-t border-border sm:-mx-6">
-        {safeFilteredProjects.map((project, index) => (
+        {filteredProjects.map((project, index) => (
           <MemoizedProjectCard
             key={project.title}
             title={project.title}
@@ -40,11 +71,11 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
             tags={project.techStack}
             link={project.link?.href}
             isNew={project.isNew}
-            isLast={index === safeFilteredProjects.length - 1}
+            isLast={index === filteredProjects.length - 1}
           />
         ))}
       </ul>
-      {safeFilteredProjects.length === 0 && (
+      {filteredProjects.length === 0 && (
         <p className="py-8 text-center text-sm text-muted-foreground">
           No projects found matching your search criteria.
         </p>
