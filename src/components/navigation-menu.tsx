@@ -325,108 +325,93 @@ export function NavigationMenu() {
         {isOpen && (
           <nav
             className="relative -mt-px overflow-visible border border-t-0 border-border bg-background/95 pointer-events-auto md:hidden"
-            aria-label="Mobile"
+            aria-label="Mobile Navigation"
           >
             <Corners />
-            <div className="border-b border-border px-4 py-3">
-              <span className="text-[11px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
-                Navigate
+            <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
+              <span className="font-mono text-[10px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
+                Jump To Section
+              </span>
+              <span className="font-mono text-[10px] text-muted-foreground/60">
+                {allSections.length} Sections
               </span>
             </div>
-            <ul className="flex flex-col">
+
+            {/* 2 options per line grid */}
+            <div className="grid grid-cols-2 gap-px bg-border">
               {allSections.map((section, index) => {
                 const active = activeSection === section.id
                 return (
-                  <HoverMark
-                    as="li"
+                  <button
                     key={section.id}
-                    label="Go"
-                    className={
-                      index < allSections.length - 1
-                        ? 'border-b border-border'
-                        : undefined
-                    }
+                    type="button"
+                    onClick={() => scrollTo(section.id)}
+                    className={cn(
+                      'flex items-center justify-between gap-1.5 bg-background px-3 py-2.5 text-left transition-colors hover:bg-muted/40 active:bg-muted/60',
+                      active
+                        ? 'text-primary font-semibold bg-muted/20'
+                        : 'text-muted-foreground hover:text-foreground'
+                    )}
                   >
-                    <button
-                      type="button"
-                      onClick={() => scrollTo(section.id)}
-                      className={cn(
-                        'flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-sm transition-colors',
-                        active
-                          ? 'text-foreground'
-                          : 'text-muted-foreground group-hover/mark:text-foreground'
-                      )}
-                    >
-                      <span className="flex items-center gap-3">
-                        <span
-                          className={cn(
-                            'font-mono text-[10px] tracking-wider tabular-nums',
-                            active
-                              ? 'text-foreground'
-                              : 'text-muted-foreground/60'
-                          )}
-                        >
-                          {String(index + 1).padStart(2, '0')}
-                        </span>
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span
+                        className={cn(
+                          'font-mono text-[10px] tracking-wider tabular-nums shrink-0',
+                          active
+                            ? 'text-primary font-bold'
+                            : 'text-muted-foreground/50'
+                        )}
+                      >
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <span className="truncate text-xs font-medium">
                         {section.label}
                       </span>
-                      <ChevronRightIcon
-                        className={cn(
-                          'size-3.5 shrink-0 transition-transform group-hover/mark:translate-x-0.5',
-                          active ? 'opacity-70' : 'opacity-40'
-                        )}
-                      />
-                    </button>
-                  </HoverMark>
+                    </div>
+                    <ChevronRightIcon
+                      className={cn(
+                        'size-3 shrink-0',
+                        active ? 'text-primary opacity-90' : 'opacity-30'
+                      )}
+                    />
+                  </button>
                 )
               })}
-              <HoverMark
-                as="li"
-                label="Chat"
-                className="border-t border-border"
+            </div>
+
+            {/* Quick Actions (Agent & CLI side-by-side) */}
+            <div className="grid grid-cols-2 gap-px bg-border border-t border-border">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false)
+                  setIsAgentOpen(true)
+                }}
+                className="flex items-center justify-center gap-2 bg-background px-3 py-2.5 text-xs font-mono text-foreground transition-colors hover:bg-muted/40 active:bg-muted/60"
               >
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsOpen(false)
-                    setIsAgentOpen(true)
-                  }}
-                  className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-sm text-foreground transition-colors"
-                >
-                  <span className="flex items-center gap-2.5 font-mono text-xs">
-                    <BotIcon className="size-3.5 text-primary" />
-                    <span>Ask Harshhaa’s Agent (⌘J)</span>
-                  </span>
-                  <ChevronRightIcon className="size-3.5 opacity-60" />
-                </button>
-              </HoverMark>
-              <HoverMark
-                as="li"
-                label="Run"
-                className="border-t border-border"
+                <BotIcon className="size-3.5 text-primary" />
+                <span>Agent (⌘J)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false)
+                  setIsTerminalOpen(true)
+                }}
+                className="flex items-center justify-center gap-2 bg-background px-3 py-2.5 text-xs font-mono text-foreground transition-colors hover:bg-muted/40 active:bg-muted/60"
               >
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsOpen(false)
-                    setIsTerminalOpen(true)
-                  }}
-                  className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left text-sm text-foreground transition-colors"
-                >
-                  <span className="flex items-center gap-2.5 font-mono text-xs">
-                    <TerminalIcon className="size-3.5 text-primary" />
-                    <span>Open Blueprint CLI (` )</span>
-                  </span>
-                  <ChevronRightIcon className="size-3.5 opacity-60" />
-                </button>
-              </HoverMark>
-              <li className="flex items-center justify-between border-t border-border bg-muted/20 px-4 py-2.5">
-                <span className="font-mono text-xs text-muted-foreground uppercase tracking-wider">
-                  Theme
-                </span>
-                <ThemeToggle />
-              </li>
-            </ul>
+                <TerminalIcon className="size-3.5 text-primary" />
+                <span>CLI (` )</span>
+              </button>
+            </div>
+
+            {/* Theme Toggle footer */}
+            <div className="flex items-center justify-between border-t border-border bg-muted/20 px-4 py-2">
+              <span className="font-mono text-[11px] text-muted-foreground uppercase tracking-wider">
+                Theme Mode
+              </span>
+              <ThemeToggle />
+            </div>
           </nav>
         )}
       </div>
