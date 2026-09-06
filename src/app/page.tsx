@@ -28,7 +28,7 @@ const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: RESUME_DATA.name,
-  jobTitle: 'Platform Engineer',
+  jobTitle: RESUME_DATA.role || 'Platform Engineer',
   url: RESUME_DATA.personalWebsiteUrl.url,
   email: RESUME_DATA.contact.email.at,
   telephone: RESUME_DATA.contact.tel.phoneNumber,

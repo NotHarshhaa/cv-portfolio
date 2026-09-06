@@ -9,37 +9,47 @@ interface SkillsCategorizedProps {
 }
 
 const skillCategories: Record<string, string[]> = {
-  'Platform Engineering': [
+  'Platform Engineering & IDP': [
     'Platform Engineering',
+    'Internal Developer Platforms (IDP)',
     'Internal Developer Platforms',
+    'Backstage',
+    'Developer Experience (DevEx)',
     'Developer Experience',
     'GitOps',
-    'ArgoCD'
+    'ArgoCD',
+    'Self-Service Portals',
+    'Golden Paths'
   ],
-  'Cloud Platforms': ['AWS', 'Azure', 'GCP', 'Cloud Infrastructure'],
-  'Container & Orchestration': ['Kubernetes', 'Docker', 'Helm'],
-  'Infrastructure as Code': [
-    'Terraform',
-    'Ansible',
-    'Infrastructure as Code'
-  ],
-  'CI/CD Tools': [
-    'Azure DevOps',
-    'Jenkins',
+  'DevOps & CI/CD': [
+    'DevOps',
+    'CI/CD Pipelines',
+    'CI/CD',
     'GitHub Actions',
+    'Azure DevOps',
     'GitLab CI',
-    'CI/CD'
+    'Jenkins',
+    'Helm',
+    'Argo Rollouts',
+    'Release Automation'
   ],
-  Observability: ['Prometheus', 'Grafana', 'Observability'],
-  'AI Infrastructure & MLOps': [
-    'MLOps',
-    'LLMOps',
-    'MLflow',
+  'AI Infrastructure & LLMOps': [
     'AI Infrastructure',
-    'Generative AI',
-    'RAG'
+    'LLMOps',
+    'MLOps',
+    'vLLM',
+    'Ollama',
+    'MLflow',
+    'Vector Databases (Qdrant/Milvus/pgvector)',
+    'Vector Databases',
+    'RAG Pipelines',
+    'RAG Architecture',
+    'RAG',
+    'GPU Cluster Management',
+    'GPU Orchestration'
   ],
-  'AI Agents & Agentic Systems': [
+  'GenAI, AI Agents & MCP': [
+    'Generative AI',
     'AI Agents',
     'Agentic AI Systems',
     'Model Context Protocol (MCP)',
@@ -48,23 +58,74 @@ const skillCategories: Record<string, string[]> = {
     'LangChain',
     'Prompt Engineering',
     'Context Engineering',
+    'Autonomous Workflows',
     'AI Automation'
   ],
-  'Scripting & Languages': ['Python', 'Bash', 'Linux'],
-  'Soft Skills': [
-    'DevOps',
+  'AI Product Development': [
+    'AI Product Development',
+    'Full-Stack AI Apps',
+    'FastAPI',
+    'Next.js AI SDK',
+    'Interactive AI Agents',
+    'Tool Calling & Function Calling',
+    'Semantic Search'
+  ],
+  'Cloud & Containers': [
+    'Kubernetes (EKS/AKS)',
+    'Kubernetes',
+    'Docker',
+    'AWS',
+    'Azure',
+    'GCP',
+    'Karpenter',
+    'Container Optimization',
+    'Cloud Infrastructure'
+  ],
+  'Infrastructure as Code': [
+    'Terraform',
+    'OpenTofu',
+    'Ansible',
+    'Infrastructure as Code (IaC)',
+    'Infrastructure as Code',
+    'Terragrunt',
+    'Policy as Code (OPA)'
+  ],
+  'Observability & SRE': [
+    'Prometheus',
+    'Grafana',
+    'OpenTelemetry (OTel)',
+    'Loki',
+    'Alertmanager',
+    'Incident Management',
+    'Observability'
+  ],
+  'Languages & Scripting': [
+    'Python',
+    'Bash / Shell Scripting',
+    'Bash',
+    'Go (Golang)',
+    'Linux Administration & Networking',
+    'Linux',
+    'REST & gRPC APIs'
+  ],
+  'Community & Open Source': [
+    'Open Source Leadership',
     'Open Source',
-    'Community Engagement'
+    'Technical Writing',
+    'Community Mentorship',
+    'Community Engagement',
+    'DevOps Blueprints'
   ]
 }
 
 export function SkillsCategorized({ skills }: SkillsCategorizedProps) {
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
     new Set([
-      'Platform Engineering',
-      'Cloud Platforms',
-      'AI Infrastructure & MLOps',
-      'AI Agents & Agentic Systems'
+      'Platform Engineering & IDP',
+      'DevOps & CI/CD',
+      'AI Infrastructure & LLMOps',
+      'GenAI, AI Agents & MCP',
+      'AI Product Development'
     ])
   )
 
