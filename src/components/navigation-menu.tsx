@@ -4,27 +4,81 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { ChevronRightIcon, MenuIcon, XIcon, TerminalIcon, BotIcon } from 'lucide-react'
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import {
+  ChevronRightIcon,
+  ChevronDownIcon,
+  MenuIcon,
+  XIcon,
+  TerminalIcon,
+  BotIcon,
+  LayersIcon,
+  CpuIcon,
+  AwardIcon,
+  UsersIcon,
+  GraduationCapIcon
+} from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { HoverMark } from '@/components/hover-mark'
 import { BracketTitle, Corners } from '@/components/frame'
 import { TerminalDrawer } from '@/components/terminal-drawer'
 import { PortfolioAIAgent } from '@/components/portfolio-ai-agent'
 
-const sections = [
+const primarySections = [
   { id: 'about', label: 'About' },
   { id: 'work', label: 'Experience' },
-  { id: 'education', label: 'Education' },
-  { id: 'architecture', label: 'Architecture' },
   { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' }
 ]
+
+const dropdownSections = [
+  {
+    id: 'pillars',
+    label: 'Core Pillars',
+    subtitle: 'Platform, LLMOps & MCP',
+    icon: LayersIcon
+  },
+  {
+    id: 'products',
+    label: 'AI Products',
+    subtitle: 'Autonomous Agents & IDP',
+    icon: BotIcon
+  },
+  {
+    id: 'architecture',
+    label: 'Architecture',
+    subtitle: 'Interactive Cloud Canvas',
+    icon: CpuIcon
+  },
+  {
+    id: 'certifications',
+    label: 'Certifications',
+    subtitle: 'Verified CNCF, AWS & IaC',
+    icon: AwardIcon
+  },
+  {
+    id: 'community',
+    label: 'Community',
+    subtitle: '250k+ Readers Worldwide',
+    icon: UsersIcon
+  },
+  {
+    id: 'education',
+    label: 'Education',
+    subtitle: 'Academic Background',
+    icon: GraduationCapIcon
+  }
+]
+
+const allSections = [...primarySections, ...dropdownSections]
 
 export function NavigationMenu() {
   const [activeSection, setActiveSection] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const [isTerminalOpen, setIsTerminalOpen] = useState(false)
   const [isAgentOpen, setIsAgentOpen] = useState(false)
+
+  const isDropdownActive = dropdownSections.some((s) => s.id === activeSection)
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -75,7 +129,7 @@ export function NavigationMenu() {
       { rootMargin: '-30% 0px -50% 0px', threshold: [0, 0.25, 0.5, 1] }
     )
 
-    sections.forEach(({ id }) => {
+    allSections.forEach(({ id }) => {
       const el = document.getElementById(id)
       if (el) observer.observe(el)
     })
@@ -87,6 +141,11 @@ export function NavigationMenu() {
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur()
     }
+    setTimeout(() => {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur()
+      }
+    }, 50)
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     setIsOpen(false)
   }
@@ -118,15 +177,25 @@ export function NavigationMenu() {
           </button>
 
           <nav className="hidden items-center gap-1 md:flex">
-            {sections.map((section) => (
-              <HoverMark key={section.id} className="px-2.5 py-1.5">
+            {primarySections.map((section) => (
+              <HoverMark
+                key={section.id}
+                className="flex items-center px-2.5 py-1.5"
+                onMouseLeave={() => {
+                  if (document.activeElement instanceof HTMLElement) {
+                    document.activeElement.blur()
+                  }
+                }}
+              >
                 <button
                   type="button"
                   onClick={() => scrollTo(section.id)}
+                  onMouseLeave={(e) => e.currentTarget.blur()}
+                  onPointerUp={(e) => e.currentTarget.blur()}
                   className={cn(
-                    'text-xs font-medium tracking-wide transition-colors',
+                    'inline-flex items-center text-xs font-medium tracking-wide leading-none transition-colors cursor-pointer',
                     activeSection === section.id
-                      ? 'text-foreground'
+                      ? 'text-foreground font-semibold'
                       : 'text-muted-foreground group-hover/mark:text-foreground'
                   )}
                 >
@@ -134,6 +203,82 @@ export function NavigationMenu() {
                 </button>
               </HoverMark>
             ))}
+
+            {/* Dropdown Menu for More Sections */}
+            <DropdownMenu.Root>
+              <HoverMark
+                className="flex items-center px-2.5 py-1.5"
+                onMouseLeave={() => {
+                  if (document.activeElement instanceof HTMLElement) {
+                    document.activeElement.blur()
+                  }
+                }}
+              >
+                <DropdownMenu.Trigger asChild>
+                  <button
+                    type="button"
+                    onMouseLeave={(e) => e.currentTarget.blur()}
+                    onPointerUp={(e) => e.currentTarget.blur()}
+                    className={cn(
+                      'group inline-flex items-center gap-1 text-xs font-medium tracking-wide leading-none transition-colors outline-none cursor-pointer',
+                      isDropdownActive
+                        ? 'text-foreground font-semibold'
+                        : 'text-muted-foreground group-hover/mark:text-foreground'
+                    )}
+                    aria-label="More navigation links"
+                  >
+                    <span>More</span>
+                    <ChevronDownIcon className="size-3 opacity-60 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                  </button>
+                </DropdownMenu.Trigger>
+              </HoverMark>
+              <DropdownMenu.Portal>
+                <DropdownMenu.Content
+                  align="center"
+                  sideOffset={10}
+                  onCloseAutoFocus={(e) => e.preventDefault()}
+                  className="relative z-50 min-w-[220px] border border-border bg-background/95 p-1.5 shadow-2xl backdrop-blur-md outline-none duration-150 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[side=bottom]:slide-in-from-top-2"
+                >
+                  <Corners />
+                  <div className="border-b border-border/80 px-2.5 py-1 mb-1">
+                    <span className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase">
+                      More Sections
+                    </span>
+                  </div>
+                  {dropdownSections.map((item) => {
+                    const IconComp = item.icon
+                    const isActive = activeSection === item.id
+                    return (
+                      <DropdownMenu.Item
+                        key={item.id}
+                        onSelect={() => scrollTo(item.id)}
+                        className={cn(
+                          'flex cursor-pointer items-start gap-2.5 rounded-none px-2.5 py-2 text-xs outline-none transition-colors hover:bg-muted/50 focus:bg-muted/50',
+                          isActive && 'bg-muted/40 font-medium text-primary'
+                        )}
+                      >
+                        <div className="mt-0.5 flex size-4 shrink-0 items-center justify-center text-muted-foreground">
+                          <IconComp className="size-3.5" />
+                        </div>
+                        <div className="flex flex-col min-w-0">
+                          <span
+                            className={cn(
+                              'text-xs font-medium',
+                              isActive ? 'text-primary' : 'text-foreground'
+                            )}
+                          >
+                            {item.label}
+                          </span>
+                          <span className="text-[10px] text-muted-foreground truncate">
+                            {item.subtitle}
+                          </span>
+                        </div>
+                      </DropdownMenu.Item>
+                    )
+                  })}
+                </DropdownMenu.Content>
+              </DropdownMenu.Portal>
+            </DropdownMenu.Root>
           </nav>
 
           <div className="relative z-10 flex items-center gap-2">
@@ -189,7 +334,7 @@ export function NavigationMenu() {
               </span>
             </div>
             <ul className="flex flex-col">
-              {sections.map((section, index) => {
+              {allSections.map((section, index) => {
                 const active = activeSection === section.id
                 return (
                   <HoverMark
@@ -197,7 +342,7 @@ export function NavigationMenu() {
                     key={section.id}
                     label="Go"
                     className={
-                      index < sections.length - 1
+                      index < allSections.length - 1
                         ? 'border-b border-border'
                         : undefined
                     }

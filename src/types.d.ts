@@ -75,6 +75,15 @@ export interface Project {
 	metrics?: ProjectMetric[]
 }
 
+export interface CertificationEntry {
+	title: string
+	issuer: string
+	issueDate: string
+	credentialUrl?: string
+	badges?: string[]
+	skills?: string[]
+}
+
 export interface ResumeData {
 	name: string
 	initials: string
@@ -90,4 +99,5 @@ export interface ResumeData {
 	work: WorkEntry[]
 	skills: string[]
 	projects: Project[]
+	certifications?: CertificationEntry[]
 }

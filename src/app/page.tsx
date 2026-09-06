@@ -15,6 +15,10 @@ import { StatsSection } from '@/components/stats-section'
 import { ProjectsSection } from '@/components/projects-section'
 import { WorkTimeline } from '@/components/work-timeline'
 import { ArchitectureVisualizer } from '@/components/architecture-visualizer'
+import { CorePillars } from '@/components/core-pillars'
+import { FeaturedProducts } from '@/components/featured-products'
+import { CertificationsSection } from '@/components/certifications-section'
+import { CommunityImpactSection } from '@/components/community-impact-section'
 import {
   BracketTitle,
   Frame,
@@ -144,9 +148,81 @@ export default function Page() {
             </FrameBody>
           </Frame>
 
+          <Frame id="pillars" className="scroll-mt-28 overflow-visible">
+            <FrameHeader label="Core Pillars & Capabilities">
+              <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
+                Platform • AI Infra • MCP • DevOps
+              </span>
+            </FrameHeader>
+            <FrameBody className="p-0 sm:p-0">
+              <CorePillars />
+            </FrameBody>
+          </Frame>
+
+          <Frame id="products" className="scroll-mt-28 overflow-visible">
+            <FrameHeader label="Featured AI Products & Platforms">
+              <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
+                Production & Open Source
+              </span>
+            </FrameHeader>
+            <FrameBody className="p-0 sm:p-0">
+              <FeaturedProducts />
+            </FrameBody>
+          </Frame>
+
           <Frame id="work" className="scroll-mt-28 overflow-visible">
             <FrameHeader label="Work Experience" />
             <WorkTimeline work={data.work} />
+          </Frame>
+
+          <Frame id="architecture" className="scroll-mt-28 overflow-visible">
+            <FrameHeader label="Architecture & Topology">
+              <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
+                Interactive Cloud Canvas
+              </span>
+            </FrameHeader>
+            <FrameBody className="py-6 sm:py-8">
+              <ArchitectureVisualizer />
+            </FrameBody>
+          </Frame>
+
+          <Frame id="skills" className="scroll-mt-28">
+            <FrameHeader label="Skills" />
+            <FrameBody>
+              <SkillsCategorized skills={data.skills} />
+            </FrameBody>
+          </Frame>
+
+          <Frame id="certifications" className="scroll-mt-28 overflow-visible">
+            <FrameHeader label="Certifications & Credentials">
+              <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
+                Verified Industry Credentials
+              </span>
+            </FrameHeader>
+            <FrameBody>
+              <CertificationsSection certifications={data.certifications} />
+            </FrameBody>
+          </Frame>
+
+          <Frame
+            id="projects"
+            className="print-force-new-page scroll-mt-28 overflow-visible"
+          >
+            <FrameHeader label="Projects" />
+            <FrameBody>
+              <ProjectsSection projects={data.projects} />
+            </FrameBody>
+          </Frame>
+
+          <Frame id="community" className="scroll-mt-28 overflow-visible">
+            <FrameHeader label="Open Source & Community Impact">
+              <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
+                250k+ Readers Worldwide
+              </span>
+            </FrameHeader>
+            <FrameBody>
+              <CommunityImpactSection />
+            </FrameBody>
           </Frame>
 
           <Frame id="education" className="scroll-mt-28 overflow-visible">
@@ -187,34 +263,6 @@ export default function Page() {
                 </li>
               ))}
             </ul>
-          </Frame>
-
-          <Frame id="architecture" className="scroll-mt-28 overflow-visible">
-            <FrameHeader label="Architecture & Topology">
-              <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
-                Interactive Cloud Canvas
-              </span>
-            </FrameHeader>
-            <FrameBody className="py-6 sm:py-8">
-              <ArchitectureVisualizer />
-            </FrameBody>
-          </Frame>
-
-          <Frame id="skills" className="scroll-mt-28">
-            <FrameHeader label="Skills" />
-            <FrameBody>
-              <SkillsCategorized skills={data.skills} />
-            </FrameBody>
-          </Frame>
-
-          <Frame
-            id="projects"
-            className="print-force-new-page scroll-mt-28 overflow-visible"
-          >
-            <FrameHeader label="Projects" />
-            <FrameBody>
-              <ProjectsSection projects={data.projects} />
-            </FrameBody>
           </Frame>
         </div>
 

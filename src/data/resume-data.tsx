@@ -763,5 +763,47 @@ Prolific open-source author and technical educator behind 40+ production bluepri
         { label: 'Deployment', value: 'Zero-Downtime Rolling' }
       ]
     }
+  ],
+  certifications: [
+    {
+      title: 'Certified Kubernetes Administrator (CKA)',
+      issuer: 'Cloud Native Computing Foundation (CNCF)',
+      issueDate: '2023',
+      credentialUrl: 'https://www.cncf.io/certification/cka/',
+      badges: ['CNCF', 'Active'],
+      skills: ['Kubernetes', 'etcd Backup/Restore', 'Cluster Hardening', 'CoreDNS', 'Network Policies']
+    },
+    {
+      title: 'AWS Certified Solutions Architect – Associate',
+      issuer: 'Amazon Web Services (AWS)',
+      issueDate: '2022',
+      credentialUrl: 'https://aws.amazon.com/certification/',
+      badges: ['AWS', 'Verified'],
+      skills: ['VPC Peering', 'Amazon EKS', 'RDS Multi-AZ', 'IAM Zero-Trust', 'Route53']
+    },
+    {
+      title: 'HashiCorp Certified: Terraform Associate',
+      issuer: 'HashiCorp',
+      issueDate: '2023',
+      credentialUrl: 'https://www.credly.com',
+      badges: ['HashiCorp', 'IaC'],
+      skills: ['Terraform Modules', 'Remote State Locking', 'Dynamic Blocks', 'IaC Testing']
+    },
+    {
+      title: 'Generative AI & LLM Systems Specialization',
+      issuer: 'DeepLearning.AI & AWS',
+      issueDate: '2024',
+      credentialUrl: 'https://www.deeplearning.ai',
+      badges: ['DeepLearning.AI', 'GenAI'],
+      skills: ['LangGraph', 'LangChain', 'Model Context Protocol (MCP)', 'RAG', 'Prompt Tuning']
+    },
+    {
+      title: 'GitHub Actions & CI/CD Automation Specialist',
+      issuer: 'GitHub',
+      issueDate: '2023',
+      credentialUrl: 'https://github.com',
+      badges: ['GitHub', 'CI/CD'],
+      skills: ['OIDC Keyless Auth', 'Custom Action Workflows', 'Self-Hosted Runners', 'Security Scanning']
+    }
   ]
 }
