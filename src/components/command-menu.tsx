@@ -131,7 +131,10 @@ export function CommandMenu({ links }: Props) {
 			>
 				Press{' '}
 				<kbd className='pointer-events-none inline-flex h-6 select-none items-center gap-1 border border-border bg-muted px-2 font-mono text-xs font-medium'>
-					<span className='text-xs'>⌘</span>K
+					<span className='text-xs'>Ctrl</span>
+					<span className='text-muted-foreground/60'>/</span>
+					<span className='text-xs'>⌘</span>
+					<span>K</span>
 				</kbd>{' '}
 				to open command menu
 			</p>

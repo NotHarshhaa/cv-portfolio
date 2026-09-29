@@ -14,9 +14,15 @@ const instrumentSans = Instrument_Sans({
   variable: '--font-instrument-sans'
 })
 
+const SITE_URL = 'https://cv.harshhaareddy.com'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: `CV | ${RESUME_DATA.name}`,
   description: `${RESUME_DATA.about}`,
+  alternates: {
+    canonical: SITE_URL
+  },
   keywords: [
     'Platform Engineer',
     'Platform Engineering',
@@ -38,13 +44,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: `CV | ${RESUME_DATA.name}`,
     description: RESUME_DATA.about,
+    url: SITE_URL,
+    siteName: `CV | ${RESUME_DATA.name}`,
     type: 'website',
-    locale: 'en_US'
+    locale: 'en_US',
+    images: [
+      {
+        url: '/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: `CV | ${RESUME_DATA.name}`
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',
     title: `CV | ${RESUME_DATA.name}`,
-    description: RESUME_DATA.about
+    description: RESUME_DATA.about,
+    images: ['/opengraph-image.png']
   },
   robots: {
     index: true,
@@ -74,7 +91,12 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-screen font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <TooltipProvider>{children}</TooltipProvider>
         </ThemeProvider>
         <Analytics />

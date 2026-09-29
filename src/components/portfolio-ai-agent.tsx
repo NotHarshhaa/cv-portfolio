@@ -49,8 +49,14 @@ const PRESET_QUESTIONS = [
   {
     label: 'Executive Summary',
     prompt: 'Can you summarize Harshhaa’s background, career trajectory, and core strengths?'
+  },
+  {
+    label: 'Contact & Links',
+    prompt: 'How can I contact or reach Harshhaa?'
   }
 ]
+
+const PROJECT_COUNT = RESUME_DATA.projects.length
 
 // Pre-indexed knowledge synthesis engine
 function generateAgentResponse(query: string): {
@@ -60,11 +66,39 @@ function generateAgentResponse(query: string): {
 } {
   const q = query.toLowerCase()
 
+  if (
+    q.includes('contact') ||
+    q.includes('email') ||
+    q.includes('phone') ||
+    q.includes('reach') ||
+    q.includes('hire') ||
+    q.includes('resume') ||
+    q.includes('cv')
+  ) {
+    return {
+      thinkingSteps: [
+        'Locating contact endpoints and professional profiles',
+        'Validating email, phone, and social channel availability',
+        'Compiling direct outreach options'
+      ],
+      content: `**Contact & Reach:**
+
+* **Email**: ${RESUME_DATA.contact.email.at}
+* **Phone**: ${RESUME_DATA.contact.tel.phoneNumber}
+* **Location**: ${RESUME_DATA.location} (open to remote & global opportunities)
+* **Profiles**: GitHub (NotHarshhaa), LinkedIn, Telegram, and his blog are linked in the contact buttons at the top of the page.
+* **Portfolio & Links Hub**: ${RESUME_DATA.personalWebsiteUrl.url} and ${RESUME_DATA.contact.link.url}
+
+The fastest way to reach him is email or LinkedIn.`,
+      citedProjects: []
+    }
+  }
+
   if (q.includes('kubernetes') || q.includes('k8s') || q.includes('container') || q.includes('pod')) {
     return {
       thinkingSteps: [
         'Parsing semantic intent: Kubernetes production architecture & container orchestration',
-        'Filtering 41 repositories for EKS, AKS, Helm charts, and cluster hardening',
+        `Filtering ${PROJECT_COUNT} repositories for EKS, AKS, Helm charts, and cluster hardening`,
         'Extracting metrics from production workloads and cluster multi-tenancy'
       ],
       content: `**Harshhaa's Kubernetes & Container Orchestration Expertise:**
@@ -81,19 +115,19 @@ Harshhaa builds and operates enterprise-grade Kubernetes infrastructure across A
 - Automated node autoscaling reducing cloud compute spend by ~35%.`,
       citedProjects: [
         {
-          title: '3-Tier Microservices on EKS',
-          link: 'https://github.com/NotHarshhaa',
+          title: 'CI/CD on EKS using GitHub Actions',
+          link: 'https://github.com/NotHarshhaa/CI-CD_EKS-GitHub_Actions',
           category: 'Kubernetes'
         },
         {
-          title: 'ArgoCD GitOps Production Blueprint',
-          link: 'https://github.com/NotHarshhaa',
-          category: 'CI/CD & GitOps'
+          title: 'Amazon EKS Cluster with Terraform',
+          link: 'https://github.com/NotHarshhaa/eks-cluster-terraform',
+          category: 'Kubernetes'
         },
         {
-          title: 'Multi-Cluster Service Mesh with Istio',
-          link: 'https://github.com/NotHarshhaa',
-          category: 'Cloud Native'
+          title: 'Kubernetes Learning Path',
+          link: 'https://github.com/NotHarshhaa/kubernetes-learning-path',
+          category: 'Container Orchestration'
         }
       ]
     }
@@ -116,19 +150,19 @@ Harshhaa leverages **Terraform (and OpenTofu)** as the foundational Infrastructu
 * **Multi-Cloud Capabilities**: In addition to AWS, Harshhaa has extensive Azure experience (AKS, Azure Virtual Networks, Blob Storage, Managed Identities).`,
       citedProjects: [
         {
-          title: 'AWS Automated Multi-Region VPC with Terraform',
-          link: 'https://github.com/NotHarshhaa',
+          title: 'AWS Terraform Workshop',
+          link: 'https://github.com/NotHarshhaa/AWS-Terraform-Workshop',
           category: 'Infrastructure as Code'
         },
         {
-          title: 'Complete EKS Cluster via Terraform & Helm',
-          link: 'https://github.com/NotHarshhaa',
+          title: 'Amazon EKS Cluster with Terraform',
+          link: 'https://github.com/NotHarshhaa/eks-cluster-terraform',
           category: 'AWS & Cloud'
         },
         {
-          title: 'Zero-Trust IAM & OIDC Automation',
-          link: 'https://github.com/NotHarshhaa',
-          category: 'Cloud Security'
+          title: 'AWS Real-Time Projects',
+          link: 'https://github.com/NotHarshhaa/AWS-Projects',
+          category: 'Cloud Engineering'
         }
       ]
     }
@@ -151,18 +185,18 @@ Harshhaa designs end-to-end infrastructure for autonomous AI agents and producti
 * **Model Serving & GPU Infra**: Deploys high-throughput self-hosted inference servers with **vLLM** and Ollama on GPU-accelerated Kubernetes nodes with paged attention optimization.`,
       citedProjects: [
         {
-          title: 'Autonomous DevOps Incident Investigator Agent',
+          title: 'DevOps Incident & Diagnostics AI Agent',
           link: 'https://github.com/NotHarshhaa',
           category: 'Agentic AI'
         },
         {
-          title: 'Model Context Protocol (MCP) Cloud Tools Server',
-          link: 'https://github.com/NotHarshhaa',
+          title: 'Real-Time DevOps Projects Hub',
+          link: 'https://projects.prodevopsguytech.com',
           category: 'LLMOps'
         },
         {
-          title: 'Hybrid RAG Pipeline with Qdrant & FastAPI',
-          link: 'https://github.com/NotHarshhaa',
+          title: 'Ultimate DevOps & Cloud Docs Portal',
+          link: 'https://docs.prodevopsguytech.com',
           category: 'GenAI'
         }
       ]
@@ -185,13 +219,18 @@ Harshhaa advocates for zero-drift declarative continuous delivery:
 * **Security in Pipeline**: Shift-left security automation using Trivy (vulnerability scanning), SonarQube (code quality), Gitleaks (secret detection), and OpenSSF Scorecard compliance.`,
       citedProjects: [
         {
-          title: 'Enterprise GitOps Pipeline with ArgoCD & GitHub Actions',
-          link: 'https://github.com/NotHarshhaa',
+          title: 'CI/CD on EKS using GitHub Actions',
+          link: 'https://github.com/NotHarshhaa/CI-CD_EKS-GitHub_Actions',
           category: 'CI/CD'
         },
         {
-          title: 'Secure Container Supply Chain with Cosign & Trivy',
-          link: 'https://github.com/NotHarshhaa',
+          title: 'ECR to ECS Deployment with GitHub Actions',
+          link: 'https://github.com/NotHarshhaa/tf-ecr-ecs-gh-deploy',
+          category: 'CI/CD & Containers'
+        },
+        {
+          title: 'DevOps Monitoring in a Box',
+          link: 'https://github.com/NotHarshhaa/devops-monitoring-in-a-box',
           category: 'DevSecOps'
         }
       ]
@@ -202,7 +241,7 @@ Harshhaa advocates for zero-drift declarative continuous delivery:
   return {
     thinkingSteps: [
       'Aggregating complete profile data across Platform, AI Infrastructure, and Cloud',
-      'Correlating 41 open-source projects, community publications, and production roles',
+      `Correlating ${PROJECT_COUNT} open-source projects, community publications, and production roles`,
       'Synthesizing core competencies for technical evaluator'
     ],
     content: `**Summary of Harshhaa Vardhan Reddy:**
@@ -215,17 +254,17 @@ Harshhaa advocates for zero-drift declarative continuous delivery:
   2. **GitOps & Delivery**: ArgoCD, GitHub Actions, Jenkins, GitOps App-of-Apps, Canary Rollouts.
   3. **AI & LLMOps**: LangGraph, Model Context Protocol (MCP), Vector Search (Qdrant), vLLM, Agentic Workflows.
   4. **Observability**: Prometheus, Grafana, OpenTelemetry, Alertmanager, Sloth SLOs.
-* **Track Record**: Author of **41+ open-source cloud-native projects**, platform engineering documentation, and hands-on production automation.`,
+* **Track Record**: Author of **40+ open-source cloud-native projects**, platform engineering documentation, and hands-on production automation.`,
     citedProjects: [
       {
-        title: 'Production Multi-Cloud IDP Blueprint',
-        link: 'https://github.com/NotHarshhaa',
+        title: 'Real-Time DevOps Projects Hub',
+        link: 'https://projects.prodevopsguytech.com',
         category: 'Platform Engineering'
       },
       {
-        title: 'Autonomous DevOps & Kubernetes Agent',
-        link: 'https://github.com/NotHarshhaa',
-        category: 'Agentic AI'
+        title: 'DevOps Repositories Central Hub',
+        link: 'https://repos.prodevopsguytech.com',
+        category: 'Open Source'
       }
     ]
   }
@@ -435,7 +474,7 @@ export function PortfolioAIAgent({ open, onOpenChange }: PortfolioAIAgentProps) 
     {
       id: 'welcome',
       role: 'agent',
-      content: `Hello! I am **Harshhaa's Portfolio Agent**.\n\nI have complete indexation of Harshhaa's **production experience**, **41 repositories**, **Kubernetes architectures**, **Terraform cloud setups**, and **Agentic AI systems**.\n\nSelect a preset inquiry below or type any question to evaluate his qualifications:`,
+      content: `Hello! I am **Harshhaa's Portfolio Agent**.\n\nI have complete indexation of Harshhaa's **production experience**, **${PROJECT_COUNT} repositories**, **Kubernetes architectures**, **Terraform cloud setups**, and **Agentic AI systems**.\n\nSelect a preset inquiry below or type any question to evaluate his qualifications:`,
       timestamp: 'Ready'
     }
   ])
@@ -445,10 +484,20 @@ export function PortfolioAIAgent({ open, onOpenChange }: PortfolioAIAgentProps) 
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const messageCounterRef = useRef(0)
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([])
+
+  useEffect(() => {
+    const timers = timersRef.current
+    return () => {
+      timers.forEach(clearTimeout)
+      timers.length = 0
+    }
+  }, [])
 
   useEffect(() => {
     if (open) {
-      setTimeout(() => inputRef.current?.focus(), 100)
+      const t = setTimeout(() => inputRef.current?.focus(), 100)
+      timersRef.current.push(t)
     }
   }, [open])
 
@@ -475,7 +524,7 @@ export function PortfolioAIAgent({ open, onOpenChange }: PortfolioAIAgentProps) 
     setIsThinking(true)
 
     // Simulate agentic retrieval and reasoning
-    setTimeout(() => {
+    const responseTimer = setTimeout(() => {
       messageCounterRef.current += 1
       const agentMsgId = `agent-${messageCounterRef.current}`
       const response = generateAgentResponse(query)
@@ -490,6 +539,7 @@ export function PortfolioAIAgent({ open, onOpenChange }: PortfolioAIAgentProps) 
       setMessages((prev) => [...prev, agentMessage])
       setIsThinking(false)
     }, 700)
+    timersRef.current.push(responseTimer)
   }
 
   const handleCopy = (id: string, text: string) => {
@@ -531,13 +581,13 @@ export function PortfolioAIAgent({ open, onOpenChange }: PortfolioAIAgentProps) 
                   <DialogPrimitive.Title className="font-heading text-base font-semibold tracking-tight">
                     Ask Harshhaa’s Agent
                   </DialogPrimitive.Title>
-                  <span className="flex items-center gap-1 border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.2 font-mono text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 uppercase">
+                  <span className="flex items-center gap-1 border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.5 font-mono text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 uppercase">
                     <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     Online
                   </span>
                 </div>
                 <p id="portfolio-agent-desc" className="text-xs text-muted-foreground">
-                  AI Context Engine: 41 Projects • Platform & LLMOps Architecture
+                  AI Context Engine: {PROJECT_COUNT} Projects • Platform & LLMOps Architecture
                 </p>
               </div>
             </div>
@@ -729,7 +779,7 @@ export function PortfolioAIAgent({ open, onOpenChange }: PortfolioAIAgentProps) 
             </form>
             <div className="mt-2 flex items-center justify-between text-[10px] font-mono text-muted-foreground">
               <span>Press Enter to inquire</span>
-              <span>Context: 41 Projects • IDP & AI Infrastructure</span>
+              <span>Context: {PROJECT_COUNT} Projects • IDP & AI Infrastructure</span>
             </div>
           </div>
         </DialogPrimitive.Content>

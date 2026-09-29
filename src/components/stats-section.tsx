@@ -1,10 +1,13 @@
 import { RESUME_DATA } from '@/data/resume-data'
 
 export function StatsSection() {
+  // Professional experience began Dec 2021 (IBM); keep in sync with the
+  // "5+ years" claim in the summary text.
+  const experienceYears = Math.max(0, new Date().getFullYear() - 2021)
   const stats = [
     {
       label: 'Years',
-      value: new Date().getFullYear() - 2020,
+      value: experienceYears,
       description: 'Experience'
     },
     {

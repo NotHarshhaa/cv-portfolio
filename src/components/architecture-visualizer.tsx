@@ -590,9 +590,27 @@ export function ArchitectureVisualizer() {
                   <g
                     key={node.id}
                     transform={`translate(${node.x}, ${node.y})`}
-                    onClick={() => setSelectedNodeId(node.id)}
-                    className={`cursor-pointer transition-all duration-150 ${
-                      isVisible ? 'opacity-100' : 'opacity-25'
+                    onClick={
+                      isVisible ? () => setSelectedNodeId(node.id) : undefined
+                    }
+                    onKeyDown={
+                      isVisible
+                        ? (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault()
+                              setSelectedNodeId(node.id)
+                            }
+                          }
+                        : undefined
+                    }
+                    role={isVisible ? 'button' : undefined}
+                    tabIndex={isVisible ? 0 : undefined}
+                    aria-label={`Inspect ${node.label}`}
+                    aria-pressed={isVisible ? isSelected : undefined}
+                    className={`group/node transition-all duration-150 ${
+                      isVisible
+                        ? 'cursor-pointer opacity-100 focus:outline-none'
+                        : 'pointer-events-none opacity-25'
                     }`}
                   >
                     {/* Node Box */}
@@ -604,7 +622,7 @@ export function ArchitectureVisualizer() {
                       fill={isSelected ? 'var(--background)' : 'var(--card)'}
                       stroke={isSelected ? 'var(--foreground)' : 'var(--border)'}
                       strokeWidth={isSelected ? '2' : '1'}
-                      className="transition-colors hover:stroke-foreground"
+                      className="transition-colors hover:stroke-foreground group-focus-visible/node:stroke-foreground"
                     />
 
                     {/* Active Accent Tag */}

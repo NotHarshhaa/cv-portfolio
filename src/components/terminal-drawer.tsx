@@ -85,7 +85,7 @@ export function TerminalDrawer({ open, onOpenChange }: TerminalDrawerProps) {
         break
 
       case 'kubectl':
-        if (args.join(' ') === 'get pods' || args[0] === 'get') {
+        if (args[0] === 'get' && args[1] === 'pods') {
           output = (
             <pre className="overflow-x-auto text-[11px] leading-relaxed text-muted-foreground">
               {`NAME                                    READY   STATUS    RESTARTS   AGE
@@ -166,6 +166,7 @@ e8419b1652f1   langgraph/agent:v2.1    "python agent.py"      Up 5 hours     0.0
       case 'clear':
         setHistory([])
         setInput('')
+        setHistoryIndex(-1)
         return
 
       case 'exit':

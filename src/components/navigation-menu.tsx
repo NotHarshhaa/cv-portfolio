@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { DropdownMenu } from 'radix-ui'
 import {
   ChevronRightIcon,
   ChevronDownIcon,
@@ -81,14 +81,15 @@ export function NavigationMenu() {
   const isDropdownActive = dropdownSections.some((s) => s.id === activeSection)
 
   useEffect(() => {
+    const isDialogOpen = () =>
+      Boolean(document.querySelector('[role="dialog"][data-state="open"]'))
+    const isTypingTarget = (target: EventTarget | null) =>
+      ['INPUT', 'TEXTAREA'].includes((target as HTMLElement)?.tagName) ||
+      (target as HTMLElement)?.isContentEditable
+
     const handleKey = (e: KeyboardEvent) => {
-      if (
-        ['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName) ||
-        (e.target as HTMLElement)?.isContentEditable
-      ) {
-        return
-      }
-      if (e.key === '`') {
+      if (isTypingTarget(e.target)) return
+      if (e.key === '`' && !isDialogOpen()) {
         e.preventDefault()
         setIsTerminalOpen((prev) => !prev)
       }
