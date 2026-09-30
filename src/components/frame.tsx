@@ -1,24 +1,38 @@
 import { cn } from '@/lib/utils'
 import type { HTMLAttributes, ReactNode } from 'react'
 
-export function Corners() {
+/** Small corner ticks sitting on the outer edges of a bordered element.
+ *  Exact copy of the reference portfolio's SectionBorders component. */
+export function Corners({ className }: { className?: string }) {
   return (
     <>
       <span
         aria-hidden
-        className="pointer-events-none absolute -top-px -left-px z-10 size-2.5 border-t-2 border-l-2 border-foreground/45 sm:size-3"
+        className={cn(
+          'pointer-events-none absolute -top-px -left-px z-10 h-2 w-2 border-l border-muted-foreground/50',
+          className
+        )}
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute -top-px -right-px z-10 size-2.5 border-t-2 border-r-2 border-foreground/45 sm:size-3"
+        className={cn(
+          'pointer-events-none absolute -top-px -right-px z-10 h-2 w-2 border-r border-muted-foreground/50',
+          className
+        )}
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute -bottom-px -left-px z-10 size-2.5 border-b-2 border-l-2 border-foreground/45 sm:size-3"
+        className={cn(
+          'pointer-events-none absolute -bottom-px -left-px z-10 h-2 w-2 border-b border-l border-muted-foreground/50',
+          className
+        )}
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute -right-px -bottom-px z-10 size-2.5 border-b-2 border-r-2 border-foreground/45 sm:size-3"
+        className={cn(
+          'pointer-events-none absolute -right-px -bottom-px z-10 h-2 w-2 border-r border-b border-muted-foreground/50',
+          className
+        )}
       />
     </>
   )
@@ -35,19 +49,19 @@ export function BracketTitle({
     <span className={cn('relative inline-block px-2 py-1', className)}>
       <span
         aria-hidden
-        className="pointer-events-none absolute -top-px -left-px size-2 border-t border-l border-foreground/45"
+        className="pointer-events-none absolute -top-px -left-px size-2 border-t border-l border-muted-foreground/50"
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute -top-px -right-px size-2 border-t border-r border-foreground/45"
+        className="pointer-events-none absolute -top-px -right-px size-2 border-t border-r border-muted-foreground/50"
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute -bottom-px -left-px size-2 border-b border-l border-foreground/45"
+        className="pointer-events-none absolute -bottom-px -left-px size-2 border-b border-l border-muted-foreground/50"
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute -right-px -bottom-px size-2 border-b border-r border-foreground/45"
+        className="pointer-events-none absolute -right-px -bottom-px size-2 border-b border-r border-muted-foreground/50"
       />
       {children}
     </span>
@@ -84,6 +98,8 @@ type FrameHeaderProps = HTMLAttributes<HTMLDivElement> & {
   label?: string
 }
 
+/** Labeled top bar inside a frame: large reference-style section title
+ *  ("About Me." style) framed by thin corner brackets */
 export function FrameHeader({
   children,
   label,
@@ -93,14 +109,16 @@ export function FrameHeader({
   return (
     <div
       className={cn(
-        'flex items-center justify-between gap-4 border-b border-border px-4 py-3 sm:px-6',
+        'flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border px-4 py-3 sm:px-6',
         className
       )}
       {...props}
     >
       {label && (
-        <BracketTitle className="text-[11px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
-          {label}
+        <BracketTitle className="px-1.5 py-0.5">
+          <span className="font-heading text-xl font-medium tracking-tight text-foreground sm:text-2xl md:text-3xl">
+            {label.endsWith('.') ? label : `${label}.`}
+          </span>
         </BracketTitle>
       )}
       {children}

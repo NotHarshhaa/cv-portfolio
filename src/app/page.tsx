@@ -19,6 +19,8 @@ import { CorePillars } from '@/components/core-pillars'
 import { FeaturedProducts } from '@/components/featured-products'
 import { CertificationsSection } from '@/components/certifications-section'
 import { CommunityImpactSection } from '@/components/community-impact-section'
+import { ViewsBadge } from '@/components/views-badge'
+import { FlipWords } from '@/components/flip-words'
 import {
   BracketTitle,
   Frame,
@@ -27,6 +29,12 @@ import {
 } from '@/components/frame'
 
 const MemoizedButtonLink = React.memo(ButtonLink)
+
+const roles = RESUME_DATA.role
+  ? RESUME_DATA.role.split('•')
+      .map((part) => part.trim())
+      .filter(Boolean)
+  : []
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -65,9 +73,12 @@ export default function Page() {
         <div className="flex w-full flex-col gap-4 print:gap-6">
           <Frame>
             <FrameHeader label="CV / Resume">
-              <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
-                Print ready
-              </span>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 print:hidden">
+                <ViewsBadge />
+                <span className="font-mono text-[11px] text-muted-foreground tabular-nums">
+                  Print ready
+                </span>
+              </div>
             </FrameHeader>
             <FrameBody className="py-8 sm:py-10">
               <div className="flex flex-col-reverse items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
@@ -76,10 +87,10 @@ export default function Page() {
                     <h1 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
                       <BracketTitle>{data.name}</BracketTitle>
                     </h1>
-                    {data.role && (
-                      <p className="mt-2 text-sm font-medium tracking-wide text-foreground/80 sm:text-base">
-                        {data.role}
-                      </p>
+                    {roles.length > 0 && (
+                      <div className="mt-2 flex flex-wrap items-baseline gap-x-2 font-heading text-xl font-semibold tracking-tight sm:text-2xl md:text-3xl">
+                        <FlipWords words={roles} />
+                      </div>
                     )}
                     <p className="mt-3 max-w-2xl text-base text-muted-foreground">
                       {data.about}

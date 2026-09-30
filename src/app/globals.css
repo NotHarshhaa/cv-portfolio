@@ -150,6 +150,22 @@
       );
     background-size: 48px 48px;
     background-position: center top;
+    transform: translate3d(0, 0, 0);
+    /* Strongest at the top, gradually fading into plain paper at the bottom */
+    mask-image: linear-gradient(
+      to bottom,
+      black 0%,
+      black 55%,
+      rgba(0, 0, 0, 0.35) 80%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      black 0%,
+      black 55%,
+      rgba(0, 0, 0, 0.35) 80%,
+      transparent 100%
+    );
   }
 
   ::selection {
