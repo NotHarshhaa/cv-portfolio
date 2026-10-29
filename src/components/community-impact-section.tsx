@@ -1,25 +1,48 @@
 'use client'
 
 import React from 'react'
-import { BookOpenIcon, GitBranchIcon, UsersIcon, TrophyIcon, ArrowUpRightIcon } from 'lucide-react'
+import {
+  BookOpenIcon,
+  GitBranchIcon,
+  UsersIcon,
+  TrophyIcon,
+  ArrowUpRightIcon,
+  type LucideIcon
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { CountUp } from '@/components/motion/count-up'
 
-const IMPACT_STATS = [
+interface ImpactStat {
+  label: string
+  value: string
+  count?: number
+  suffix?: string
+  description: string
+  icon: LucideIcon
+}
+
+const IMPACT_STATS: ImpactStat[] = [
   {
     label: 'Global Readers',
     value: '250K+',
+    count: 250,
+    suffix: 'K+',
     description: 'Engineers reached worldwide across Hashnode & DEV.to',
     icon: UsersIcon
   },
   {
     label: 'Technical Guides',
     value: '120+',
+    count: 120,
+    suffix: '+',
     description: 'In-depth architecture blueprints and troubleshooting tutorials',
     icon: BookOpenIcon
   },
   {
     label: 'Open Source Repos',
     value: '40+',
+    count: 40,
+    suffix: '+',
     description: 'Production templates, Helm charts, and IaC blueprints',
     icon: GitBranchIcon
   },
@@ -53,8 +76,15 @@ export function CommunityImpactSection() {
                   Impact
                 </span>
               </div>
-              <p className="font-mono text-2xl font-semibold tabular-nums text-foreground sm:text-3xl">
-                {stat.value}
+              <p className="font-mono text-2xl font-semibold tabular-nums text-primary sm:text-3xl">
+                {typeof stat.count === 'number' ? (
+                  <>
+                    <CountUp value={stat.count} />
+                    {stat.suffix}
+                  </>
+                ) : (
+                  stat.value
+                )}
               </p>
               <p className="mt-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 {stat.label}

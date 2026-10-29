@@ -142,8 +142,11 @@ export function FeaturedProducts() {
             {/* Metrics */}
             <div className="grid grid-cols-3 gap-2">
               {product.metrics.map((metric) => (
-                <div key={metric.label} className="border border-border bg-card p-3 text-center">
-                  <p className="font-mono text-base font-semibold tabular-nums text-foreground sm:text-lg">
+                <div
+                  key={metric.label}
+                  className="border border-border bg-card p-3 text-center transition-colors hover:border-primary/40"
+                >
+                  <p className="font-mono text-base font-semibold tabular-nums text-primary sm:text-lg">
                     {metric.value}
                   </p>
                   <p className="mt-0.5 text-[10px] text-muted-foreground uppercase tracking-wider">

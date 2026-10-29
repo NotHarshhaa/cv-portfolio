@@ -23,6 +23,7 @@ import { HoverMark } from '@/components/hover-mark'
 import { BracketTitle, Corners } from '@/components/frame'
 import { TerminalDrawer } from '@/components/terminal-drawer'
 import { PortfolioAIAgent } from '@/components/portfolio-ai-agent'
+import { ScrollProgress } from '@/components/scroll-progress'
 
 const primarySections = [
   { id: 'about', label: 'About' },
@@ -156,6 +157,7 @@ export function NavigationMenu() {
       className="fixed top-0 right-0 left-0 z-50 print:hidden pointer-events-none right-scroll-bar-position"
       style={{ right: 'var(--removed-body-scroll-bar-size, 0px)' }}
     >
+      <ScrollProgress />
       <div className="site-shell pt-3 sm:pt-4">
         <div className="relative flex h-12 items-center justify-between overflow-visible border border-border bg-background/80 backdrop-blur-md px-4 pointer-events-auto sm:h-14 sm:px-5">
           <Corners />
@@ -194,12 +196,21 @@ export function NavigationMenu() {
                   onMouseLeave={(e) => e.currentTarget.blur()}
                   onPointerUp={(e) => e.currentTarget.blur()}
                   className={cn(
-                    'inline-flex items-center text-xs font-medium tracking-wide leading-none transition-colors cursor-pointer',
+                    'inline-flex items-center gap-1.5 text-xs font-medium tracking-wide leading-none transition-colors cursor-pointer',
                     activeSection === section.id
                       ? 'text-foreground font-semibold'
                       : 'text-muted-foreground group-hover/mark:text-foreground'
                   )}
                 >
+                  <span
+                    aria-hidden
+                    className={cn(
+                      'size-1 shrink-0 bg-primary transition-opacity',
+                      activeSection === section.id
+                        ? 'opacity-100'
+                        : 'opacity-0'
+                    )}
+                  />
                   {section.label}
                 </button>
               </HoverMark>

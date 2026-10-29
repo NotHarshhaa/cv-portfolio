@@ -1,6 +1,9 @@
 import React from 'react'
 import { type Metadata } from 'next'
-import { Instrument_Sans } from 'next/font/google'
+import {
+  Instrument_Sans,
+  JetBrains_Mono
+} from 'next/font/google'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { RESUME_DATA } from '@/data/resume-data'
 import { cn } from '@/lib/utils'
@@ -12,6 +15,11 @@ import './globals.css'
 const instrumentSans = Instrument_Sans({
   subsets: ['latin'],
   variable: '--font-instrument-sans'
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono'
 })
 
 const SITE_URL = 'https://cv.harshhaareddy.com'
@@ -87,10 +95,14 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn(
         'min-h-screen font-sans antialiased',
-        instrumentSans.variable
+        instrumentSans.variable,
+        jetbrainsMono.variable
       )}
     >
       <body className="min-h-screen font-sans antialiased">
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}`}</style>
+        </noscript>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

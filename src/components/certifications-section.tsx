@@ -13,18 +13,18 @@ export function CertificationsSection({ certifications }: CertificationsSectionP
   if (!certifications || certifications.length === 0) return null
 
   return (
-    <ul className="-mx-4 sm:-mx-6 divide-y divide-border">
+    <ul className="grid grid-cols-1 gap-px bg-border md:grid-cols-2">
       {certifications.map((cert) => (
         <li
           key={cert.title}
-          className="flex flex-col gap-4 px-4 py-5 transition-colors hover:bg-muted/30 sm:flex-row sm:items-start sm:justify-between sm:px-6 sm:py-6"
+          className="group flex flex-col bg-background p-4 transition-colors hover:bg-muted/30 sm:p-5"
         >
-          <div className="flex items-start gap-3.5 min-w-0 flex-1">
-            <div className="flex size-9 shrink-0 items-center justify-center border border-border bg-muted/40 text-primary">
+          <div className="flex min-w-0 flex-1 items-start gap-3.5">
+            <div className="flex size-9 shrink-0 items-center justify-center border border-border bg-muted/40 text-primary transition-colors group-hover:border-primary/40 group-hover:bg-primary/10">
               <AwardIcon className="size-4.5" />
             </div>
 
-            <div className="space-y-1.5 min-w-0">
+            <div className="min-w-0 flex-1 space-y-1.5">
               <div className="flex flex-wrap items-center gap-2">
                 <h3 className="text-sm font-semibold tracking-tight text-foreground sm:text-base">
                   {cert.title}
@@ -55,7 +55,7 @@ export function CertificationsSection({ certifications }: CertificationsSectionP
             </div>
           </div>
 
-          <div className="flex items-center gap-3 self-start sm:self-auto shrink-0 pl-12 sm:pl-0">
+          <div className="mt-4 flex items-center justify-between gap-3 border-t border-border/60 pt-3">
             <span className="font-mono text-xs text-muted-foreground tabular-nums">
               {cert.issueDate}
             </span>
@@ -67,9 +67,9 @@ export function CertificationsSection({ certifications }: CertificationsSectionP
                 className="inline-flex items-center gap-1 font-mono text-xs text-primary hover:underline"
                 aria-label={`Verify credential for ${cert.title}`}
               >
-                <CheckCircleIcon className="size-3 text-green-500" />
+                <CheckCircleIcon className="size-3 text-primary" />
                 <span>Verify</span>
-                <ArrowUpRightIcon className="size-3 opacity-60" />
+                <ArrowUpRightIcon className="size-3 opacity-60 transition-opacity group-hover:opacity-100" />
               </a>
             )}
           </div>

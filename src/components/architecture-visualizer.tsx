@@ -520,8 +520,8 @@ export function ArchitectureVisualizer() {
                   <path d="M 0 1 L 8 5 L 0 9 z" fill="currentColor" className="text-muted-foreground/60" />
                 </marker>
                 <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="var(--foreground)" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="var(--foreground)" stopOpacity="0.2" />
+                  <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="var(--primary)" stopOpacity="0.2" />
                 </linearGradient>
               </defs>
 
@@ -570,7 +570,7 @@ export function ArchitectureVisualizer() {
                         y1={src.y + 25}
                         x2={dst.x + 65}
                         y2={dst.y + 25}
-                        stroke={isHighlighted ? 'var(--foreground)' : 'var(--border)'}
+                        stroke={isHighlighted ? 'var(--primary)' : 'var(--border)'}
                         strokeWidth={isHighlighted ? '2' : '1.2'}
                         strokeDasharray={isHighlighted ? '4 3' : '3 3'}
                         className={isHighlighted ? 'animate-pulse' : ''}
@@ -620,7 +620,7 @@ export function ArchitectureVisualizer() {
                       width="130"
                       height="50"
                       fill={isSelected ? 'var(--background)' : 'var(--card)'}
-                      stroke={isSelected ? 'var(--foreground)' : 'var(--border)'}
+                      stroke={isSelected ? 'var(--primary)' : 'var(--border)'}
                       strokeWidth={isSelected ? '2' : '1'}
                       className="transition-colors hover:stroke-foreground group-focus-visible/node:stroke-foreground"
                     />

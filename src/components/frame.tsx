@@ -116,8 +116,11 @@ export function FrameHeader({
     >
       {label && (
         <BracketTitle className="px-1.5 py-0.5">
-          <span className="font-heading text-xl font-medium tracking-tight text-foreground sm:text-2xl md:text-3xl">
-            {label.endsWith('.') ? label : `${label}.`}
+          <span className="flex items-center gap-2.5">
+            <span aria-hidden className="size-1.5 shrink-0 bg-primary" />
+            <span className="font-heading text-xl font-medium tracking-tight text-foreground sm:text-2xl md:text-3xl">
+              {label.endsWith('.') ? label : `${label}.`}
+            </span>
           </span>
         </BracketTitle>
       )}

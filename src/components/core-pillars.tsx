@@ -81,18 +81,22 @@ const PILLARS: Pillar[] = [
 export function CorePillars() {
   return (
     <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2">
-      {PILLARS.map((pillar) => {
+      {PILLARS.map((pillar, index) => {
         const IconComponent = pillar.icon
         return (
           <div
             key={pillar.id}
-            className="flex flex-col justify-between bg-background p-6 transition-colors hover:bg-muted/20 sm:p-8"
+            className="group relative flex flex-col justify-between bg-background p-6 transition-colors hover:bg-muted/20 sm:p-8"
           >
+            <span
+              aria-hidden
+              className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100"
+            />
             <div className="space-y-4">
               {/* Header */}
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex size-10 items-center justify-center border border-border bg-muted/40 text-primary">
+                  <div className="flex size-10 items-center justify-center border border-border bg-muted/40 text-primary transition-colors group-hover:border-primary/40 group-hover:bg-primary/10">
                     <IconComponent className="size-5" />
                   </div>
                   <div>
@@ -104,9 +108,14 @@ export function CorePillars() {
                     </p>
                   </div>
                 </div>
-                <Badge variant="outline" className="font-mono text-[10px] tracking-wider uppercase">
-                  {pillar.badge}
-                </Badge>
+                <div className="flex shrink-0 items-center gap-2">
+                  <span className="font-mono text-[10px] text-muted-foreground/50 tabular-nums">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <Badge variant="outline" className="font-mono text-[10px] tracking-wider uppercase">
+                    {pillar.badge}
+                  </Badge>
+                </div>
               </div>
 
               {/* Metric Callout */}

@@ -21,6 +21,10 @@ import { CertificationsSection } from '@/components/certifications-section'
 import { CommunityImpactSection } from '@/components/community-impact-section'
 import { ViewsBadge } from '@/components/views-badge'
 import { FlipWords } from '@/components/flip-words'
+import { Reveal } from '@/components/motion/reveal'
+import { Button } from '@/components/ui/button'
+import { SiteFooter } from '@/components/site-footer'
+import { ArrowRightIcon } from 'lucide-react'
 import {
   BracketTitle,
   Frame,
@@ -83,63 +87,92 @@ export default function Page() {
             <FrameBody className="py-8 sm:py-10">
               <div className="flex flex-col-reverse items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex-1 space-y-4">
-                  <div>
-                    <h1 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-                      <BracketTitle>{data.name}</BracketTitle>
-                    </h1>
-                    {roles.length > 0 && (
-                      <div className="mt-2 flex flex-wrap items-baseline gap-x-2 font-heading text-xl font-semibold tracking-tight sm:text-2xl md:text-3xl">
-                        <FlipWords words={roles} />
+                  <Reveal immediate>
+                    <div>
+                      <div className="inline-flex items-center gap-2.5 border border-primary/30 bg-primary/5 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-primary print:hidden">
+                        <span className="relative flex size-2">
+                          <span
+                            aria-hidden
+                            className="absolute inline-flex size-full animate-ping bg-primary opacity-50"
+                          />
+                          <span
+                            aria-hidden
+                            className="relative inline-flex size-2 bg-primary"
+                          />
+                        </span>
+                        Open to new opportunities
                       </div>
-                    )}
-                    <p className="mt-3 max-w-2xl text-base text-muted-foreground">
-                      {data.about}
-                    </p>
-                  </div>
+                      <h1 className="mt-4 font-heading text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+                        <BracketTitle>{data.name}</BracketTitle>
+                      </h1>
+                      {roles.length > 0 && (
+                        <div className="mt-2 flex flex-wrap items-baseline gap-x-2 font-heading text-xl font-semibold tracking-tight sm:text-2xl md:text-3xl">
+                          <FlipWords words={roles} />
+                        </div>
+                      )}
+                      <p className="mt-3 max-w-2xl text-base text-muted-foreground">
+                        {data.about}
+                      </p>
+                    </div>
+                  </Reveal>
 
-                  <a
-                    className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-opacity hover:opacity-70"
-                    href={data.locationLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`View ${data.location} on Google Maps`}
-                  >
-                    <GlobeIcon className="size-4" aria-hidden="true" />
-                    {data.location}
-                  </a>
+                  <Reveal immediate delay={0.1} className="space-y-4">
+                    <a
+                      className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-opacity hover:opacity-70"
+                      href={data.locationLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`View ${data.location} on Google Maps`}
+                    >
+                      <GlobeIcon className="size-4" aria-hidden="true" />
+                      {data.location}
+                    </a>
 
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    <MemoizedButtonLink data={data} />
-                    <DownloadResumeButton />
-                  </div>
+                    <div className="flex flex-wrap items-center gap-2 pt-1">
+                      <Button asChild>
+                        <a
+                          href={`mailto:${data.contact.email.at}`}
+                          aria-label="Email Harshhaa"
+                        >
+                          <span>Get in Touch</span>
+                          <ArrowRightIcon data-icon="inline-end" />
+                        </a>
+                      </Button>
+                      <DownloadResumeButton />
+                      <MemoizedButtonLink data={data} />
+                    </div>
+                  </Reveal>
                 </div>
 
-                <a
-                  href="https://github.com/NotHarshhaa"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 focus:outline-none"
-                  aria-label="Visit GitHub profile"
-                >
-                  <span className="relative block">
-                    <Corners />
-                    <div className="relative size-28 overflow-hidden border border-border bg-muted sm:size-32">
-                      <Image
-                        src={RESUME_DATA.avatar}
-                        alt={RESUME_DATA.name}
-                        width={128}
-                        height={128}
-                        priority
-                        className="size-full object-cover"
-                      />
-                    </div>
-                  </span>
-                </a>
+                <Reveal immediate delay={0.15} className="shrink-0">
+                  <a
+                    href="https://github.com/NotHarshhaa"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block focus:outline-none"
+                    aria-label="Visit GitHub profile"
+                  >
+                    <span className="relative block box-glow">
+                      <Corners />
+                      <div className="relative size-28 overflow-hidden border border-border bg-muted sm:size-32">
+                        <Image
+                          src={RESUME_DATA.avatar}
+                          alt={RESUME_DATA.name}
+                          width={128}
+                          height={128}
+                          priority
+                          className="size-full object-cover grayscale-[30%] transition-all duration-500 hover:grayscale-0"
+                        />
+                      </div>
+                    </span>
+                  </a>
+                </Reveal>
               </div>
             </FrameBody>
           </Frame>
 
-          <Frame id="about" className="scroll-mt-28">
+          <Reveal>
+            <Frame id="about" className="scroll-mt-28">
             <FrameHeader label="About">
               <CopyButton
                 text={data.contact.email.at}
@@ -164,8 +197,10 @@ export default function Page() {
               <StatsSection />
             </FrameBody>
           </Frame>
+          </Reveal>
 
-          <Frame id="pillars" className="scroll-mt-28 overflow-visible">
+          <Reveal>
+            <Frame id="pillars" className="scroll-mt-28 overflow-visible">
             <FrameHeader label="Core Pillars & Capabilities">
               <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
                 Platform • AI Infra • MCP • DevOps
@@ -175,8 +210,10 @@ export default function Page() {
               <CorePillars />
             </FrameBody>
           </Frame>
+          </Reveal>
 
-          <Frame id="products" className="scroll-mt-28 overflow-visible">
+          <Reveal>
+            <Frame id="products" className="scroll-mt-28 overflow-visible">
             <FrameHeader label="Featured AI Products & Platforms">
               <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
                 Production & Open Source
@@ -186,13 +223,17 @@ export default function Page() {
               <FeaturedProducts />
             </FrameBody>
           </Frame>
+          </Reveal>
 
-          <Frame id="work" className="scroll-mt-28 overflow-visible">
+          <Reveal>
+            <Frame id="work" className="scroll-mt-28 overflow-visible">
             <FrameHeader label="Work Experience" />
             <WorkTimeline work={data.work} />
           </Frame>
+          </Reveal>
 
-          <Frame id="architecture" className="scroll-mt-28 overflow-visible">
+          <Reveal>
+            <Frame id="architecture" className="scroll-mt-28 overflow-visible">
             <FrameHeader label="Architecture & Topology">
               <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
                 Interactive Cloud Canvas
@@ -202,36 +243,44 @@ export default function Page() {
               <ArchitectureVisualizer />
             </FrameBody>
           </Frame>
+          </Reveal>
 
-          <Frame id="skills" className="scroll-mt-28">
+          <Reveal>
+            <Frame id="skills" className="scroll-mt-28">
             <FrameHeader label="Skills" />
             <FrameBody>
               <SkillsCategorized skills={data.skills} />
             </FrameBody>
           </Frame>
+          </Reveal>
 
-          <Frame id="certifications" className="scroll-mt-28 overflow-visible">
+          <Reveal>
+            <Frame id="certifications" className="scroll-mt-28 overflow-visible">
             <FrameHeader label="Certifications & Credentials">
               <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
                 Verified Industry Credentials
               </span>
             </FrameHeader>
-            <FrameBody>
+            <FrameBody className="p-0 sm:p-0">
               <CertificationsSection certifications={data.certifications} />
             </FrameBody>
           </Frame>
+          </Reveal>
 
-          <Frame
-            id="projects"
-            className="print-force-new-page scroll-mt-28 overflow-visible"
-          >
+          <Reveal className="print-force-new-page">
+            <Frame
+              id="projects"
+              className="scroll-mt-28 overflow-visible"
+            >
             <FrameHeader label="Projects" />
             <FrameBody>
               <ProjectsSection projects={data.projects} />
             </FrameBody>
           </Frame>
+          </Reveal>
 
-          <Frame id="community" className="scroll-mt-28 overflow-visible">
+          <Reveal>
+            <Frame id="community" className="scroll-mt-28 overflow-visible">
             <FrameHeader label="Open Source & Community Impact">
               <span className="font-mono text-[11px] text-muted-foreground tabular-nums print:hidden">
                 250k+ Readers Worldwide
@@ -241,8 +290,10 @@ export default function Page() {
               <CommunityImpactSection />
             </FrameBody>
           </Frame>
+          </Reveal>
 
-          <Frame id="education" className="scroll-mt-28 overflow-visible">
+          <Reveal>
+            <Frame id="education" className="scroll-mt-28 overflow-visible">
             <FrameHeader label="Education" />
             <ul>
               {data.education.map((education, index) => (
@@ -281,6 +332,9 @@ export default function Page() {
               ))}
             </ul>
           </Frame>
+          </Reveal>
+
+          <SiteFooter />
         </div>
 
         <CommandMenu

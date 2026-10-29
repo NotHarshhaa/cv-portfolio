@@ -201,34 +201,48 @@ export function SkillsCategorized({ skills }: SkillsCategorizedProps) {
             className={cn(!isLast && 'border-b border-border')}
           >
             {isOther ? (
-              <div className="flex w-full items-center justify-between gap-4 px-4 py-4 sm:px-6">
+              <div className="flex w-full items-center gap-3 px-4 py-4 sm:px-6">
+                <span className="font-mono text-[10px] tracking-wider text-muted-foreground/50 tabular-nums">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
                 <span className="text-sm font-medium">{category}</span>
+                <span className="ml-auto font-mono text-[10px] text-muted-foreground/60 tabular-nums">
+                  {categorySkills.length}
+                </span>
               </div>
             ) : (
               <button
                 type="button"
-                className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-muted/40 sm:px-6"
+                className="group flex w-full items-center gap-3 px-4 py-4 text-left transition-colors hover:bg-muted/40 sm:px-6"
                 onClick={() => toggleCategory(category)}
                 aria-expanded={isOpen}
                 aria-controls={sectionId}
               >
-                <span className="text-sm font-medium">{category}</span>
+                <span className="font-mono text-[10px] tracking-wider text-muted-foreground/50 tabular-nums">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="text-sm font-medium transition-colors group-hover:text-foreground">
+                  {category}
+                </span>
+                <span className="font-mono text-[10px] text-muted-foreground/60 tabular-nums">
+                  ({categorySkills.length})
+                </span>
                 {isOpen ? (
-                  <ChevronUpIcon className="size-4 shrink-0 text-muted-foreground" />
+                  <ChevronUpIcon className="ml-auto size-4 shrink-0 text-primary" />
                 ) : (
-                  <ChevronDownIcon className="size-4 shrink-0 text-muted-foreground" />
+                  <ChevronDownIcon className="ml-auto size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
                 )}
               </button>
             )}
             {isOpen && (
               <ul
                 id={sectionId}
-                className="flex flex-wrap gap-x-3 gap-y-1.5 px-4 pb-5 sm:px-6"
+                className="flex flex-wrap gap-1.5 px-4 pb-5 sm:px-6 sm:pl-[4.25rem]"
               >
                 {categorySkills.map((skill) => (
                   <li
                     key={skill}
-                    className="text-xs text-muted-foreground/90 sm:text-sm"
+                    className="cursor-default border border-border/70 bg-muted/30 px-2 py-1 font-mono text-[10px] text-muted-foreground transition-colors hover:border-primary/50 hover:bg-primary/5 hover:text-foreground sm:text-[11px]"
                   >
                     {skill}
                   </li>

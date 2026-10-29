@@ -1,4 +1,5 @@
 import { RESUME_DATA } from '@/data/resume-data'
+import { CountUp } from '@/components/motion/count-up'
 
 export function StatsSection() {
   // Professional experience began Dec 2021 (IBM); keep in sync with the
@@ -32,14 +33,14 @@ export function StatsSection() {
       {stats.map((stat, index) => (
         <div
           key={stat.label}
-          className={`px-4 py-5 ${
+          className={`px-4 py-5 transition-colors hover:bg-muted/30 ${
             index % 2 === 0 ? 'border-r border-border' : ''
           } ${
             index < 2 ? 'border-b border-border md:border-b-0' : ''
           } ${index < 3 ? 'md:border-r md:border-border' : 'md:border-r-0'}`}
         >
-          <p className="font-mono text-2xl font-semibold tabular-nums tracking-tight sm:text-3xl">
-            {stat.value}+
+          <p className="font-mono text-2xl font-semibold tabular-nums tracking-tight text-primary sm:text-3xl">
+            <CountUp value={stat.value} />+
           </p>
           <p className="mt-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
             {stat.label}

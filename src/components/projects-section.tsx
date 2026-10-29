@@ -60,8 +60,8 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         totalCount={safeProjects.length}
         filteredCount={filteredProjects.length}
       />
-      <ul className="-mx-4 border-t border-border sm:-mx-6">
-        {filteredProjects.map((project, index) => (
+      <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        {filteredProjects.map((project) => (
           <MemoizedProjectCard
             key={project.title}
             title={project.title}
@@ -69,7 +69,6 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
             tags={project.techStack}
             link={project.link?.href}
             isNew={project.isNew}
-            isLast={index === filteredProjects.length - 1}
             onDeepDive={() => handleDeepDive(project)}
           />
         ))}

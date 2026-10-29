@@ -40,13 +40,13 @@ export function HoverMark({
             )}
             style={{
               backgroundColor:
-                'color-mix(in oklch, var(--foreground) 3.5%, transparent)',
+                'color-mix(in oklch, var(--primary) 4%, transparent)',
               backgroundImage: `repeating-linear-gradient(
                 -45deg,
                 transparent,
                 transparent 2px,
-                color-mix(in oklch, var(--foreground) 9%, transparent) 2px,
-                color-mix(in oklch, var(--foreground) 9%, transparent) 3px
+                color-mix(in oklch, var(--primary) 10%, transparent) 2px,
+                color-mix(in oklch, var(--primary) 10%, transparent) 3px
               )`
             }}
           />

@@ -38,7 +38,7 @@ export function FlipWords({
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           exit={{ opacity: 0, y: -10, filter: 'blur(8px)' }}
           transition={{ duration: 0.3 }}
-          className="inline-block"
+          className="inline-block text-primary"
         >
           {words[index]}
         </motion.span>
