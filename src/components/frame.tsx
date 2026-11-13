@@ -9,28 +9,28 @@ export function Corners({ className }: { className?: string }) {
       <span
         aria-hidden
         className={cn(
-          'pointer-events-none absolute -top-px -left-px z-10 h-2 w-2 border-l border-muted-foreground/50',
+          'pointer-events-none absolute -top-px -left-px z-10 size-2 border-t border-l border-muted-foreground/50',
           className
         )}
       />
       <span
         aria-hidden
         className={cn(
-          'pointer-events-none absolute -top-px -right-px z-10 h-2 w-2 border-r border-muted-foreground/50',
+          'pointer-events-none absolute -top-px -right-px z-10 size-2 border-t border-r border-muted-foreground/50',
           className
         )}
       />
       <span
         aria-hidden
         className={cn(
-          'pointer-events-none absolute -bottom-px -left-px z-10 h-2 w-2 border-b border-l border-muted-foreground/50',
+          'pointer-events-none absolute -bottom-px -left-px z-10 size-2 border-b border-l border-muted-foreground/50',
           className
         )}
       />
       <span
         aria-hidden
         className={cn(
-          'pointer-events-none absolute -right-px -bottom-px z-10 h-2 w-2 border-r border-b border-muted-foreground/50',
+          'pointer-events-none absolute -right-px -bottom-px z-10 size-2 border-b border-r border-muted-foreground/50',
           className
         )}
       />

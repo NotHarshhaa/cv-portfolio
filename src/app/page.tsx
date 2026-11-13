@@ -20,6 +20,8 @@ import { FeaturedProducts } from '@/components/featured-products'
 import { CertificationsSection } from '@/components/certifications-section'
 import { CommunityImpactSection } from '@/components/community-impact-section'
 import { ViewsBadge } from '@/components/views-badge'
+import { GithubFollowersBadge } from '@/components/github-followers-badge'
+import { GitHubIcon } from '@/components/icons'
 import { FlipWords } from '@/components/flip-words'
 import { Reveal } from '@/components/motion/reveal'
 import { Button } from '@/components/ui/button'
@@ -77,7 +79,8 @@ export default function Page() {
         <div className="flex w-full flex-col gap-4 print:gap-6">
           <Frame>
             <FrameHeader label="CV / Resume">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 print:hidden">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2 print:hidden">
+                <GithubFollowersBadge />
                 <ViewsBadge />
                 <span className="font-mono text-[11px] text-muted-foreground tabular-nums">
                   Print ready
@@ -145,27 +148,39 @@ export default function Page() {
                 </div>
 
                 <Reveal immediate delay={0.15} className="shrink-0">
-                  <a
-                    href="https://github.com/NotHarshhaa"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block focus:outline-none"
-                    aria-label="Visit GitHub profile"
-                  >
-                    <span className="relative block box-glow">
-                      <Corners />
-                      <div className="relative size-28 overflow-hidden border border-border bg-muted sm:size-32 2xl:size-36">
-                        <Image
-                          src={RESUME_DATA.avatar}
-                          alt={RESUME_DATA.name}
-                          width={144}
-                          height={144}
-                          priority
-                          className="size-full object-cover grayscale-[30%] transition-all duration-500 hover:grayscale-0"
-                        />
-                      </div>
-                    </span>
-                  </a>
+                  <div className="flex flex-col items-center">
+                    <a
+                      href="https://github.com/NotHarshhaa"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block focus:outline-none"
+                      aria-label="Visit GitHub profile"
+                    >
+                      <span className="relative block box-glow">
+                        <Corners />
+                        <div className="relative size-28 overflow-hidden border border-border bg-muted sm:size-32 2xl:size-36">
+                          <Image
+                            src={RESUME_DATA.avatar}
+                            alt={RESUME_DATA.name}
+                            width={144}
+                            height={144}
+                            priority
+                            className="size-full object-cover grayscale-[30%] transition-all duration-500 hover:grayscale-0"
+                          />
+                        </div>
+                      </span>
+                    </a>
+                    <a
+                      href="https://github.com/NotHarshhaa"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2.5 inline-flex items-center gap-1.5 border border-border/70 bg-muted/30 px-2 py-0.5 font-mono text-[11px] text-muted-foreground transition-colors hover:border-primary/50 hover:bg-primary/5 hover:text-primary print:hidden"
+                      title="GitHub Profile"
+                    >
+                      <GitHubIcon className="size-3" />
+                      <span>@NotHarshhaa</span>
+                    </a>
+                  </div>
                 </Reveal>
               </div>
             </FrameBody>
