@@ -55,29 +55,29 @@ export function WorkTimeline({ work }: WorkTimelineProps) {
                 index === 0 ? 'bg-primary' : 'bg-background'
               )}
             />
-            <div className="grid gap-6 px-4 py-8 sm:grid-cols-[11rem_1fr] sm:gap-10 sm:px-6 sm:py-10">
+            <div className="grid gap-6 px-4 py-8 sm:grid-cols-[11rem_1fr] xl:grid-cols-[14rem_1fr] 2xl:grid-cols-[16rem_1fr] sm:gap-10 sm:px-6 sm:py-10 2xl:px-8 2xl:py-12">
               <div>
                 {workItem.link ? (
                   <a
                     href={workItem.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-base font-medium"
+                    className="inline-flex items-center gap-1 text-base font-medium 2xl:text-lg"
                   >
                     {workItem.company}
                     <ArrowUpRight className="size-3.5 opacity-40" />
                   </a>
                 ) : (
-                  <p className="text-base font-medium">{workItem.company}</p>
+                  <p className="text-base font-medium 2xl:text-lg">{workItem.company}</p>
                 )}
                 {workItem.badges.length > 0 && (
-                  <p className="mt-1 text-xs text-muted-foreground">
+                  <p className="mt-1 text-xs text-muted-foreground 2xl:text-sm">
                     {workItem.badges.join(' · ')}
                   </p>
                 )}
               </div>
 
-              <div className="space-y-8">
+              <div className="space-y-8 max-w-4xl 2xl:max-w-5xl">
                 {workItem.jobs.map((job, jobIndex) => {
                   const isCurrent = /present/i.test(job.end)
                   return (

@@ -237,12 +237,12 @@ export function SkillsCategorized({ skills }: SkillsCategorizedProps) {
             {isOpen && (
               <ul
                 id={sectionId}
-                className="flex flex-wrap gap-1.5 px-4 pb-5 sm:px-6 sm:pl-[4.25rem]"
+                className="flex flex-wrap gap-1.5 2xl:gap-2 px-4 pb-5 sm:px-6 2xl:px-8 sm:pl-[4.25rem] 2xl:pl-[5rem]"
               >
                 {categorySkills.map((skill) => (
                   <li
                     key={skill}
-                    className="cursor-default border border-border/70 bg-muted/30 px-2 py-1 font-mono text-[10px] text-muted-foreground transition-colors hover:border-primary/50 hover:bg-primary/5 hover:text-foreground sm:text-[11px]"
+                    className="cursor-default border border-border/70 bg-muted/30 px-2 py-1 2xl:px-2.5 2xl:py-1.5 font-mono text-[10px] text-muted-foreground transition-colors hover:border-primary/50 hover:bg-primary/5 hover:text-foreground sm:text-[11px] 2xl:text-xs"
                   >
                     {skill}
                   </li>

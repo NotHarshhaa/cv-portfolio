@@ -84,8 +84,8 @@ export default function Page() {
                 </span>
               </div>
             </FrameHeader>
-            <FrameBody className="py-8 sm:py-10">
-              <div className="flex flex-col-reverse items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <FrameBody className="py-8 sm:py-10 2xl:py-12">
+              <div className="flex flex-col-reverse items-start gap-6 sm:flex-row sm:items-center sm:justify-between 2xl:gap-10">
                 <div className="flex-1 space-y-4">
                   <Reveal immediate>
                     <div>
@@ -102,15 +102,15 @@ export default function Page() {
                         </span>
                         Open to new opportunities
                       </div>
-                      <h1 className="mt-4 font-heading text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+                      <h1 className="mt-4 font-heading text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl 2xl:text-6xl">
                         <BracketTitle>{data.name}</BracketTitle>
                       </h1>
                       {roles.length > 0 && (
-                        <div className="mt-2 flex flex-wrap items-baseline gap-x-2 font-heading text-xl font-semibold tracking-tight sm:text-2xl md:text-3xl">
+                        <div className="mt-2 flex flex-wrap items-baseline gap-x-2 font-heading text-xl font-semibold tracking-tight sm:text-2xl md:text-3xl 2xl:text-4xl">
                           <FlipWords words={roles} />
                         </div>
                       )}
-                      <p className="mt-3 max-w-2xl text-base text-muted-foreground">
+                      <p className="mt-3 max-w-2xl text-base text-muted-foreground 2xl:max-w-4xl 2xl:text-lg">
                         {data.about}
                       </p>
                     </div>
@@ -118,7 +118,7 @@ export default function Page() {
 
                   <Reveal immediate delay={0.1} className="space-y-4">
                     <a
-                      className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-opacity hover:opacity-70"
+                      className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-opacity hover:opacity-70 2xl:text-base"
                       href={data.locationLink}
                       target="_blank"
                       rel="noreferrer"
@@ -154,12 +154,12 @@ export default function Page() {
                   >
                     <span className="relative block box-glow">
                       <Corners />
-                      <div className="relative size-28 overflow-hidden border border-border bg-muted sm:size-32">
+                      <div className="relative size-28 overflow-hidden border border-border bg-muted sm:size-32 2xl:size-36">
                         <Image
                           src={RESUME_DATA.avatar}
                           alt={RESUME_DATA.name}
-                          width={128}
-                          height={128}
+                          width={144}
+                          height={144}
                           priority
                           className="size-full object-cover grayscale-[30%] transition-all duration-500 hover:grayscale-0"
                         />
@@ -181,14 +181,14 @@ export default function Page() {
               />
             </FrameHeader>
             <FrameBody className="space-y-6">
-              <div className="space-y-4">
+              <div className="space-y-4 max-w-4xl 2xl:max-w-5xl">
                 {data.summary
                   .split(/\n\n+/)
                   .filter(Boolean)
                   .map((paragraph) => (
                     <p
                       key={paragraph.slice(0, 40)}
-                      className="text-sm leading-relaxed text-muted-foreground sm:text-base"
+                      className="text-sm leading-relaxed text-muted-foreground sm:text-base 2xl:text-lg 2xl:leading-relaxed"
                     >
                       {paragraph.trim()}
                     </p>
@@ -317,7 +317,7 @@ export default function Page() {
                     <p className="text-sm text-foreground/90">
                       {education.degree}
                     </p>
-                    <ul className="space-y-1.5">
+                    <ul className="space-y-1.5 max-w-4xl 2xl:max-w-5xl">
                       {education.description.map((item, i) => (
                         <li
                           key={i}

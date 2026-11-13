@@ -13,11 +13,11 @@ export function CertificationsSection({ certifications }: CertificationsSectionP
   if (!certifications || certifications.length === 0) return null
 
   return (
-    <ul className="grid grid-cols-1 gap-px bg-border md:grid-cols-2">
+    <ul className="grid grid-cols-1 gap-px bg-border md:grid-cols-2 xl:grid-cols-3">
       {certifications.map((cert) => (
         <li
           key={cert.title}
-          className="group flex flex-col bg-background p-4 transition-colors hover:bg-muted/30 sm:p-5"
+          className="group flex flex-col bg-background p-4 transition-colors hover:bg-muted/30 sm:p-5 2xl:p-6"
         >
           <div className="flex min-w-0 flex-1 items-start gap-3.5">
             <div className="flex size-9 shrink-0 items-center justify-center border border-border bg-muted/40 text-primary transition-colors group-hover:border-primary/40 group-hover:bg-primary/10">

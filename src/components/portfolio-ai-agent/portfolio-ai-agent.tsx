@@ -70,7 +70,7 @@ export function PortfolioAIAgent({ open, onOpenChange }: PortfolioAIAgentProps) 
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs duration-150 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
         <DialogPrimitive.Content
-          className="fixed inset-y-0 right-0 z-50 flex w-full max-w-2xl flex-col border-l border-border bg-background/95 font-sans shadow-2xl backdrop-blur-md duration-200 outline-none sm:max-w-2xl data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:animate-in data-[state=open]:slide-in-from-right right-scroll-bar-position"
+          className="fixed inset-y-0 right-0 z-50 flex w-full max-w-2xl 2xl:max-w-3xl min-[1792px]:max-w-4xl flex-col border-l border-border bg-background/95 font-sans shadow-2xl backdrop-blur-md duration-200 outline-none sm:max-w-2xl 2xl:max-w-3xl min-[1792px]:max-w-4xl data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:animate-in data-[state=open]:slide-in-from-right right-scroll-bar-position"
           style={{ right: 'var(--removed-body-scroll-bar-size, 0px)' }}
           aria-describedby="portfolio-agent-desc"
         >

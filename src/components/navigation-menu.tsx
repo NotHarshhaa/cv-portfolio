@@ -25,11 +25,15 @@ import { TerminalDrawer } from '@/components/terminal-drawer'
 import { PortfolioAIAgent } from '@/components/portfolio-ai-agent'
 import { ScrollProgress } from '@/components/scroll-progress'
 
-const primarySections = [
-  { id: 'about', label: 'About' },
-  { id: 'work', label: 'Experience' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' }
+const desktopNavItems = [
+  { id: 'about', label: 'About', visibility: 'flex' },
+  { id: 'pillars', label: 'Pillars', visibility: 'hidden xl:flex' },
+  { id: 'products', label: 'Products', visibility: 'hidden xl:flex' },
+  { id: 'work', label: 'Experience', visibility: 'flex' },
+  { id: 'architecture', label: 'Architecture', visibility: 'hidden 2xl:flex' },
+  { id: 'skills', label: 'Skills', visibility: 'flex' },
+  { id: 'certifications', label: 'Certifications', visibility: 'hidden 2xl:flex' },
+  { id: 'projects', label: 'Projects', visibility: 'flex' }
 ]
 
 const dropdownSections = [
@@ -37,25 +41,29 @@ const dropdownSections = [
     id: 'pillars',
     label: 'Core Pillars',
     subtitle: 'Platform, LLMOps & MCP',
-    icon: LayersIcon
+    icon: LayersIcon,
+    hideOn: 'xl:hidden'
   },
   {
     id: 'products',
     label: 'AI Products',
     subtitle: 'Autonomous Agents & IDP',
-    icon: BotIcon
+    icon: BotIcon,
+    hideOn: 'xl:hidden'
   },
   {
     id: 'architecture',
     label: 'Architecture',
     subtitle: 'Interactive Cloud Canvas',
-    icon: CpuIcon
+    icon: CpuIcon,
+    hideOn: '2xl:hidden'
   },
   {
     id: 'certifications',
     label: 'Certifications',
     subtitle: 'Verified CNCF, AWS & IaC',
-    icon: AwardIcon
+    icon: AwardIcon,
+    hideOn: '2xl:hidden'
   },
   {
     id: 'community',
@@ -71,15 +79,48 @@ const dropdownSections = [
   }
 ]
 
-const allSections = [...primarySections, ...dropdownSections]
+const allSections = [
+  { id: 'about', label: 'About' },
+  { id: 'pillars', label: 'Core Pillars' },
+  { id: 'products', label: 'AI Products' },
+  { id: 'work', label: 'Experience' },
+  { id: 'architecture', label: 'Architecture' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'certifications', label: 'Certifications' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'community', label: 'Community' },
+  { id: 'education', label: 'Education' }
+]
 
 export function NavigationMenu() {
   const [activeSection, setActiveSection] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const [isTerminalOpen, setIsTerminalOpen] = useState(false)
   const [isAgentOpen, setIsAgentOpen] = useState(false)
+  const [isXl, setIsXl] = useState(false)
+  const [is2xl, setIs2xl] = useState(false)
 
-  const isDropdownActive = dropdownSections.some((s) => s.id === activeSection)
+  useEffect(() => {
+    const mqXl = window.matchMedia('(min-width: 1280px)')
+    const mq2xl = window.matchMedia('(min-width: 1536px)')
+    const update = () => {
+      setIsXl(mqXl.matches)
+      setIs2xl(mq2xl.matches)
+    }
+    update()
+    mqXl.addEventListener('change', update)
+    mq2xl.addEventListener('change', update)
+    return () => {
+      mqXl.removeEventListener('change', update)
+      mq2xl.removeEventListener('change', update)
+    }
+  }, [])
+
+  const isDropdownActive =
+    activeSection === 'community' ||
+    activeSection === 'education' ||
+    (!is2xl && (activeSection === 'architecture' || activeSection === 'certifications')) ||
+    (!isXl && (activeSection === 'pillars' || activeSection === 'products'))
 
   useEffect(() => {
     const isDialogOpen = () =>
@@ -180,10 +221,10 @@ export function NavigationMenu() {
           </button>
 
           <nav className="hidden items-center gap-1 md:flex">
-            {primarySections.map((section) => (
+            {desktopNavItems.map((section) => (
               <HoverMark
                 key={section.id}
-                className="flex items-center px-2.5 py-1.5"
+                className={cn('items-center px-2.5 py-1.5', section.visibility)}
                 onMouseLeave={() => {
                   if (document.activeElement instanceof HTMLElement) {
                     document.activeElement.blur()
@@ -266,6 +307,7 @@ export function NavigationMenu() {
                         onSelect={() => scrollTo(item.id)}
                         className={cn(
                           'flex cursor-pointer items-start gap-2.5 rounded-none px-2.5 py-2 text-xs outline-none transition-colors hover:bg-muted/50 focus:bg-muted/50',
+                          item.hideOn,
                           isActive && 'bg-muted/40 font-medium text-primary'
                         )}
                       >

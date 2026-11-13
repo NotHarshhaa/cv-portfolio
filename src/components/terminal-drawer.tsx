@@ -216,7 +216,7 @@ e8419b1652f1   langgraph/agent:v2.1    "python agent.py"      Up 5 hours     0.0
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs duration-150 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
         <DialogPrimitive.Content
-          className="fixed bottom-0 left-0 right-0 z-50 mx-auto flex h-[82vh] max-h-[640px] w-full max-w-4xl flex-col border-t border-border bg-background/95 font-mono shadow-2xl backdrop-blur-md duration-200 outline-none sm:bottom-6 sm:h-[70vh] sm:border data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom"
+          className="fixed bottom-0 left-0 right-0 z-50 mx-auto flex h-[82vh] max-h-[640px] 2xl:max-h-[720px] w-full max-w-4xl 2xl:max-w-5xl min-[1792px]:max-w-6xl flex-col border-t border-border bg-background/95 font-mono shadow-2xl backdrop-blur-md duration-200 outline-none sm:bottom-6 sm:h-[70vh] sm:border data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom"
           aria-describedby="terminal-drawer-desc"
         >
           <Corners />

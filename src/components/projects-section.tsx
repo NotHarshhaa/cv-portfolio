@@ -60,7 +60,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         totalCount={safeProjects.length}
         filteredCount={filteredProjects.length}
       />
-      <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2 2xl:grid-cols-3">
         {filteredProjects.map((project) => (
           <MemoizedProjectCard
             key={project.title}

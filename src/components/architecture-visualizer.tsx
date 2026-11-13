@@ -488,9 +488,9 @@ export function ArchitectureVisualizer() {
       </div>
 
       {/* Main Grid: Interactive Canvas + Live Node Inspector */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 2xl:gap-8">
         {/* Topology Interactive SVG Canvas */}
-        <div className="relative border border-border bg-card/60 p-4 shadow-xs lg:col-span-7 xl:col-span-8">
+        <div className="relative border border-border bg-card/60 p-4 shadow-xs lg:col-span-7 xl:col-span-8 2xl:col-span-7">
           <Corners />
 
           <div className="mb-3 flex items-center justify-between font-mono text-[11px] text-muted-foreground">
@@ -501,7 +501,7 @@ export function ArchitectureVisualizer() {
             <span>Click any node to inspect manifest & specs</span>
           </div>
 
-          <div className="relative overflow-x-auto rounded-none border border-border/70 bg-background/90 p-4">
+          <div className="relative flex items-center justify-center overflow-x-auto rounded-none border border-border/70 bg-background/90 p-4 2xl:p-6">
             <svg
               viewBox="0 0 580 650"
               className="h-auto w-full min-w-[520px] max-w-full select-none"
@@ -667,7 +667,7 @@ export function ArchitectureVisualizer() {
         </div>
 
         {/* Live Node Inspector Panel */}
-        <div className="relative flex flex-col border border-border bg-card p-5 shadow-xs lg:col-span-5 xl:col-span-4">
+        <div className="relative flex flex-col border border-border bg-card p-5 shadow-xs lg:col-span-5 xl:col-span-4 2xl:col-span-5 2xl:p-6">
           <Corners />
 
           <div className="flex items-center justify-between border-b border-border pb-3.5">
@@ -687,15 +687,15 @@ export function ArchitectureVisualizer() {
 
           <div className="mt-4 space-y-4">
             <div>
-              <h4 className="font-heading text-lg font-semibold tracking-tight">
+              <h4 className="font-heading text-lg font-semibold tracking-tight 2xl:text-xl">
                 {selectedNode.label}
               </h4>
-              <p className="mt-0.5 font-mono text-xs text-muted-foreground">
+              <p className="mt-0.5 font-mono text-xs text-muted-foreground 2xl:text-sm">
                 {selectedNode.sublabel}
               </p>
             </div>
 
-            <p className="text-xs leading-relaxed text-foreground/90 sm:text-sm">
+            <p className="text-xs leading-relaxed text-foreground/90 sm:text-sm 2xl:text-[15px] 2xl:leading-relaxed">
               {selectedNode.role}
             </p>
 
@@ -718,7 +718,7 @@ export function ArchitectureVisualizer() {
               <span className="font-mono text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
                 Architectural Specifications:
               </span>
-              <ul className="mt-1.5 space-y-1.5 text-xs text-muted-foreground">
+              <ul className="mt-1.5 space-y-1.5 text-xs text-muted-foreground 2xl:text-[13px]">
                 {selectedNode.specs.map((s, idx) => (
                   <li key={idx} className="flex items-start gap-1.5">
                     <span className="text-primary font-bold">›</span>
@@ -729,14 +729,14 @@ export function ArchitectureVisualizer() {
             </div>
 
             {/* Live Code / Manifest Preview */}
-            <div className="border border-border bg-muted/50 p-3">
+            <div className="border border-border bg-muted/50 p-3 2xl:p-4">
               <div className="mb-2 flex items-center justify-between font-mono text-[10px] text-muted-foreground">
                 <div className="flex items-center gap-1 text-primary">
                   <CodeIcon className="size-3" />
                   <span>Config Snippet ({selectedNode.codeSnippet.language})</span>
                 </div>
               </div>
-              <pre className="max-h-36 overflow-x-auto font-mono text-[11px] leading-relaxed text-foreground/90">
+              <pre className="max-h-36 2xl:max-h-56 overflow-x-auto overflow-y-auto font-mono text-[11px] leading-relaxed text-foreground/90">
                 <code>{selectedNode.codeSnippet.code}</code>
               </pre>
             </div>

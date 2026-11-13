@@ -109,7 +109,7 @@ export function FrameHeader({
   return (
     <div
       className={cn(
-        'flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border px-4 py-3 sm:px-6',
+        'flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border px-4 py-3 sm:px-6 2xl:px-8 2xl:py-4',
         className
       )}
       {...props}
@@ -135,7 +135,7 @@ export function FrameBody({
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('px-4 py-6 sm:px-6 sm:py-8', className)} {...props}>
+    <div className={cn('px-4 py-6 sm:px-6 sm:py-8 2xl:px-8 2xl:py-9', className)} {...props}>
       {children}
     </div>
   )

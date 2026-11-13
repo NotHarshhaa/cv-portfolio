@@ -80,13 +80,13 @@ const PILLARS: Pillar[] = [
 
 export function CorePillars() {
   return (
-    <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 xl:grid-cols-4">
       {PILLARS.map((pillar, index) => {
         const IconComponent = pillar.icon
         return (
           <div
             key={pillar.id}
-            className="group relative flex flex-col justify-between bg-background p-6 transition-colors hover:bg-muted/20 sm:p-8"
+            className="group relative flex flex-col justify-between bg-background p-6 transition-colors hover:bg-muted/20 sm:p-8 2xl:p-8"
           >
             <span
               aria-hidden

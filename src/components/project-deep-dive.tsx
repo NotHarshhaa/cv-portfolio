@@ -36,7 +36,7 @@ export function ProjectDeepDive({
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs duration-150 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
         <DialogPrimitive.Content
-          className="fixed inset-y-0 right-0 z-50 flex w-full max-w-xl flex-col border-l border-border bg-background/95 p-6 shadow-2xl backdrop-blur-md duration-200 outline-none sm:p-8 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right"
+          className="fixed inset-y-0 right-0 z-50 flex w-full max-w-xl 2xl:max-w-2xl min-[1792px]:max-w-3xl flex-col border-l border-border bg-background/95 p-6 shadow-2xl backdrop-blur-md duration-200 outline-none sm:p-8 2xl:p-10 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right"
           aria-describedby="project-deep-dive-desc"
         >
           <Corners />

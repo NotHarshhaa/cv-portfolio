@@ -97,7 +97,7 @@ export function FeaturedProducts() {
         return (
           <div
             key={product.id}
-            className={`space-y-5 px-4 py-6 sm:px-6 sm:py-8 ${
+            className={`space-y-5 px-4 py-6 sm:px-6 sm:py-8 2xl:px-8 2xl:py-9 ${
               index < FEATURED_PRODUCTS.length - 1 ? 'border-b border-border' : ''
             }`}
           >
@@ -109,11 +109,11 @@ export function FeaturedProducts() {
                 </div>
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="font-heading text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+                    <h3 className="font-heading text-lg font-semibold tracking-tight text-foreground sm:text-xl 2xl:text-2xl">
                       {product.title}
                     </h3>
                   </div>
-                  <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
+                  <p className="mt-1 text-xs text-muted-foreground sm:text-sm 2xl:text-base">
                     {product.tagline}
                   </p>
                 </div>
@@ -121,62 +121,69 @@ export function FeaturedProducts() {
 
               <div className="flex flex-wrap gap-1.5 pt-1 sm:pt-0">
                 {product.badges.map((b) => (
-                  <Badge key={b} variant="secondary" className="font-mono text-[10px] tracking-wide">
+                  <Badge key={b} variant="secondary" className="font-mono text-[10px] tracking-wide 2xl:text-[11px]">
                     {b}
                   </Badge>
                 ))}
               </div>
             </div>
 
-            {/* Architecture description */}
-            <div className="rounded-none border border-border/80 bg-muted/20 p-4">
-              <div className="flex items-center gap-1.5 font-mono text-[11px] font-semibold tracking-wider text-foreground uppercase">
-                <SparklesIcon className="size-3 text-primary" />
-                <span>Architecture & Implementation</span>
-              </div>
-              <p className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                {product.architecture}
-              </p>
-            </div>
-
-            {/* Metrics */}
-            <div className="grid grid-cols-3 gap-2">
-              {product.metrics.map((metric) => (
-                <div
-                  key={metric.label}
-                  className="border border-border bg-card p-3 text-center transition-colors hover:border-primary/40"
-                >
-                  <p className="font-mono text-base font-semibold tabular-nums text-primary sm:text-lg">
-                    {metric.value}
-                  </p>
-                  <p className="mt-0.5 text-[10px] text-muted-foreground uppercase tracking-wider">
-                    {metric.label}
+            {/* Content: single column on mobile/tablet, balanced 2-column split on xl/2xl wide screens */}
+            <div className="grid grid-cols-1 gap-5 xl:grid-cols-12 xl:gap-8">
+              {/* Left Column: Architecture & CTA */}
+              <div className="flex flex-col justify-between gap-4 xl:col-span-6 2xl:col-span-6">
+                <div className="h-full rounded-none border border-border/80 bg-muted/20 p-4 2xl:p-5">
+                  <div className="flex items-center gap-1.5 font-mono text-[11px] font-semibold tracking-wider text-foreground uppercase">
+                    <SparklesIcon className="size-3 text-primary" />
+                    <span>Architecture & Implementation</span>
+                  </div>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm 2xl:text-[15px] 2xl:leading-relaxed">
+                    {product.architecture}
                   </p>
                 </div>
-              ))}
-            </div>
 
-            {/* Highlights */}
-            <ul className="space-y-1.5">
-              {product.highlights.map((highlight, idx) => (
-                <li
-                  key={idx}
-                  className="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground sm:text-sm"
-                >
-                  <span className="mt-1.5 size-1.5 shrink-0 bg-primary" />
-                  <span>{highlight}</span>
-                </li>
-              ))}
-            </ul>
+                <div className="pt-1">
+                  <Button variant="outline" size="sm" asChild className="gap-1.5 font-mono text-xs">
+                    <a href={product.link.href} target="_blank" rel="noopener noreferrer">
+                      <span>{product.link.label}</span>
+                      <ArrowUpRightIcon className="size-3.5 opacity-60" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
 
-            {/* Link */}
-            <div className="pt-2">
-              <Button variant="outline" size="sm" asChild className="gap-1.5">
-                <a href={product.link.href} target="_blank" rel="noopener noreferrer">
-                  <span>{product.link.label}</span>
-                  <ArrowUpRightIcon className="size-3.5 opacity-60" />
-                </a>
-              </Button>
+              {/* Right Column: Key Metrics & Highlights */}
+              <div className="flex flex-col justify-between gap-4 xl:col-span-6 2xl:col-span-6">
+                {/* Metrics */}
+                <div className="grid grid-cols-3 gap-2">
+                  {product.metrics.map((metric) => (
+                    <div
+                      key={metric.label}
+                      className="border border-border bg-card p-3 text-center transition-colors hover:border-primary/40 2xl:p-4"
+                    >
+                      <p className="font-mono text-base font-semibold tabular-nums text-primary sm:text-lg 2xl:text-xl">
+                        {metric.value}
+                      </p>
+                      <p className="mt-0.5 text-[10px] text-muted-foreground uppercase tracking-wider 2xl:text-[11px]">
+                        {metric.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Highlights */}
+                <ul className="space-y-2 border-t border-border/60 pt-3">
+                  {product.highlights.map((highlight, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-2.5 text-xs leading-relaxed text-muted-foreground sm:text-sm 2xl:text-[14px]"
+                    >
+                      <span className="mt-1.5 size-1.5 shrink-0 bg-primary" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         )

@@ -64,7 +64,7 @@ export function CommunityImpactSection() {
           return (
             <div
               key={stat.label}
-              className={`p-4 sm:p-5 ${
+              className={`p-4 sm:p-5 2xl:p-6 ${
                 index % 2 === 0 ? 'border-r border-border' : ''
               } ${
                 index < 2 ? 'border-b border-border md:border-b-0' : ''
@@ -76,7 +76,7 @@ export function CommunityImpactSection() {
                   Impact
                 </span>
               </div>
-              <p className="font-mono text-2xl font-semibold tabular-nums text-primary sm:text-3xl">
+              <p className="font-mono text-2xl font-semibold tabular-nums text-primary sm:text-3xl 2xl:text-4xl">
                 {typeof stat.count === 'number' ? (
                   <>
                     <CountUp value={stat.count} />
@@ -86,10 +86,10 @@ export function CommunityImpactSection() {
                   stat.value
                 )}
               </p>
-              <p className="mt-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+              <p className="mt-1 text-xs font-medium uppercase tracking-wide text-muted-foreground 2xl:text-sm">
                 {stat.label}
               </p>
-              <p className="mt-0.5 text-xs text-muted-foreground/80 leading-relaxed">
+              <p className="mt-0.5 text-xs text-muted-foreground/80 leading-relaxed 2xl:text-sm">
                 {stat.description}
               </p>
             </div>
@@ -99,7 +99,7 @@ export function CommunityImpactSection() {
 
       {/* Narrative & Channel links */}
       <div className="space-y-4 pt-2">
-        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base 2xl:text-lg 2xl:leading-relaxed max-w-4xl 2xl:max-w-5xl">
           Dedicated to demystifying enterprise Platform Engineering, GitOps automation, and production Agentic AI systems through open-source blueprints and reproducible architectures. Championing developer experience, continuous learning, and practical production engineering for the global tech community.
         </p>
 
