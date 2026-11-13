@@ -12,6 +12,7 @@ import {
   XIcon,
   TerminalIcon,
   BotIcon,
+  CommandIcon,
   LayersIcon,
   CpuIcon,
   AwardIcon,
@@ -335,12 +336,23 @@ export function NavigationMenu() {
             </DropdownMenu.Root>
           </nav>
 
-          <div className="relative z-10 flex items-center gap-2">
+          <div className="relative z-10 flex items-center gap-1.5 sm:gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => window.dispatchEvent(new CustomEvent('open-command-menu'))}
+              className="h-9 gap-1.5 px-2 font-mono text-xs tracking-wider sm:px-2.5"
+              aria-label="Open Command Palette"
+              title="Open Command Palette (⌘K)"
+            >
+              <CommandIcon className="size-3.5 text-primary" />
+              <span className="hidden sm:inline">CMD</span>
+            </Button>
             <Button
               variant="outline"
               size="sm"
               onClick={() => setIsAgentOpen(true)}
-              className="h-9 gap-1.5 px-2.5 font-mono text-xs tracking-wider"
+              className="h-9 gap-1.5 px-2 font-mono text-xs tracking-wider sm:px-2.5"
               aria-label="Ask Harshhaa's AI Agent"
               title="Ask Harshhaa's AI Agent (⌘J)"
             >
@@ -351,7 +363,7 @@ export function NavigationMenu() {
               variant="outline"
               size="sm"
               onClick={() => setIsTerminalOpen(true)}
-              className="h-9 gap-1.5 px-2.5 font-mono text-xs tracking-wider"
+              className="h-9 gap-1.5 px-2 font-mono text-xs tracking-wider sm:px-2.5"
               aria-label="Open CLI Terminal"
               title="Open CLI Terminal (`)"
             >
@@ -433,15 +445,26 @@ export function NavigationMenu() {
               })}
             </div>
 
-            {/* Quick Actions (Agent & CLI side-by-side) */}
-            <div className="grid grid-cols-2 gap-px bg-border border-t border-border">
+            {/* Quick Actions (CMD, Agent & CLI) */}
+            <div className="grid grid-cols-3 gap-px bg-border border-t border-border">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false)
+                  window.dispatchEvent(new CustomEvent('open-command-menu'))
+                }}
+                className="flex items-center justify-center gap-1.5 bg-background px-2 py-2.5 text-xs font-mono text-foreground transition-colors hover:bg-muted/40 active:bg-muted/60"
+              >
+                <CommandIcon className="size-3.5 text-primary" />
+                <span>CMD (⌘K)</span>
+              </button>
               <button
                 type="button"
                 onClick={() => {
                   setIsOpen(false)
                   setIsAgentOpen(true)
                 }}
-                className="flex items-center justify-center gap-2 bg-background px-3 py-2.5 text-xs font-mono text-foreground transition-colors hover:bg-muted/40 active:bg-muted/60"
+                className="flex items-center justify-center gap-1.5 bg-background px-2 py-2.5 text-xs font-mono text-foreground transition-colors hover:bg-muted/40 active:bg-muted/60"
               >
                 <BotIcon className="size-3.5 text-primary" />
                 <span>Agent (⌘J)</span>
@@ -452,7 +475,7 @@ export function NavigationMenu() {
                   setIsOpen(false)
                   setIsTerminalOpen(true)
                 }}
-                className="flex items-center justify-center gap-2 bg-background px-3 py-2.5 text-xs font-mono text-foreground transition-colors hover:bg-muted/40 active:bg-muted/60"
+                className="flex items-center justify-center gap-1.5 bg-background px-2 py-2.5 text-xs font-mono text-foreground transition-colors hover:bg-muted/40 active:bg-muted/60"
               >
                 <TerminalIcon className="size-3.5 text-primary" />
                 <span>CLI (` )</span>
